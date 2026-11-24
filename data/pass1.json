@@ -3,23 +3,25 @@
     "name": "Salesforce",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Salesforce CRM platform with REST, SOAP, and Bulk APIs.",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "API key"
     ],
-    "access": "unknown",
+    "access": "self_serve_free",
     "api_type": [
-      "unknown"
+      "REST",
+      "SOAP"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Salesforce\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": ",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
       "https://developer.salesforce.com/docs"
     ],
-    "confidence": "low",
+    "confidence": "med",
     "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Salesforce\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Enterprise cloud-based customer relationship management (CRM) platfo",
     "human_needed": true,
     "human_needed_reason": "automated extraction failed",

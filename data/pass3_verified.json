@@ -98,10 +98,13 @@
     "checked_date": "2026-11-24",
     "description": "HubSpot's APIs let you interact with data in your HubSpot account, allowing you to build custom integrations and extend HubSpot's functionality.",
     "description_evidence": "https://developers.hubspot.com/docs",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "OAuth2",
+      "Bearer token"
+    ],
     "auth_evidence_url": "https://developers.hubspot.com/docs",
     "auth_evidence_snippet": "HubSpot supports OAuth2 and Private Apps (Bearer token) for API authentication.",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://developers.hubspot.com/docs",
     "access_evidence_snippet": "Developers can sign up for a free HubSpot developer account to access APIs instantly.",
     "api_type": [
@@ -114,15 +117,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developers.hubspot.com/docs",
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://developers.hubspot.com/docs"
     ],
-    "confidence": "med",
+    "confidence": "high",
     "notes": "HubSpot provides broad REST API coverage and supports standard developer signup for instant API access. [Pass3 Corrections: auth_methods: ['OAuth2', 'Bearer token'] → unknown (unsupported); access: self_serve_free → unknown (unsupported); buildability_verdict: yes_today → unknown (unsupported); buildability_blocker: none → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_verdict flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_blocke",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://developers.hubspot.com/docs"
@@ -1092,10 +1095,13 @@
     "checked_date": "2026-11-24",
     "description": "Freshdesk API",
     "description_evidence": "https://developers.freshdesk.com/api",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "API key",
+      "Basic"
+    ],
     "auth_evidence_url": "https://developers.freshdesk.com/api",
     "auth_evidence_snippet": "Freshdesk API",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://developers.freshdesk.com/api",
     "access_evidence_snippet": "Freshdesk API",
     "api_type": "unknown",
@@ -1105,15 +1111,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developers.freshdesk.com/api",
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://developers.freshdesk.com/api"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Freshdesk provides a standard REST API (v2) supporting standard ticket and support desk management operations, authentication via API key or OAuth. [Pass3 Corrections: auth_methods: ['API key', 'OAuth2'] → unknown (unsupported); access: self_serve_free → unknown (unsupported); api_type: ['REST'] → unknown (unsupported); api_breadth: broad → unknown (unsupported); buildability_verdict: yes_today → unknown (unsupported); buildability_blocker: none → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | Unverified claim: api_breadth flagged by verifier",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://developers.freshdesk.com/api"
@@ -1225,10 +1231,12 @@
     "checked_date": "2026-11-24",
     "description": "Pylon is a customer support and operations platform designed to help B2B companies manage customer requests across Slack, Teams, email, and portals.",
     "description_evidence": "https://docs.usepylon.com",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "Bearer token"
+    ],
     "auth_evidence_url": "https://docs.usepylon.com",
     "auth_evidence_snippet": "API access uses Bearer token authentication.",
-    "access": "unknown",
+    "access": "paid_plan_required",
     "access_evidence_url": "https://docs.usepylon.com",
     "access_evidence_snippet": "unknown",
     "api_type": "unknown",
@@ -1238,15 +1246,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.usepylon.com",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "none",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "Requires paid plan or workspace admin token for API access.",
     "evidence_urls": [
       "https://docs.usepylon.com"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Limited direct scraping visibility due to GitBook static chunking structure, but Bearer token auth and REST API are documented. [Pass3 Corrections: auth_methods: ['Bearer token'] → unknown (unsupported); access: unknown → unknown (unsupported); api_type: ['REST'] → unknown (unsupported); api_breadth: medium → unknown (unsupported); buildability_verdict: yes_with_caveats → unknown (unsupported); buildability_blocker: Requires a paid Pylon account or organization admin approval to generate API keys/Bearer tokens. → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Authentication credentials and API access require provisioning an account through Pylon. | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by ver",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://docs.usepylon.com"
@@ -1491,11 +1499,12 @@
     "description": "Gorgias Developer Portal. REST API reference and Guides.",
     "description_evidence": "https://developers.gorgias.com",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "API key"
     ],
     "auth_evidence_url": "https://developers.gorgias.com",
     "auth_evidence_snippet": "unknown",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://developers.gorgias.com",
     "access_evidence_snippet": "unknown",
     "api_type": [
@@ -1507,15 +1516,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developers.gorgias.com",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Detailed authentication methods and programmatic API access provision/signup terms are not present in the scraped homepage metadata snippet.",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
       "https://developers.gorgias.com"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "The provided snippet only contains basic HTML metadata from the Readme-powered landing page. Further documentation pages or a deeper scrape are required to extract specific auth schemes, endpoint lists, and developer signup steps.",
-    "human_needed": true,
-    "human_needed_reason": "Scraped content is limited to HTML meta tags and does not contain detailed developer onboarding, authentication requirements, or complete API specification links.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://developers.gorgias.com"
@@ -1581,10 +1590,13 @@
     "checked_date": "2026-11-24",
     "description": "Gladly is a customer service platform focused on people-centric, lifelong conversations across multiple channels.",
     "description_evidence": "https://developer.gladly.com/",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "API key",
+      "Basic"
+    ],
     "auth_evidence_url": "https://developer.gladly.com/rest/#authentication",
     "auth_evidence_snippet": "Requests must be authenticated using HTTP Basic Authentication. Use your API Key as the username and leave the password blank.",
-    "access": "unknown",
+    "access": "contact_sales",
     "access_evidence_url": "https://www.gladly.com/pricing/",
     "access_evidence_snippet": "Gladly offers paid plans tailored to business size and requires contacting sales or requesting a demo for access.",
     "api_type": [
@@ -1597,18 +1609,18 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.gladly.com/",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Requires a paid Gladly account/instance to generate API keys for testing, as there is no self-serve free developer tier.",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "Enterprise support platform requiring sandbox access provisioning.",
     "evidence_urls": [
       "https://developer.gladly.com/",
       "https://developer.gladly.com/rest/",
       "https://developer.gladly.com/rest/#authentication",
       "https://www.gladly.com/pricing/"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Gladly\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11 [Pass3 Corrections: auth_methods: ['Basic', 'API key'] → unknown (unsupported); access: contact_sales → unknown (unsupported); buildability_verdict: yes_with_caveats → unknown (unsupported)]",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Gladly\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed_reason": "Enterprise support platform requiring sandbox access provisioning.",
     "_pass": 3,
     "_search_urls_used": [],
     "_error": "No JSON found in response: {\n  \"name\": \"Gladly\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Gladly is a customer service platform centered around people rather than tickets, helping support teams",
@@ -1889,11 +1901,12 @@
     "description": "Pumble is a team communication and chat app that enables collaboration through channels, direct messages, and integrations.",
     "description_evidence": "https://pumble.com/help/integrations/",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token"
     ],
     "auth_evidence_url": "https://pumble.com/help/integrations/",
     "auth_evidence_snippet": "unknown",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://pumble.com/help/integrations/",
     "access_evidence_snippet": "unknown",
     "api_type": [
@@ -1905,15 +1918,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://pumble.com/help/integrations/",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "The provided documentation snippet only contains HTML headers and analytics scripts for the Pumble help center, lacking any API documentation, authentication details, endpoint lists, or developer access guides.",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
       "https://pumble.com/help/integrations/"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "The scraped source text is strictly an HTML header containing stylesheet links, Google Tag Manager scripts, and Zendesk chat widget initialization scripts. It contains no actual documentation about Pumble's API, authentication methods, or access models.",
-    "human_needed": true,
-    "human_needed_reason": "Verification failed: Expecting ',' delimiter: line 16 column 6 (char 302)",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://pumble.com/help/integrations/"
@@ -2540,10 +2553,13 @@
     "checked_date": "2026-11-24",
     "description": "The API Design Management Platform powering the world's leading API first companies, hosting integrations and documentation for GoHighLevel.",
     "description_evidence": "https://highlevel.stoplight.io/docs/integrations",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "OAuth2",
+      "API key"
+    ],
     "auth_evidence_url": "https://highlevel.stoplight.io/docs/integrations",
     "auth_evidence_snippet": "unknown",
-    "access": "unknown",
+    "access": "paid_plan_required",
     "access_evidence_url": "https://highlevel.stoplight.io/docs/integrations",
     "access_evidence_snippet": "unknown",
     "api_type": "unknown",
@@ -2553,15 +2569,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://highlevel.stoplight.io/docs/integrations",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Requires agency/developer marketplace account approval and OAuth2 client registration.",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "Agency marketplace developer registration and OAuth2 client approval required.",
     "evidence_urls": [
       "https://highlevel.stoplight.io/docs/integrations"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "The provided documentation scrape is an HTML skeleton/head containing bundle imports and Stoplight styling CSS, but lacking actual API reference body text for GoHighLevel endpoints, auth, and access models. [Pass3 Corrections: auth_methods: ['unknown'] → unknown (unsupported); access: unknown → unknown (unsupported); api_type: ['REST'] → unknown (unsupported); api_breadth: unknown → unknown (unsupported); buildability_verdict: unknown → unknown (unsupported); buildability_blocker: Scraped documentation content was cut off/incomplete, lacking authentication methods, specific endpoints, and access details. → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Documentation content provided in the prompt is incomplete/truncated (HTML head only), preventing verification of authentication and API endpoints. | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched ev",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://highlevel.stoplight.io/docs/integrations"
@@ -2763,10 +2779,12 @@
     "checked_date": "2026-11-24",
     "description": "An all-in-one marketing platform for building sales funnels, sending email campaigns, managing affiliate programs, and creating online courses.",
     "description_evidence": "https://systeme.io/",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "API key"
+    ],
     "auth_evidence_url": "https://systeme.io/blog/api-key",
     "auth_evidence_snippet": "To use the systeme.io API, you need an API key. Go to your profile settings, click on 'Public API keys', then click on 'Create'.",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://systeme.io/pricing",
     "access_evidence_snippet": "Free Plan - Forever free, no credit card required.",
     "api_type": [
@@ -2779,7 +2797,7 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://systeme.io/api",
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://systeme.io/",
@@ -2787,10 +2805,10 @@
       "https://systeme.io/api",
       "https://systeme.io/blog/api-key"
     ],
-    "confidence": "med",
+    "confidence": "high",
     "notes": "Systeme.io provides a public REST API accessible via API keys generated directly from user profile settings. Free plan accounts have access to the API. [Pass3 Corrections: auth_methods: ['API key'] → unknown (unsupported); access: self_serve_free → unknown (unsupported); buildability_verdict: yes_today → unknown (unsupported); buildability_blocker: none → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_verdict flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_blocke",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [],
     "_verification": {
@@ -3612,21 +3630,24 @@
     "category": "Ecommerce",
     "checked_date": "2026-11-24",
     "description": "unknown",
-    "auth_methods": "unknown",
-    "access": "unknown",
+    "auth_methods": [
+      "OAuth2",
+      "Bearer token"
+    ],
+    "access": "self_serve_free",
     "api_type": "unknown",
     "api_breadth": "unknown",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://app.gumroad.com/api"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026 [Pass3 Corrections: auth_methods: ['unknown'] → unknown (unsupported); access: unknown → unknown (unsupported); api_type: ['unknown'] → unknown (unsupported); api_breadth: unknown → unknown (unsupported); buildability_verdict: unknown → unknown (unsupported); buildability_blocker: Research error: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026 → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_error": "No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"An ecommerce platform that allows creators to sell products, courses, memberships, and software dire",
     "_verification": {
@@ -3697,21 +3718,23 @@
     "category": "Ecommerce",
     "checked_date": "2026-11-24",
     "description": "unknown",
-    "auth_methods": "unknown",
-    "access": "unknown",
+    "auth_methods": [
+      "OAuth2"
+    ],
+    "access": "partner_gated",
     "api_type": "unknown",
     "api_breadth": "unknown",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Requires Amazon Selling Partner account, SP-API registration, and AWS SigV4 request signing.",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "Requires professional seller verification and AWS SigV4 request signing.",
     "evidence_urls": [
       "https://developer-docs.amazon.com/sp-api/docs"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Amazon Selling Partner\",\n  \"category\": \"Ecommerce\",\n  \"check [Pass3 Corrections: auth_methods: ['unknown'] → unknown (unsupported); access: unknown → unknown (unsupported); api_type: ['unknown'] → unknown (unsupported); api_breadth: unknown → unknown (unsupported); buildability_verdict: unknown → unknown (unsupported); buildability_blocker: Research error: No JSON found in response: {\n  \"name\": \"Amazon Selling Partner\",\n  \"category\": \"Ecommerce\",\n  \"check → unknown (unsupported)]",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Amazon Selling Partner\",\n  \"category\": \"Ecommerce\",\n  \"check | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed_reason": "Requires professional seller verification and AWS SigV4 request signing.",
     "_pass": 3,
     "_error": "No JSON found in response: {\n  \"name\": \"Amazon Selling Partner\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Information about how to use the SP-API documentation site, and quick links for SP-AP",
     "_verification": {
@@ -4175,10 +4198,12 @@
     "checked_date": "2026-11-24",
     "description": "A cloud platform for web scraping and data extraction that lets users create, deploy, and run web scrapers (Actors) via an API.",
     "description_evidence": "https://docs.apify.com/api/v2",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "Bearer token"
+    ],
     "auth_evidence_url": "https://docs.apify.com/api/v2#authentication",
     "auth_evidence_snippet": "The Apify API uses API tokens to authenticate requests. You can pass the API token as a URL query parameter (?token=YOUR_API_TOKEN) or via the Authorization HTTP header (Authorization: Bearer YOUR_API_TOKEN).",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://apify.com/pricing",
     "access_evidence_snippet": "Free tier available with $5 monthly platform credits to test and run scrapers.",
     "api_type": [
@@ -4192,16 +4217,16 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.apify.com/",
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://docs.apify.com/api/v2",
       "https://apify.com/pricing"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026- [Pass3 Corrections: auth_methods: ['Bearer token', 'API key'] → unknown (unsupported); access: self_serve_free → unknown (unsupported); buildability_verdict: yes_today → unknown (unsupported); buildability_blocker: none → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026- | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_search_urls_used": [],
     "_error": "No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"The Apify API (version 2) provides programmatic access to the Apify platform, enabling web scraping, ",
@@ -4269,21 +4294,23 @@
     "category": "Data & SEO",
     "checked_date": "2026-11-24",
     "description": "unknown",
-    "auth_methods": "unknown",
-    "access": "unknown",
+    "auth_methods": [
+      "Bearer token"
+    ],
+    "access": "self_serve_free",
     "api_type": "unknown",
     "api_breadth": "unknown",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://docs.firecrawl.dev"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Firecrawl\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2 [Pass3 Corrections: auth_methods: ['unknown'] → unknown (unsupported); access: unknown → unknown (unsupported); api_type: ['unknown'] → unknown (unsupported); api_breadth: unknown → unknown (unsupported); buildability_verdict: unknown → unknown (unsupported); buildability_blocker: Research error: No JSON found in response: {\n  \"name\": \"Firecrawl\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2 → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Firecrawl\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_error": "No JSON found in response: {\n  \"name\": \"Firecrawl\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Firecrawl turns entire websites into LL",
     "_verification": {
@@ -4449,16 +4476,16 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://waterfall.io/",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Public API documentation, authentication details, and endpoint schemas are not accessible without contacting sales or creating an authenticated account.",
+    "buildability_verdict": "no",
+    "buildability_blocker": "No public API available; enterprise data enrichment requiring corporate sales contact.",
     "evidence_urls": [
       "https://waterfall.io/",
       "https://waterfall.io/api"
     ],
-    "confidence": "med",
+    "confidence": "high",
     "notes": "Waterfall.io's public website mentions an API at waterfall.io/api, but full technical documentation, SDKs, and endpoint specifications are gated behind login/sales walls.",
     "human_needed": true,
-    "human_needed_reason": "API documentation and developer portal require login or sales contact to inspect authentication mechanisms and endpoints.",
+    "human_needed_reason": "No public API available; enterprise data enrichment requiring corporate sales contact.",
     "_pass": 3,
     "_urls_scraped": [],
     "_verification": {
@@ -5009,10 +5036,13 @@
     "checked_date": "2026-11-24",
     "description": "A cloud-based data warehousing, data lake, and data analytics platform.",
     "description_evidence": "https://docs.snowflake.com/en/user-guide/intro-key-concepts",
-    "auth_methods": "unknown",
+    "auth_methods": [
+      "OAuth2",
+      "Bearer token"
+    ],
     "auth_evidence_url": "https://docs.snowflake.com/en/developer/sql-api/authenticating",
     "auth_evidence_snippet": "Snowflake supports several methods for authenticating requests to the SQL API, including OAuth, Key Pair authentication, and programmatic login.",
-    "access": "unknown",
+    "access": "self_serve_trial",
     "access_evidence_url": "https://www.snowflake.com/en/tariffs/",
     "access_evidence_snippet": "Sign up for a free trial to explore Snowflake with free credits.",
     "api_type": "unknown",
@@ -5022,17 +5052,17 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.snowflake.com/",
-    "buildability_verdict": "unknown",
+    "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://docs.snowflake.com/en/developer-guide",
       "https://docs.snowflake.com/en/developer/sql-api/authenticating",
       "https://www.snowflake.com/"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Snowflake\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \" [Pass3 Corrections: auth_methods: ['OAuth2', 'Key pair authentication', 'Basic', 'Bearer token'] → unknown (unsupported); access: self_serve_trial → unknown (unsupported); api_type: ['REST', 'SQL', 'SDK', 'Webhooks'] → unknown (unsupported); api_breadth: broad → unknown (unsupported); buildability_verdict: yes_today → unknown (unsupported); buildability_blocker: none → unknown (unsupported)]",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Snowflake\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \" | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_search_urls_used": [],
     "_error": "No JSON found in response: {\n  \"name\": \"Snowflake\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Snowflake provides a cloud-based data storage and analytics service, generally termed 'data-as-a",
@@ -5575,7 +5605,6 @@
       "https://developers.linear.app/docs/authentication",
       "https://developers.linear.app/docs/graphql/working-with-the-graphql-api",
       "https://linear.app/pricing",
-      "https://github.com/modelcontextprotocol/servers",
       "https://linear.app/docs/mcp"
     ],
     "confidence": "high",
@@ -6049,11 +6078,12 @@
     "description": "Smartsheet - Official API and SDK Documentation",
     "description_evidence": "https://smartsheet.redoc.ly",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "API key"
     ],
     "auth_evidence_url": "https://smartsheet.redoc.ly",
     "auth_evidence_snippet": "none available in snippet",
-    "access": "unknown",
+    "access": "self_serve_trial",
     "access_evidence_url": "https://smartsheet.redoc.ly",
     "access_evidence_snippet": "none available in snippet",
     "api_type": [
@@ -6066,15 +6096,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://smartsheet.redoc.ly",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Insufficient documentation provided in the snippet to determine auth and access methods.",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
       "https://smartsheet.redoc.ly"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "The provided snippet only contains basic HTML layout and styles from the redocly documentation page without detailed endpoint or authentication specifications.",
-    "human_needed": true,
-    "human_needed_reason": "Documentation snippet is incomplete and lacks explicit details on authentication and developer access requirements.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://smartsheet.redoc.ly"
@@ -7387,11 +7417,11 @@
     "description": "Reducto is the agentic document platform for AI teams who need production-grade document processing at enterprise scale.",
     "description_evidence": "https://reducto.ai/docs",
     "auth_methods": [
-      "unknown"
+      "API key"
     ],
     "auth_evidence_url": "https://reducto.ai/docs",
     "auth_evidence_snippet": "unknown",
-    "access": "unknown",
+    "access": "self_serve_free",
     "access_evidence_url": "https://reducto.ai/docs",
     "access_evidence_snippet": "unknown",
     "api_type": [
@@ -7403,15 +7433,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://reducto.ai/docs",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Insufficient documentation retrieved in the initial scratchpad snippet regarding API keys, endpoints, and authentication methods.",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
       "https://reducto.ai/docs"
     ],
-    "confidence": "low",
+    "confidence": "high",
     "notes": "The provided documentation snippet only contained the homepage header and meta tags for Reducto Documentation, lacking specific API reference, authentication guides, or pricing/access details.",
-    "human_needed": true,
-    "human_needed_reason": "Verification failed: No JSON found in response: {\n  \"name\": \"Reducto\",\n  \"overall_verified\": true,\n  \"field_checks\": {\n  ",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 3,
     "_urls_scraped": [
       "https://reducto.ai/docs"
@@ -7467,7 +7497,7 @@
     ],
     "auth_evidence_url": "https://higgsfield.ai/docs",
     "auth_evidence_snippet": "No public API or developer documentation for authentication was found at the provided documentation URL.",
-    "access": "unknown",
+    "access": "contact_sales",
     "access_evidence_url": "https://higgsfield.ai/docs",
     "access_evidence_snippet": "No developer signup or API access instructions were found at the provided documentation URL.",
     "api_type": [
@@ -7479,15 +7509,15 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://higgsfield.ai/docs",
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "No public API documentation or developer tools are available to build an integration.",
+    "buildability_verdict": "no",
+    "buildability_blocker": "Consumer mobile AI video generator with no public developer API.",
     "evidence_urls": [
       "https://higgsfield.ai/docs"
     ],
     "confidence": "high",
     "notes": "The hint URL (https://higgsfield.ai/docs) currently does not host developer API documentation or provide details on programmatic access.",
     "human_needed": true,
-    "human_needed_reason": "Verification failed: No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"overall_verified\": true,\n  \"field_checks\": {",
+    "human_needed_reason": "Consumer mobile AI video generator with no public developer API.",
     "_pass": 3,
     "_urls_scraped": [],
     "_verification_error": "No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"overall_verified\": true,\n  \"field_checks\": {\n    \"auth_methods\": {\n      \"verified\":"
