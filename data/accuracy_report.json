@@ -1,0 +1,101 @@
+{
+  "sample_size": 30,
+  "seed": 42,
+  "stratification": "3 apps per category x 10 categories",
+  "pass1": {
+    "auth_methods": {
+      "correct": 8,
+      "total": 30,
+      "pct": 26.7
+    },
+    "access": {
+      "correct": 10,
+      "total": 30,
+      "pct": 33.3
+    },
+    "api_breadth": {
+      "correct": 20,
+      "total": 30,
+      "pct": 66.7
+    },
+    "mcp_server_exists": {
+      "correct": 15,
+      "total": 30,
+      "pct": 50.0
+    },
+    "buildability_verdict": {
+      "correct": 22,
+      "total": 30,
+      "pct": 73.3
+    },
+    "overall": {
+      "correct": 75,
+      "total": 150,
+      "pct": 50.0
+    }
+  },
+  "pass2": {
+    "auth_methods": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "access": {
+      "correct": 26,
+      "total": 30,
+      "pct": 86.7
+    },
+    "api_breadth": {
+      "correct": 29,
+      "total": 30,
+      "pct": 96.7
+    },
+    "mcp_server_exists": {
+      "correct": 27,
+      "total": 30,
+      "pct": 90.0
+    },
+    "buildability_verdict": {
+      "correct": 25,
+      "total": 30,
+      "pct": 83.3
+    },
+    "overall": {
+      "correct": 137,
+      "total": 150,
+      "pct": 91.3
+    }
+  },
+  "pass3": {
+    "auth_methods": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "access": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "api_breadth": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "mcp_server_exists": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "buildability_verdict": {
+      "correct": 30,
+      "total": 30,
+      "pct": 100.0
+    },
+    "overall": {
+      "correct": 150,
+      "total": 150,
+      "pct": 100.0
+    }
+  }
+}

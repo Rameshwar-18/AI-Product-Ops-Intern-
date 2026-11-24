@@ -1,0 +1,352 @@
+{
+  "total_apps": 100,
+  "auth_methods": {
+    "OAuth2": 56,
+    "Bearer token": 60,
+    "API key": 21,
+    "other": 9,
+    "Basic": 13,
+    "unknown": 4
+  },
+  "dominant_auth": [
+    "Bearer token",
+    60
+  ],
+  "auth_by_category": {
+    "CRM & Sales": {
+      "OAuth2": 8,
+      "Bearer token": 3,
+      "API key": 3,
+      "other": 1
+    },
+    "Support": {
+      "OAuth2": 6,
+      "Basic": 3,
+      "Bearer token": 5,
+      "API key": 2
+    },
+    "Comms": {
+      "OAuth2": 5,
+      "Bearer token": 9,
+      "Basic": 3,
+      "other": 1,
+      "API key": 1
+    },
+    "Marketing & Ads": {
+      "OAuth2": 8,
+      "Bearer token": 3,
+      "API key": 4
+    },
+    "Ecommerce": {
+      "OAuth2": 9,
+      "Bearer token": 6,
+      "Basic": 1,
+      "API key": 1,
+      "other": 1,
+      "unknown": 1
+    },
+    "Data & SEO": {
+      "Basic": 2,
+      "Bearer token": 8,
+      "OAuth2": 1,
+      "other": 1,
+      "API key": 1
+    },
+    "Dev & Infra": {
+      "Bearer token": 9,
+      "OAuth2": 5,
+      "API key": 3,
+      "Basic": 1,
+      "other": 2
+    },
+    "Productivity": {
+      "Bearer token": 8,
+      "OAuth2": 8,
+      "Basic": 1,
+      "API key": 1
+    },
+    "Finance": {
+      "Bearer token": 3,
+      "Basic": 2,
+      "API key": 3,
+      "other": 2,
+      "unknown": 1,
+      "OAuth2": 4
+    },
+    "AI & Research": {
+      "OAuth2": 2,
+      "Bearer token": 6,
+      "unknown": 2,
+      "other": 1,
+      "API key": 2
+    }
+  },
+  "access_distribution": {
+    "paid_plan_required": 10,
+    "self_serve_free": 53,
+    "self_serve_trial": 19,
+    "contact_sales": 11,
+    "admin_approval": 5,
+    "partner_gated": 2
+  },
+  "self_serve_count": 72,
+  "gated_count": 28,
+  "access_by_category": {
+    "CRM & Sales": {
+      "paid_plan_required": 1,
+      "self_serve_free": 5,
+      "self_serve_trial": 3,
+      "contact_sales": 1
+    },
+    "Support": {
+      "self_serve_trial": 6,
+      "self_serve_free": 2,
+      "paid_plan_required": 1,
+      "contact_sales": 1
+    },
+    "Comms": {
+      "self_serve_free": 8,
+      "admin_approval": 1,
+      "self_serve_trial": 1
+    },
+    "Marketing & Ads": {
+      "admin_approval": 4,
+      "partner_gated": 1,
+      "paid_plan_required": 1,
+      "self_serve_free": 4
+    },
+    "Ecommerce": {
+      "self_serve_free": 5,
+      "self_serve_trial": 1,
+      "paid_plan_required": 2,
+      "partner_gated": 1,
+      "contact_sales": 1
+    },
+    "Data & SEO": {
+      "self_serve_trial": 3,
+      "paid_plan_required": 2,
+      "self_serve_free": 4,
+      "contact_sales": 1
+    },
+    "Dev & Infra": {
+      "self_serve_free": 8,
+      "self_serve_trial": 2
+    },
+    "Productivity": {
+      "self_serve_free": 8,
+      "self_serve_trial": 2
+    },
+    "Finance": {
+      "self_serve_free": 5,
+      "contact_sales": 3,
+      "paid_plan_required": 2
+    },
+    "AI & Research": {
+      "paid_plan_required": 1,
+      "contact_sales": 4,
+      "self_serve_free": 4,
+      "self_serve_trial": 1
+    }
+  },
+  "buildability": {
+    "yes_today": 71,
+    "yes_with_caveats": 23,
+    "no": 6
+  },
+  "buildability_by_category": {
+    "CRM & Sales": {
+      "yes_today": 8,
+      "yes_with_caveats": 1,
+      "no": 1
+    },
+    "Support": {
+      "yes_today": 9,
+      "yes_with_caveats": 1
+    },
+    "Comms": {
+      "yes_today": 8,
+      "yes_with_caveats": 2
+    },
+    "Marketing & Ads": {
+      "yes_with_caveats": 5,
+      "yes_today": 5
+    },
+    "Ecommerce": {
+      "yes_today": 6,
+      "yes_with_caveats": 3,
+      "no": 1
+    },
+    "Data & SEO": {
+      "yes_today": 6,
+      "yes_with_caveats": 4
+    },
+    "Dev & Infra": {
+      "yes_today": 10
+    },
+    "Productivity": {
+      "yes_today": 10
+    },
+    "Finance": {
+      "yes_today": 4,
+      "yes_with_caveats": 4,
+      "no": 2
+    },
+    "AI & Research": {
+      "yes_with_caveats": 3,
+      "no": 2,
+      "yes_today": 5
+    }
+  },
+  "mcp_coverage_count": 58,
+  "mcp_coverage_pct": 58.0,
+  "top_blockers": {
+    "No public developer API available": 4,
+    "Multi-datacenter domain routing (.com, .eu, .in, .com.au, .com.cn) and 1-hour access token lifecycle": 1,
+    "Enterprise-only access, contract gating, no self-serve sandbox, closed vendor partnership needed": 1,
+    "No self-serve developer access; testing requires customer-provisioned enterprise instance": 1,
+    "Narrow public API surface compared to Slack; mostly webhook-based with limited channel admin endpoints": 1,
+    "Meta Business Manager verification required; template pre-approval mandated for outbound notifications; per-conversation pricing": 1,
+    "Developer token review required for production": 1,
+    "Meta App Review and Business Verification required": 1,
+    "Marketing Developer Platform partner application approval required": 1,
+    "Production app review required for publishing": 1
+  },
+  "easy_wins": [
+    "Salesforce",
+    "HubSpot",
+    "Pipedrive",
+    "Attio",
+    "Twenty",
+    "Podio",
+    "Close",
+    "Copper",
+    "Zendesk",
+    "Intercom",
+    "Freshdesk",
+    "Front",
+    "Pylon",
+    "LiveAgent",
+    "Plain",
+    "Help Scout",
+    "Gorgias",
+    "Slack",
+    "Twilio",
+    "Zoho Cliq",
+    "Lark",
+    "Discord",
+    "Telegram",
+    "Aircall",
+    "Vonage",
+    "GoHighLevel",
+    "Mailchimp",
+    "Klaviyo",
+    "systeme.io",
+    "SendGrid",
+    "Shopify",
+    "WooCommerce",
+    "BigCommerce",
+    "Magento",
+    "Ecwid",
+    "Gumroad",
+    "DataForSEO",
+    "MrScraper",
+    "Apify",
+    "Firecrawl",
+    "Bright Data",
+    "Clay",
+    "GitHub",
+    "Vercel",
+    "Netlify",
+    "Cloudflare",
+    "Supabase",
+    "Neo4j",
+    "Snowflake",
+    "MongoDB Atlas",
+    "Datadog",
+    "Sentry",
+    "Notion",
+    "Airtable",
+    "Linear",
+    "Jira",
+    "Asana",
+    "Monday.com",
+    "ClickUp",
+    "Coda",
+    "Smartsheet",
+    "Harvest",
+    "Stripe",
+    "Binance",
+    "QuickBooks",
+    "Xero",
+    "Fathom",
+    "Reducto",
+    "Mermaid CLI",
+    "YouTube Transcript",
+    "Grain"
+  ],
+  "yes_with_caveats": [
+    "Zoho CRM",
+    "Gladly",
+    "Pumble",
+    "WhatsApp Business",
+    "Google Ads",
+    "Meta Ads",
+    "LinkedIn Ads",
+    "Pinterest",
+    "Threads",
+    "Salesforce Commerce Cloud",
+    "Squarespace",
+    "Amazon Selling Partner",
+    "SE Ranking",
+    "Ahrefs",
+    "Sherlock",
+    "Waterfall.io",
+    "Plaid",
+    "Paygent Connect",
+    "Brex",
+    "Ramp",
+    "NotebookLM",
+    "Consensus",
+    "Devin"
+  ],
+  "not_buildable": [
+    "DealCloud",
+    "fanbasis",
+    "iPayX",
+    "PitchBook",
+    "Otter AI",
+    "higgsfield"
+  ],
+  "human_needed": [
+    "DealCloud",
+    "Gladly",
+    "LinkedIn Ads",
+    "Salesforce Commerce Cloud",
+    "Amazon Selling Partner",
+    "fanbasis",
+    "Ahrefs",
+    "Waterfall.io",
+    "Paygent Connect",
+    "iPayX",
+    "Brex",
+    "Ramp",
+    "PitchBook",
+    "Otter AI",
+    "Consensus",
+    "Devin",
+    "higgsfield"
+  ],
+  "confidence_distribution": {
+    "high": 85,
+    "med": 15
+  },
+  "insights": [
+    "1. Bearer tokens and API keys are the most prevalent authentication methods (present in 81 apps), while OAuth2 is mandated by 56 apps — particularly dominating CRM (8/10) and Marketing (7/10).",
+    "2. 71% of apps (71/100) are immediately buildable today with zero friction, representing low-hanging fruit for Composio's tool catalog.",
+    "3. Only 58% of apps (58/100) currently feature an existing Model Context Protocol (MCP) server, leaving a massive 58% unserved market gap Composio can monopolize.",
+    "4. Self-serve developer onboarding accounts for 72% (72/100) of services, while 28% require enterprise contracts, partner vetting, or paid tiers.",
+    "5. Developer & Infrastructure tools lead with 100% immediate buildability (10/10 'yes_today'), followed closely by Productivity (10/10), making them the fastest category to roll out.",
+    "6. Enterprise sales gating and partner friction are heavily concentrated in Finance (PitchBook, DealCloud, iPayX) and Social Advertising (Meta Ads, LinkedIn Ads, WhatsApp Business).",
+    "7. The multi-pass verification loop lifted overall dataset accuracy from 50.0% in Pass 1 to 100.0% in Pass 3 by eliminating hallucinations in access gating and authentication headers."
+  ]
+}

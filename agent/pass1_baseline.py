@@ -1,0 +1,171 @@
+"""
+Pass 1: Cheap baseline research using LLM knowledge + one search per app.
+Saves to data/pass1.json
+"""
+
+import os
+import sys
+import json
+import time
+import asyncio
+from pathlib import Path
+from dotenv import load_dotenv
+
+load_dotenv()
+sys.path.insert(0, str(Path(__file__).parent))
+
+from apps import APPS
+from schema import EXTRACTION_PROMPT_TEMPLATE
+from llm_client import get_llm_response, extract_json_from_response
+from firecrawl_client import search_web
+
+DATA_DIR = Path(__file__).parent.parent / "data"
+DATA_DIR.mkdir(exist_ok=True)
+CACHE_DIR = DATA_DIR / "cache"
+CACHE_DIR.mkdir(exist_ok=True)
+
+
+def get_cache_path(app_name: str, pass_num: int) -> Path:
+    safe_name = app_name.replace(" ", "_").replace("/", "_").lower()
+    return CACHE_DIR / f"pass{pass_num}_{safe_name}.json"
+
+
+def load_cached(app_name: str, pass_num: int):
+    p = get_cache_path(app_name, pass_num)
+    if p.exists():
+        try:
+            return json.loads(p.read_text(encoding="utf-8"))
+        except:
+            pass
+    return None
+
+
+def save_cached(app_name: str, pass_num: int, data: dict):
+    p = get_cache_path(app_name, pass_num)
+    p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
+
+
+def research_app_pass1(app: dict) -> dict:
+    """
+    Pass 1: Use LLM training knowledge + one quick web search.
+    Fast and cheap - provides baseline for improvement measurement.
+    """
+    name = app["name"]
+    category = app["category"]
+    hint_url = app.get("hint_url", "")
+    
+    # Check cache
+    cached = load_cached(name, 1)
+    if cached:
+        print(f"  [Pass1] {name} - cached")
+        return cached
+    
+    print(f"  [Pass1] Researching: {name}")
+    
+    # Do one search to get some context
+    search_context = ""
+    try:
+        results = search_web(f"{name} API developer documentation auth access")
+        for r in results[:2]:
+            if r.get("content"):
+                search_context += f"\n\nURL: {r['url']}\n{r['content'][:1500]}"
+    except Exception as e:
+        print(f"  [Pass1] Search failed for {name}: {e}")
+    
+    # Build prompt
+    prompt = EXTRACTION_PROMPT_TEMPLATE.format(
+        app_name=name,
+        category=category,
+        hint_url=hint_url
+    )
+    
+    if search_context:
+        prompt += f"\n\nADDITIONAL CONTEXT FROM WEB SEARCH:\n{search_context}"
+    
+    prompt += "\n\nIMPORTANT: Base your answers on factual knowledge. Mark confidence=low if uncertain."
+    
+    try:
+        response = get_llm_response(prompt)
+        record = extract_json_from_response(response)
+        record["_pass"] = 1
+        record["_search_urls_used"] = [r.get("url","") for r in (results if 'results' in dir() else [])]
+        save_cached(name, 1, record)
+        return record
+    except Exception as e:
+        print(f"  [Pass1] ERROR for {name}: {e}")
+        # Return minimal error record
+        error_record = {
+            "name": name,
+            "category": category,
+            "checked_date": "2026-11-24",
+            "description": "unknown",
+            "auth_methods": ["unknown"],
+            "access": "unknown",
+            "api_type": ["unknown"],
+            "api_breadth": "unknown",
+            "mcp_server_exists": False,
+            "mcp_server_url": None,
+            "buildability_verdict": "unknown",
+            "buildability_blocker": f"Research error: {str(e)[:100]}",
+            "evidence_urls": [hint_url] if hint_url else [],
+            "confidence": "low",
+            "notes": f"Pass1 extraction failed: {str(e)[:200]}",
+            "human_needed": True,
+            "human_needed_reason": "automated extraction failed",
+            "_pass": 1,
+            "_error": str(e)
+        }
+        save_cached(name, 1, error_record)
+        return error_record
+
+
+def run_pass1(apps=None, single_app=None):
+    """Run pass 1 for all apps or a single app."""
+    if single_app:
+        app_list = [a for a in APPS if a["name"].lower() == single_app.lower()]
+        if not app_list:
+            print(f"App '{single_app}' not found in list")
+            return []
+    else:
+        app_list = apps or APPS
+    
+    results = []
+    for i, app in enumerate(app_list):
+        print(f"\n[{i+1}/{len(app_list)}] {app['name']} ({app['category']})")
+        result = research_app_pass1(app)
+        results.append(result)
+        
+        # Rate limit
+        if not load_cached(app["name"], 1) or True:
+            time.sleep(1)
+    
+    # Save results
+    output_path = DATA_DIR / "pass1.json"
+    
+    # Merge with existing if running single app
+    existing = []
+    if output_path.exists():
+        try:
+            existing = json.loads(output_path.read_text(encoding="utf-8"))
+        except:
+            pass
+    
+    # Update or append
+    existing_names = {r["name"]: i for i, r in enumerate(existing)}
+    for r in results:
+        if r["name"] in existing_names:
+            existing[existing_names[r["name"]]] = r
+        else:
+            existing.append(r)
+    
+    output_path.write_text(json.dumps(existing, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"\n[Pass1] Saved {len(existing)} records to {output_path}")
+    return results
+
+
+if __name__ == "__main__":
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--app", help="Research a single app by name")
+    args = parser.parse_args()
+    run_pass1(single_app=args.app)

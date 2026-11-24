@@ -1,0 +1,155 @@
+[
+  {
+    "name": "DealCloud",
+    "category": "CRM & Sales",
+    "reason": "No public developer docs or self-serve signup; gated behind institutional NDA and sales contact.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "Enterprise-only access, contract gating, no self-serve sandbox, closed vendor partnership needed",
+    "docs_url": "https://dealcloud.com/resources/integrations/"
+  },
+  {
+    "name": "Gladly",
+    "category": "Support",
+    "reason": "No self-serve trial or developer sandbox; access gated behind enterprise procurement.",
+    "verdict": "yes_with_caveats",
+    "access": "contact_sales",
+    "blocker": "No self-serve developer access; testing requires customer-provisioned enterprise instance",
+    "docs_url": "https://developer.gladly.com"
+  },
+  {
+    "name": "LinkedIn Ads",
+    "category": "Marketing & Ads",
+    "reason": "MDP application review required.",
+    "verdict": "yes_with_caveats",
+    "access": "partner_gated",
+    "blocker": "Marketing Developer Platform partner application approval required",
+    "docs_url": "https://learn.microsoft.com/en-us/linkedin/marketing/"
+  },
+  {
+    "name": "Salesforce Commerce Cloud",
+    "category": "Ecommerce",
+    "reason": "No public sandbox; realm requires enterprise sales.",
+    "verdict": "yes_with_caveats",
+    "access": "paid_plan_required",
+    "blocker": "Enterprise realm provisioning required",
+    "docs_url": "https://developer.salesforce.com/docs/commerce"
+  },
+  {
+    "name": "Amazon Selling Partner",
+    "category": "Ecommerce",
+    "reason": "Strict data protection vetting prevents self-serve testing.",
+    "verdict": "yes_with_caveats",
+    "access": "partner_gated",
+    "blocker": "Seller account + developer vetting + AWS SigV4 signing",
+    "docs_url": "https://developer-docs.amazon.com/sp-api/docs"
+  },
+  {
+    "name": "fanbasis",
+    "category": "Ecommerce",
+    "reason": "No public API or docs; closed consumer app.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "No public developer API available",
+    "docs_url": "https://fanbasis.com"
+  },
+  {
+    "name": "Ahrefs",
+    "category": "Data & SEO",
+    "reason": "Enterprise plan paywall prevents self-serve testing.",
+    "verdict": "yes_with_caveats",
+    "access": "paid_plan_required",
+    "blocker": "API access restricted to Enterprise plan ($999+/mo)",
+    "docs_url": "https://docs.ahrefs.com/docs/ahrefs-api"
+  },
+  {
+    "name": "Waterfall.io",
+    "category": "Data & SEO",
+    "reason": "No public API documentation; sales contact only.",
+    "verdict": "yes_with_caveats",
+    "access": "contact_sales",
+    "blocker": "Sales consultation required for access",
+    "docs_url": "https://waterfall.io"
+  },
+  {
+    "name": "Paygent Connect",
+    "category": "Finance",
+    "reason": "Requires merchant processor contract.",
+    "verdict": "yes_with_caveats",
+    "access": "contact_sales",
+    "blocker": "Merchant underwriting and gateway credentials required",
+    "docs_url": "https://www.nmi.com/developer/"
+  },
+  {
+    "name": "iPayX",
+    "category": "Finance",
+    "reason": "No public API or developer portal.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "No public developer API available",
+    "docs_url": "https://www.ipayx.com"
+  },
+  {
+    "name": "Brex",
+    "category": "Finance",
+    "reason": "No public sandbox without business customer status.",
+    "verdict": "yes_with_caveats",
+    "access": "paid_plan_required",
+    "blocker": "Requires active Brex corporate customer account",
+    "docs_url": "https://developer.brex.com"
+  },
+  {
+    "name": "Ramp",
+    "category": "Finance",
+    "reason": "Corporate bank underwriting required.",
+    "verdict": "yes_with_caveats",
+    "access": "paid_plan_required",
+    "blocker": "Requires active Ramp corporate card customer account",
+    "docs_url": "https://docs.ramp.com/developer-guide"
+  },
+  {
+    "name": "PitchBook",
+    "category": "Finance",
+    "reason": "Contact-sales only; prohibitive price barrier.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "Prohibitive annual enterprise subscription fee ($25k+)",
+    "docs_url": "https://pitchbook.com/news/pitchbook-api"
+  },
+  {
+    "name": "Otter AI",
+    "category": "AI & Research",
+    "reason": "No public developer documentation.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "No public developer API available",
+    "docs_url": "https://otter.ai"
+  },
+  {
+    "name": "Consensus",
+    "category": "AI & Research",
+    "reason": "No self-serve API registration.",
+    "verdict": "yes_with_caveats",
+    "access": "contact_sales",
+    "blocker": "API is not self-serve; requires developer partnership",
+    "docs_url": "https://consensus.app"
+  },
+  {
+    "name": "Devin",
+    "category": "AI & Research",
+    "reason": "High commercial seat cost prevents casual testing.",
+    "verdict": "yes_with_caveats",
+    "access": "contact_sales",
+    "blocker": "Requires paid commercial Devin subscription ($500+/mo)",
+    "docs_url": "https://docs.cognition.ai"
+  },
+  {
+    "name": "higgsfield",
+    "category": "AI & Research",
+    "reason": "No public API or docs; consumer video app.",
+    "verdict": "no",
+    "access": "contact_sales",
+    "blocker": "No public developer API available",
+    "docs_url": "https://higgsfield.ai"
+  }
+]
