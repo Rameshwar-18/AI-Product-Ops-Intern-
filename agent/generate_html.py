@@ -1328,7 +1328,9 @@ def build_html():
 
     output_path = WEB_DIR / "index.html"
     output_path.write_text(html_content, encoding="utf-8")
-    print(f"Generated clean HTML case-study page: {output_path} ({len(html_content)} bytes)")
+    root_path = Path(__file__).parent.parent / "index.html"
+    root_path.write_text(html_content, encoding="utf-8")
+    print(f"Generated clean HTML case-study page: {output_path} and root {root_path} ({len(html_content)} bytes)")
 
 if __name__ == "__main__":
     build_html()
