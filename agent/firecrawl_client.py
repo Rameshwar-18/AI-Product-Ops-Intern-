@@ -14,7 +14,10 @@ FIRECRAWL_BASE = "https://api.firecrawl.dev/v1"
 
 
 def get_api_key() -> Optional[str]:
-    return os.environ.get("FIRECRAWL_API_KEY")
+    k = os.environ.get("FIRECRAWL_API_KEY", "").strip()
+    if not k or k.startswith("your_") or "api_key_here" in k:
+        return None
+    return k
 
 
 def search_web(query: str, num_results: int = 5) -> List[Dict]:
@@ -123,17 +126,16 @@ def _fallback_search(query: str) -> List[Dict]:
 
 
 def _fallback_scrape(url: str, max_chars: int) -> Optional[str]:
-    """Fallback: simple requests-based scraping."""
+    """Fallback: simple requests-based scraping with short connect timeout."""
     try:
         headers = {
-            "User-Agent": "Mozilla/5.0 (compatible; ComposioResearchBot/1.0)"
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
         }
-        resp = requests.get(url, headers=headers, timeout=15)
+        resp = requests.get(url, headers=headers, timeout=(4, 6))
         if resp.status_code == 200:
-            # Return raw text, truncated
             return resp.text[:max_chars]
     except Exception as e:
-        print(f"  [Fallback] Scrape error for {url}: {e}")
+        print(f"  [Fallback] Scrape skipped for {url}: {e}")
     return None
 
 

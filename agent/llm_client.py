@@ -26,24 +26,54 @@ def get_llm_response(prompt: str, model: str = "gemini", max_retries: int = 3) -
 
 
 def _call_gemini(prompt: str, api_key: str, max_retries: int) -> str:
-    import google.generativeai as genai
-    genai.configure(api_key=api_key)
-    model = genai.GenerativeModel("gemini-1.5-flash")
+    """Call Google Gemini REST API with modern model fallback and retries."""
+    import requests
     
+    models_to_try = [
+        "gemini-flash-lite-latest",
+        "gemini-flash-latest",
+        "gemini-3.8-flash",
+        "gemini-2.5-flash"
+    ]
+    
+    headers = {"Content-Type": "application/json"}
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}],
+        "generationConfig": {"temperature": 0.1, "maxOutputTokens": 4096}
+    }
+    
+    last_error = None
     for attempt in range(max_retries):
-        try:
-            response = model.generate_content(
-                prompt,
-                generation_config={"temperature": 0.1, "max_output_tokens": 4096}
-            )
-            return response.text
-        except Exception as e:
-            if attempt < max_retries - 1:
-                wait = 2 ** attempt * 2
-                print(f"  [LLM] Retry {attempt+1} after {wait}s: {e}")
-                time.sleep(wait)
-            else:
-                raise
+        for model in models_to_try:
+            url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
+            try:
+                resp = requests.post(url, headers=headers, json=payload, timeout=20)
+                if resp.status_code == 200:
+                    data = resp.json()
+                    candidates = data.get("candidates", [])
+                    if candidates:
+                        parts = candidates[0].get("content", {}).get("parts", [])
+                        if parts:
+                            return parts[0].get("text", "")
+                elif resp.status_code == 404:
+                    # Model not supported for this key/tier, try next model
+                    continue
+                elif resp.status_code in (429, 503):
+                    # Rate limit or temporary high demand
+                    last_error = f"HTTP {resp.status_code}: {resp.text[:100]}"
+                    continue
+                else:
+                    last_error = f"HTTP {resp.status_code}: {resp.text[:100]}"
+            except Exception as e:
+                last_error = str(e)
+                continue
+        
+        if attempt < max_retries - 1:
+            wait = 2 ** attempt * 2
+            print(f"  [LLM] Retry {attempt+1} after {wait}s ({last_error})")
+            time.sleep(wait)
+    
+    raise RuntimeError(f"Gemini API call failed after {max_retries} attempts: {last_error}")
 
 
 def _call_openai(prompt: str, api_key: str, max_retries: int) -> str:
