@@ -1041,7 +1041,7 @@ def build_html():
             <span class="node-step-tag">STAGE 03</span>
             <div class="node-title">Pass 3: Verifier Loop</div>
             <div class="node-desc">
-              Independent verifier agent audits claims strictly against fetched page text. Overwrites hallucinations, enforces official vendor-owned MCP rules, and routes unverified claims to human review.
+              Independent verifier agent audits claims strictly against fetched page text. Flags unsupported claims as unknown, enforces official vendor-owned MCP rules, and routes unverified claims to human review.
             </div>
           </div>
           <div class="flow-node">
@@ -1482,20 +1482,32 @@ def build_html():
         {{ key: 'overall', label: 'Overall Accuracy Benchmark' }}
       ];
 
+      function formatScore(stat, cls) {{
+        if (!stat || stat.total === 0) {{
+          return '<span style="color:var(--text-muted); font-size:0.8rem; font-weight:normal;">n/a (0 checked)</span>';
+        }}
+        return `<span class="acc-score ${{cls}}">${{stat.correct}}/${{stat.total}} = ${{stat.pct}}%</span>`;
+      }}
+
       tbody.innerHTML = rows.map(r => {{
-        const p1 = RAW_ACCURACY.pass1[r.key]?.pct || 0;
-        const p2 = RAW_ACCURACY.pass2[r.key]?.pct || 0;
-        const p3 = RAW_ACCURACY.pass3[r.key]?.pct || 0;
-        const delta = (p3 - p1).toFixed(1);
+        const s1 = RAW_ACCURACY.pass1[r.key];
+        const s2 = RAW_ACCURACY.pass2[r.key];
+        const s3 = RAW_ACCURACY.pass3[r.key];
         const isOverall = r.key === 'overall';
+
+        let deltaHtml = '<span style="color:var(--text-muted); font-size:0.8rem;">-</span>';
+        if (s1 && s3 && s1.total > 0 && s3.total > 0) {{
+          const delta = (s3.pct - s1.pct).toFixed(1);
+          deltaHtml = `<span class="acc-score score-high">${{delta >= 0 ? '+' : ''}}${{delta}}%</span>`;
+        }}
 
         return `
           <tr style="${{isOverall ? 'font-weight:700; background:#EEF2FF;' : ''}}">
             <td style="text-align:left;">${{r.label}}</td>
-            <td class="acc-score score-low">${{p1}}%</td>
-            <td class="acc-score score-mid">${{p2}}%</td>
-            <td class="acc-score score-high">${{p3}}%</td>
-            <td class="acc-score score-high">${{delta >= 0 ? '+' : ''}}${{delta}}%</td>
+            <td>${{formatScore(s1, 'score-low')}}</td>
+            <td>${{formatScore(s2, 'score-mid')}}</td>
+            <td>${{formatScore(s3, 'score-high')}}</td>
+            <td>${{deltaHtml}}</td>
           </tr>
         `;
       }}).join('');
