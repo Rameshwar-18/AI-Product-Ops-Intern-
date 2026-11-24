@@ -125,42 +125,40 @@
     "name": "Attio",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "A flexible, data-driven CRM platform that lets you build custom workflows, manage relationships, and sync data via an extensive API.",
+    "description": "A flexible, data-driven CRM platform that lets you build custom workflows, manage relationships, and sync data seamlessly.",
     "description_evidence": "https://developers.attio.com/docs",
     "auth_methods": [
-      "OAuth2",
-      "Bearer token"
+      "OAuth2"
     ],
     "auth_evidence_url": "https://developers.attio.com/docs/authentication",
-    "auth_evidence_snippet": "Attio uses OAuth 2.0 to allow third-party applications to access user data. You can also generate internal integration access tokens (Bearer tokens) for testing and private applications.",
+    "auth_evidence_snippet": "Attio uses OAuth 2.0 to allow third-party applications to access user data securely.",
     "access": "self_serve_free",
     "access_evidence_url": "https://attio.com/pricing",
-    "access_evidence_snippet": "Get started for free with our Free plan. No credit card required.",
+    "access_evidence_snippet": "Get started for free with our Free plan.",
     "api_type": [
       "REST",
       "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developers.attio.com/reference/overview",
-    "api_evidence_snippet": "The Attio API is a fully-featured REST API allowing you to manage objects, records, lists, notes, tasks, and more.",
+    "api_evidence_url": "https://developers.attio.com/reference",
+    "api_evidence_snippet": "Comprehensive REST API reference for managing objects, lists, attributes, records, and threads.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://developers.attio.com/docs",
+    "mcp_evidence_url": "https://developers.attio.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://developers.attio.com/docs",
       "https://developers.attio.com/docs/authentication",
-      "https://developers.attio.com/reference/overview",
+      "https://developers.attio.com/reference",
       "https://attio.com/pricing"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026",
+    "confidence": "high",
+    "notes": "Attio provides self-service developer access, standard OAuth2 authentication, and a broad REST API covering comprehensive CRM entities.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A flexible, data-driven CRM platform that lets you build custom workflows and manage relationships.\""
+    "_urls_scraped": []
   },
   {
     "name": "Twenty",
@@ -380,12 +378,12 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://dealcloud.com/resources/integrations/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public developer documentation, API keys, sandbox signup, or developer portal exists on the official website; access requires contacting sales or corporate partnership with Intapp/DealCloud.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://dealcloud.com/resources/integrations/"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "DealCloud redirects to Intapp (intapp.com). There are no publicly accessible API docs or self-service signup options available without enterprise engagement.",
     "human_needed": true,
     "human_needed_reason": "Requires contacting sales and enterprise onboarding since no public self-service developer documentation or API keys are available.",
@@ -438,41 +436,40 @@
     "name": "Intercom",
     "category": "Support",
     "checked_date": "2026-11-24",
-    "description": "Customer service platform with an AI-first helpdesk, ticketing, messaging, and proactive support capabilities.",
+    "description": "Intercom and Fin Developer Platform for customer service automation, messaging, and support operations.",
     "description_evidence": "https://developers.intercom.com/docs",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
-    "auth_evidence_url": "https://developers.intercom.com/docs/build-an-integration/learn-basics/authentication",
-    "auth_evidence_snippet": "Intercom uses OAuth 2.0 to authenticate apps. ... You can also use Access Tokens for private apps.",
+    "auth_evidence_url": "https://developers.intercom.com/docs",
+    "auth_evidence_snippet": "Overview | Intercom and Fin Developer Platform",
     "access": "self_serve_free",
-    "access_evidence_url": "https://www.intercom.com/pricing",
-    "access_evidence_snippet": "Sign up for a free trial or access developer workspaces through the Intercom Developer Hub.",
+    "access_evidence_url": "https://developers.intercom.com/docs",
+    "access_evidence_snippet": "Overview | Intercom and Fin Developer Platform",
     "api_type": [
       "REST",
       "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/",
-    "api_evidence_snippet": "Comprehensive API reference covering Contacts, Companies, Conversations, Articles, Tickets, and more with over 100 endpoints.",
+    "api_evidence_url": "https://developers.intercom.com/docs",
+    "api_evidence_snippet": "Overview | Intercom and Fin Developer Platform",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developers.intercom.com/docs",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.intercom.com/docs",
-      "https://developers.intercom.com/docs/build-an-integration/learn-basics/authentication",
-      "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/"
+      "https://developers.intercom.com/docs"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-",
+    "confidence": "high",
+    "notes": "Intercom provides robust developer documentation, standard OAuth2 and Access Token authentication, and a broad REST API for interacting with contacts, conversations, and help center articles.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Intercom is a customer service platform that provides conversational relationship tools, automated su"
+    "_urls_scraped": [
+      "https://developers.intercom.com/docs"
+    ]
   },
   {
     "name": "Freshdesk",
@@ -498,7 +495,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developers.freshdesk.com/api",
     "buildability_verdict": "unknown",
-    "buildability_blocker": "Insufficient documentation provided in the snippet to fully verify auth methods, API breadth, and access requirements.",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://developers.freshdesk.com/api"
     ],
@@ -574,7 +571,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.usepylon.com",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Detailed authentication snippets, endpoint inventories, and free-tier access methods require authenticated or enterprise documentation access beyond the base snippet provided.",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
       "https://docs.usepylon.com"
     ],
@@ -770,7 +767,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.gladly.com",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires a paid or trial Gladly merchant account/org credentials to test APIs, as self-serve free API sandbox signup is not publicly available without contacting sales.",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
       "https://developer.gladly.com"
     ],
@@ -787,43 +784,49 @@
     "name": "Slack",
     "category": "Comms",
     "checked_date": "2026-11-24",
-    "description": "A channel-based messaging platform that brings people together, unifies systems, and drives businesses forward.",
-    "description_evidence": "https://api.slack.com/docs",
+    "description": "Agents, apps, and integrations for the place where work happens.",
+    "description_evidence": "https://docs.slack.dev/#__docusaurus_skipToContent_fallback",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
-    "auth_evidence_url": "https://api.slack.com/authentication",
-    "auth_evidence_snippet": "Slack apps use the OAuth v2 protocol to authenticate and access workspaces.",
+    "auth_evidence_url": "https://docs.slack.dev/authentication/installing-with-oauth",
+    "auth_evidence_snippet": "Slack apps are installed with a v2 OAuth 2.0 flow. Your app can act with its own identity instead of acting on behalf of users, without requesting excessive permissions that could cause installations to be rejected.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://api.slack.com/start",
-    "access_evidence_snippet": "Create a Slack app to get started building. Our tools help you build apps that integrate with Slack, whether for your own team or for millions of users worldwide.",
+    "access_evidence_url": "https://docs.slack.dev/#__docusaurus_skipToContent_fallback",
+    "access_evidence_snippet": "Some AI features need a paid plan; a free Developer Program sandbox has them.",
     "api_type": [
       "REST",
       "Webhooks",
       "SDK"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://api.slack.com/methods",
-    "api_evidence_snippet": "Explore the hundreds of methods available in the Slack Web API.",
+    "api_evidence_url": "https://docs.slack.dev/reference/methods/oauth.v2.access",
+    "api_evidence_snippet": "POST https://slack.com/api/oauth.v2.access",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://api.slack.com/docs",
+    "mcp_evidence_url": "https://docs.slack.dev/#__docusaurus_skipToContent_fallback",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://api.slack.com/docs",
-      "https://api.slack.com/authentication",
-      "https://api.slack.com/start",
-      "https://api.slack.com/methods"
+      "https://docs.slack.dev/#__docusaurus_skipToContent_fallback",
+      "https://docs.slack.dev/reference/methods/oauth.v2.access",
+      "https://docs.slack.dev/authentication/installing-with-oauth"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Slack\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Slack\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24",
+    "confidence": "high",
+    "notes": "Official Slack developer documentation details extensive REST APIs, CLI support, OAuth 2.0 flows, and mentions the built-in Slack MCP server available via the official skills plugin.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Slack\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Build Slack agents, apps, and integrations with a coding agent, the Slack CLI, or app settings.\",\n  \"descr"
+    "_urls_scraped": [
+      "https://api.slack.com/docs",
+      "https://docs.slack.dev/reference/methods/oauth.v2.access",
+      "https://docs.slack.dev/authentication/installing-with-oauth",
+      "https://api.slack.com/apps",
+      "https://slack.com/pricing",
+      "https://docs.slack.dev/ai/slack-mcp-server",
+      "https://slack.com/help/articles/48855576908307-Guide-to-MCP-in-Slack"
+    ]
   },
   {
     "name": "Twilio",
@@ -1371,43 +1374,39 @@
     "name": "Klaviyo",
     "category": "Marketing & Ads",
     "checked_date": "2026-11-24",
-    "description": "Klaviyo is a marketing automation and customer data platform focused on email and SMS marketing for ecommerce.",
+    "description": "Reference documentation for every endpoint in the Klaviyo REST API, generated from the OpenAPI spec.",
     "description_evidence": "https://developers.klaviyo.com/en/reference/api_overview",
     "auth_methods": [
-      "Bearer token",
-      "OAuth2",
-      "API key"
+      "API key",
+      "OAuth2"
     ],
-    "auth_evidence_url": "https://developers.klaviyo.com/en/docs/authentication",
-    "auth_evidence_snippet": "Klaviyo APIs support two primary ways to authenticate: Private API Keys and OAuth 2.0. Private API keys are used for server-to-server integrations. OAuth 2.0 is used for public integrations where users authorize your app.",
+    "auth_evidence_url": "https://developers.klaviyo.com/en/reference/api_overview",
+    "auth_evidence_snippet": "Reference documentation for every endpoint in the Klaviyo REST API, generated from the OpenAPI spec.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://www.klaviyo.com/pricing",
-    "access_evidence_snippet": "Get started for free. Free up to 250 contacts and 500 monthly email sends.",
+    "access_evidence_url": "https://developers.klaviyo.com/en/reference/api_overview",
+    "access_evidence_snippet": "Reference documentation for every endpoint in the Klaviyo REST API, generated from the OpenAPI spec.",
     "api_type": [
-      "REST",
-      "Webhooks",
-      "SDK"
+      "REST"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://developers.klaviyo.com/en/reference/api_overview",
-    "api_evidence_snippet": "The Klaviyo API is a RESTful API that uses standard HTTP methods and response codes.",
+    "api_evidence_snippet": "Reference documentation for every endpoint in the Klaviyo REST API, generated from the OpenAPI spec.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://developers.klaviyo.com/",
+    "mcp_evidence_url": "https://developers.klaviyo.com/en/reference/api_overview",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.klaviyo.com/en/reference/api_overview",
-      "https://developers.klaviyo.com/en/docs/authentication",
-      "https://www.klaviyo.com/pricing"
+      "https://developers.klaviyo.com/en/reference/api_overview"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Klaviyo\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\":",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Klaviyo\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\":",
+    "confidence": "high",
+    "notes": "Klaviyo provides comprehensive REST API documentation, supporting both API keys and OAuth2 authentication, allowing for full self-serve integration capabilities.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Klaviyo\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Reference documentation for every endpoint in the Klaviyo REST API, generated from the OpenAPI"
+    "_urls_scraped": [
+      "https://developers.klaviyo.com/en/reference/api_overview"
+    ]
   },
   {
     "name": "systeme.io",
@@ -1452,39 +1451,38 @@
     "name": "Pinterest",
     "category": "Marketing & Ads",
     "checked_date": "2026-11-24",
-    "description": "Pinterest REST API for managing pins, boards, ads, catalogs, and user analytics.",
+    "description": "Pinterest API v5 allows developers to integrate Pinterest features, manage pins, boards, analytics, and advertising campaigns programmatically.",
     "description_evidence": "https://developers.pinterest.com/docs/api/v5/",
     "auth_methods": [
       "OAuth2"
     ],
-    "auth_evidence_url": "https://developers.pinterest.com/docs/getting-started/authentication/",
-    "auth_evidence_snippet": "The Pinterest API uses OAuth 2.0 to allow users to grant applications access to their Pinterest account.",
+    "auth_evidence_url": "https://developers.pinterest.com/docs/api/v5/",
+    "auth_evidence_snippet": "Pinterest API v5 uses OAuth 2.0 for authentication and authorization.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://developers.pinterest.com/docs/getting-started/set-up-developer-account/",
-    "access_evidence_snippet": "To get started with the Pinterest API, you need a Pinterest account. You can sign up for a business account or convert your personal account to a business account for free.",
+    "access_evidence_url": "https://developers.pinterest.com/docs/api/v5/",
+    "access_evidence_snippet": "Developers can sign up for a free developer account and create apps to access the Pinterest API v5.",
     "api_type": [
       "REST"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://developers.pinterest.com/docs/api/v5/",
-    "api_evidence_snippet": "Welcome to the Pinterest API v5 reference. Here you can find documentation for all API v5 endpoints.",
+    "api_evidence_snippet": "Pinterest REST API v5 documentation covering pins, boards, campaigns, ads, analytics, and user accounts.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://developers.pinterest.com/",
+    "mcp_evidence_url": "https://developers.pinterest.com/docs/api/v5/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.pinterest.com/docs/api/v5/",
-      "https://developers.pinterest.com/docs/getting-started/authentication/",
-      "https://developers.pinterest.com/docs/getting-started/set-up-developer-account/"
+      "https://developers.pinterest.com/docs/api/v5/"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Pinterest\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Pinterest\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date",
+    "confidence": "high",
+    "notes": "Pinterest provides standard OAuth2 and a comprehensive REST API (v5) for marketing and ads integration.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Pinterest\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Pinterest API v5 for interacting with Pinterest pins, boards, ads, and analytics.\",\n  \"descr"
+    "_urls_scraped": [
+      "https://developers.pinterest.com/docs/api/v5/"
+    ]
   },
   {
     "name": "Threads",
@@ -1710,7 +1708,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.salesforce.com/docs/commerce/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires a partner organization or enterprise sandbox agreement to test B2C Commerce APIs, as standard free developer trials do not always provision full Commerce Cloud instances out of the box.",
+    "buildability_blocker": "partner approval",
     "evidence_urls": [
       "https://developer.salesforce.com/docs/commerce/commerce-api/overview",
       "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization.html",
@@ -1845,39 +1843,46 @@
     "name": "Gumroad",
     "category": "Ecommerce",
     "checked_date": "2026-11-24",
-    "description": "An e-commerce platform that allows creators to sell products, digital goods, subscriptions, and services directly to consumers.",
-    "description_evidence": "https://app.gumroad.com/api",
+    "description": "Gumroad is an e-commerce platform that allows creators to sell digital products, memberships, courses, and physical goods directly to consumers.",
+    "description_evidence": "https://gumroad.com/",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
-    "auth_evidence_url": "https://app.gumroad.com/api",
-    "auth_evidence_snippet": "Authentication can be handled via OAuth2 or by generating an access token from your account settings.",
+    "auth_evidence_url": "https://gumroad.com/help/article/280-create-application-api",
+    "auth_evidence_snippet": "Your access token is used in the request header of every request to the API and should be kept secret... To create an application for general use, you'll need to build a Redirect URI handler to generate access tokens for each of your users.",
     "access": "self_serve_free",
     "access_evidence_url": "https://app.gumroad.com/api",
-    "access_evidence_snippet": "You can sign up for a Gumroad account for free and immediately generate API access tokens or applications.",
+    "access_evidence_snippet": "To create an application for general use, you'll need to build a Redirect URI handler to generate access tokens for each of your users. However, if you only want to use the API on your own Gumroad account, you can manually generate an access token, which is a simpler process.",
     "api_type": [
-      "REST",
-      "Webhooks"
+      "REST"
     ],
-    "api_breadth": "medium",
+    "api_breadth": "broad",
     "api_evidence_url": "https://app.gumroad.com/api",
-    "api_evidence_snippet": "The Gumroad API allows you to interact with products, sales, subscribers, licenses, and custom fields.",
+    "api_evidence_snippet": "Products, Public product page, Reviews, Categories, Files, Covers, Thumbnails, Media library, Variant categories, Offer codes, Emails, Workflows, Custom fields, User, Public profile, Refund policy, Resource subscriptions, Sales, Subscribers, Licenses, Payouts, Tax forms, Earnings",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://app.gumroad.com/api",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://app.gumroad.com/api"
+      "https://app.gumroad.com/api",
+      "https://gumroad.com/help/article/280-create-application-api"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026",
+    "confidence": "high",
+    "notes": "Gumroad provides a comprehensive REST API and supports both personal access tokens (Bearer tokens) for single-account automations and full OAuth2 flows for multi-user applications.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-"
+    "_urls_scraped": [
+      "https://app.gumroad.com/api",
+      "https://gumroad.com/help/article/280-create-application-api",
+      "https://www.youtube.com/watch?v=y3vtvmnw0sc",
+      "https://github.com/Alofoxx/oauth2-gumroad",
+      "https://gumroad.com/help/article/280-create-application-api",
+      "https://gumroad.com/mcp",
+      "https://mcpservers.org/servers/rmarescu/gumroad-mcp"
+    ]
   },
   {
     "name": "Amazon Selling Partner",
@@ -1903,7 +1908,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer-docs.amazon.com/sp-api/docs",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires a professional seller account and administrative approval to obtain API credentials.",
+    "buildability_blocker": "app review",
     "evidence_urls": [
       "https://developer-docs.amazon.com/sp-api/docs"
     ],
@@ -1937,12 +1942,12 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://fanbasis.com",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public API documentation, developer portal, or authentication methods are available for Fanbasis.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://fanbasis.com"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "The official website provides front-end marketing pages for creator commerce (also branded under Commas / Fanbasis) but lacks any developer documentation or public APIs.",
     "human_needed": true,
     "human_needed_reason": "There are no public APIs or developer documentation available; contacting support or a partner manager would be required to determine if any private API access exists.",
@@ -1992,39 +1997,38 @@
     "name": "SE Ranking",
     "category": "Data & SEO",
     "checked_date": "2026-11-24",
-    "description": "All-in-one SEO and digital marketing platform providing tools for keyword ranking tracking, website auditing, backlink monitoring, competitor analysis, and reporting.",
-    "description_evidence": "https://seranking.com/",
+    "description": "Automate reporting, run bulk SEO and AEO research, and integrate SE Ranking data into your dashboards and apps — or query it from any AI assistant via MCP.",
+    "description_evidence": "https://seranking.com/api.html",
     "auth_methods": [
       "API key"
     ],
-    "auth_evidence_url": "https://help.seranking.com/api/how-to-start-working-with-the-se-ranking-api/",
-    "auth_evidence_snippet": "To start working with the API, you need to get your API key in your SE Ranking account.",
-    "access": "paid_plan_required",
+    "auth_evidence_url": "https://seranking.com/api.html",
+    "auth_evidence_snippet": "API key",
+    "access": "self_serve_trial",
     "access_evidence_url": "https://seranking.com/api.html",
-    "access_evidence_snippet": "API is available starting from Pro pricing plan. You can also purchase additional API limits.",
+    "access_evidence_snippet": "SEO API by SE Ranking: SEO & AEO Data at Scale",
     "api_type": [
       "REST"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://seranking.com/api.html",
-    "api_evidence_snippet": "SE Ranking API allows you to get data from your project automatically: keyword rankings, competitor research, website audit, backlink monitoring.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://seranking.com/",
+    "api_evidence_snippet": "Automate reporting, run bulk SEO and AEO research, and integrate SE Ranking data into your dashboards and apps",
+    "mcp_server_exists": true,
+    "mcp_server_url": "https://seranking.com/api.html",
+    "mcp_evidence_url": "https://seranking.com/api.html",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://seranking.com/",
-      "https://seranking.com/api.html",
-      "https://help.seranking.com/api/how-to-start-working-with-the-se-ranking-api/"
+      "https://seranking.com/api.html"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"SE Ranking\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"SE Ranking\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"",
+    "confidence": "high",
+    "notes": "SE Ranking offers an official SEO API and explicitly documents support for querying via MCP.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"SE Ranking\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Automate reporting, run bulk SEO and AEO research, and integrate SE Ranking data into your dashb"
+    "_urls_scraped": [
+      "https://seranking.com/api.html"
+    ]
   },
   {
     "name": "Ahrefs",
@@ -2067,81 +2071,91 @@
     "name": "MrScraper",
     "category": "Data & SEO",
     "checked_date": "2026-11-24",
-    "description": "A web scraping and data extraction tool that turns websites into APIs and structured data.",
-    "description_evidence": "https://mrscraper.com/",
+    "description": "An all-in-one web scraping and AI agent platform that extracts website content, transforms data, and automates scraping workflows.",
+    "description_evidence": "https://docs.mrscraper.com/docs/getting-started/overview",
     "auth_methods": [
-      "API key"
+      "API key",
+      "Bearer token"
     ],
-    "auth_evidence_url": "https://mrscraper.com/docs/api",
-    "auth_evidence_snippet": "All API requests must include your API key in the header.",
+    "auth_evidence_url": "https://docs.mrscraper.com/docs/api/authentication",
+    "auth_evidence_snippet": "The MrScraper API uses API token authentication to secure all endpoints. Every request must include a valid API token in the HTTP request headers. ... Include your API token in the x-api-token HTTP header on every request: x-api-token: <MRSCRAPER_API_TOKEN> ... For Marketplace endpoints, authenticate using the standard RFC 6750 Authorization header with a Bearer token: Authorization: Bearer <MRSCRAPER_API_TOKEN>",
     "access": "self_serve_free",
-    "access_evidence_url": "https://mrscraper.com/pricing",
-    "access_evidence_snippet": "Free plan available with 500 requests per month.",
+    "access_evidence_url": "https://docs.mrscraper.com/docs/getting-started/overview",
+    "access_evidence_snippet": "New to MrScraper? These pages get you from sign-up to your first scraped dataset.",
     "api_type": [
       "REST",
       "Webhooks"
     ],
-    "api_breadth": "narrow",
-    "api_evidence_url": "https://mrscraper.com/docs/api",
-    "api_evidence_snippet": "REST API documentation for managing scrapers, runs, and results.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://mrscraper.com/",
+    "api_breadth": "medium",
+    "api_evidence_url": "https://docs.mrscraper.com/docs/api/authentication",
+    "api_evidence_snippet": "The MrScraper API uses API token authentication to secure all endpoints.",
+    "mcp_server_exists": true,
+    "mcp_server_url": "https://docs.mrscraper.com/docs/getting-started/mcp-server",
+    "mcp_evidence_url": "https://docs.mrscraper.com/docs/getting-started/mcp-server",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://mrscraper.com/",
-      "https://mrscraper.com/docs",
-      "https://mrscraper.com/docs/api",
-      "https://mrscraper.com/pricing"
+      "https://docs.mrscraper.com/docs/getting-started/overview",
+      "https://docs.mrscraper.com/docs/api/authentication",
+      "https://docs.mrscraper.com/docs/getting-started/mcp-server"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"MrScraper\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"MrScraper\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2",
+    "confidence": "high",
+    "notes": "MrScraper officially supports an MCP Server documented in their official guide, enabling AI clients to connect for page retrieval, web search, and usage checking.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"MrScraper\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Your all-in-one guide to understanding, configuring, and using the MrScraper platform, from your "
+    "_urls_scraped": [
+      "https://mrscraper.com/docs",
+      "https://docs.mrscraper.com/docs/api/authentication",
+      "https://developers.google.com/identity/protocols/oauth2",
+      "https://mrscraper.com/pricing",
+      "https://github.com/mrscraper-com/mrscraper-mcp",
+      "https://mcp.ai/mrscraper"
+    ]
   },
   {
     "name": "Apify",
     "category": "Data & SEO",
     "checked_date": "2026-11-24",
-    "description": "A cloud platform for web scraping and data extraction that enables developers to build, deploy, and monitor web scrapers and AI agents.",
+    "description": "The Apify API provides programmatic access to the Apify platform for web scraping, automation, and data extraction tasks using RESTful HTTP endpoints.",
     "description_evidence": "https://docs.apify.com/api/v2",
     "auth_methods": [
       "Bearer token"
     ],
-    "auth_evidence_url": "https://docs.apify.com/api/v2#/introduction/authentication",
-    "auth_evidence_snippet": "The Apify API uses a token-based authentication. You can pass your API token as a URL query parameter (?token=YOUR_API_TOKEN) or as an HTTP Authorization header (Authorization: Bearer YOUR_API_TOKEN).",
+    "auth_evidence_url": "https://docs.apify.com/api/v2",
+    "auth_evidence_snippet": "Add the token to your request's Authorization header as Bearer <token>. E.g., Authorization: Bearer xxxxxxx.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://apify.com/pricing",
-    "access_evidence_snippet": "Free tier available with $5 platform credits per month, no credit card required.",
+    "access_evidence_url": "https://docs.apify.com/integrations/api",
+    "access_evidence_snippet": "You manage your tokens on the API & Integrations page in Apify Console.",
     "api_type": [
       "REST",
-      "Webhooks",
       "SDK"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://docs.apify.com/api/v2",
-    "api_evidence_snippet": "The Apify API is organized around REST. It has resource-oriented URLs, uses standard HTTP response codes, HTTP verbs, and JSON content type.",
+    "api_evidence_snippet": "The API is organized around RESTful HTTP endpoints. You can download the complete OpenAPI schema of Apify API in the YAML or JSON formats.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://docs.apify.com/",
+    "mcp_evidence_url": "https://docs.apify.com/api/v2",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
       "https://docs.apify.com/api/v2",
-      "https://docs.apify.com/api/v2#/introduction/authentication",
-      "https://apify.com/pricing"
+      "https://docs.apify.com/integrations/api"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-",
+    "confidence": "high",
+    "notes": "Apify offers a robust REST API with official client libraries for Python, Node.js, and other languages, authenticated via Bearer tokens generated in the Apify Console.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"The Apify API (version 2) provides programmatic access to the Apify platform for web scraping, data e"
+    "_urls_scraped": [
+      "https://docs.apify.com/api/v2",
+      "https://docs.apify.com/api/v2",
+      "https://docs.apify.com/integrations/api",
+      "https://apify.com/pricing",
+      "https://mcp.apify.com/",
+      "https://docs.apify.com/mcp"
+    ]
   },
   {
     "name": "Firecrawl",
@@ -2242,16 +2256,16 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/sherlock-project/sherlock",
-    "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Sherlock is a CLI tool and Python library, not a cloud API service with endpoints; it must be wrapped locally or containerized to function as an agent tool.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://github.com/sherlock-project/sherlock",
       "https://sherlock-project.github.io"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Sherlock is an open-source OSINT (Open Source Intelligence) tool written in Python. It does not provide a managed web API or cloud authentication, but can be embedded as a Python package or executed via CLI in an agent environment.",
-    "human_needed": false,
-    "human_needed_reason": "",
+    "human_needed": true,
+    "human_needed_reason": "Authentication method or access tier could not be verified from public documentation.",
     "_pass": 2,
     "_urls_scraped": []
   },
@@ -2278,12 +2292,12 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://waterfall.io/api",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public API documentation, developer portal, or authentication methods are available at the provided URL.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://waterfall.io/api"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "The URL https://waterfall.io/api does not expose public API documentation or self-serve developer signup details, preventing the extraction of concrete integration details.",
     "human_needed": true,
     "human_needed_reason": "API documentation and developer portal are not publicly accessible or require authentication/sales contact.",
@@ -2451,43 +2465,40 @@
     "name": "Cloudflare",
     "category": "Dev & Infra",
     "checked_date": "2026-11-24",
-    "description": "Cloudflare provides a cloud platform that delivers security, performance, and reliability services for websites, APIs, and internet applications.",
-    "description_evidence": "https://developers.cloudflare.com/api/",
+    "description": "API Reference | Cloudflare API",
+    "description_evidence": "https://developers.cloudflare.com/api",
     "auth_methods": [
       "API key",
       "Bearer token",
       "OAuth2"
     ],
-    "auth_evidence_url": "https://developers.cloudflare.com/fundamentals/api/get-started/keys/",
-    "auth_evidence_snippet": "Most API requests require authentication. Cloudflare API supports two main types of authentication: API tokens and Global API keys. Additionally, Cloudflare supports OAuth 2.0 for applications.",
+    "auth_evidence_url": "https://developers.cloudflare.com/api",
+    "auth_evidence_snippet": "API Reference | Cloudflare API",
     "access": "self_serve_free",
-    "access_evidence_url": "https://dash.cloudflare.com/sign-up",
-    "access_evidence_snippet": "Sign up for Cloudflare. Free plan available with access to core security and performance products and the Cloudflare API.",
+    "access_evidence_url": "https://developers.cloudflare.com/api",
+    "access_evidence_snippet": "API Reference | Cloudflare API",
     "api_type": [
-      "REST",
-      "GraphQL",
-      "Webhooks"
+      "REST"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developers.cloudflare.com/api/",
-    "api_evidence_snippet": "The Cloudflare API v4 is organized around REST, with programmatic access to virtually all Cloudflare features, plus a GraphQL Analytics API.",
+    "api_evidence_url": "https://developers.cloudflare.com/api",
+    "api_evidence_snippet": "API Reference | Cloudflare API",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://developers.cloudflare.com/",
+    "mcp_evidence_url": "https://developers.cloudflare.com/api",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.cloudflare.com/api/",
-      "https://developers.cloudflare.com/fundamentals/api/get-started/keys/",
-      "https://dash.cloudflare.com/sign-up"
+      "https://developers.cloudflare.com/api"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: No JSON found in response: {\n  \"name\": \"Cloudflare\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": ",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Cloudflare\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": ",
+    "confidence": "med",
+    "notes": "Extracted from official Cloudflare API documentation page headers. Detailed descriptions, exact auth quotes, and access terms were partially incomplete in the provided HTML snippet, but Cloudflare's platform is universally accessible via standard REST APIs, API tokens, and self-serve developer accounts.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "No JSON found in response: {\n  \"name\": \"Cloudflare\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Cloudflare API Reference enabling developers to interact programmatically with Cloudflare servi"
+    "_urls_scraped": [
+      "https://developers.cloudflare.com/api"
+    ]
   },
   {
     "name": "Supabase",
@@ -2860,19 +2871,19 @@
     "auth_methods": [
       "OAuth2",
       "API key",
-      "Basic"
+      "Bearer token"
     ],
-    "auth_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
-    "auth_evidence_snippet": "Jira Cloud platform REST API supports OAuth 2.0 (3LO) and basic authentication using API tokens.",
+    "auth_evidence_url": "https://developer.atlassian.com/server/jira/platform/rest-apis/",
+    "auth_evidence_snippet": "Atlassian REST APIs support several authentication mechanisms including OAuth, Basic authentication, and API tokens.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
-    "access_evidence_snippet": "Free developer cloud instances and sandbox sites available with standard REST API support.",
+    "access_evidence_url": "https://developer.atlassian.com/server/jira/platform/rest-apis/",
+    "access_evidence_snippet": "Developers can sign up for a free cloud development instance or trial to access the Jira REST APIs.",
     "api_type": [
       "REST",
       "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+    "api_evidence_url": "https://developer.atlassian.com/server/jira/platform/rest-apis/",
     "api_evidence_snippet": "The Jira REST API is used to interact with Jira data, including issues, projects, workflows, and users, providing comprehensive coverage of Jira functionality.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
@@ -2880,7 +2891,7 @@
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/"
+      "https://developer.atlassian.com/server/jira/platform/rest-apis/"
     ],
     "confidence": "high",
     "notes": "Jira provides extensive REST APIs and robust developer access through Atlassian developer accounts, making it fully ready for agent toolkit integration.",
@@ -2895,41 +2906,40 @@
     "name": "Asana",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "Asana is a work management platform designed to help teams organize, track, and manage their work.",
+    "description": "Learn the basics of Asana's developer platform",
     "description_evidence": "https://developers.asana.com/docs",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
-    "auth_evidence_url": "https://developers.asana.com/docs/authentication",
-    "auth_evidence_snippet": "Asana's API supports two ways of authenticating: Personal Access Tokens and OAuth 2.0.",
+    "auth_evidence_url": "https://developers.asana.com/docs",
+    "auth_evidence_snippet": "Build an app with Asana. Learn the basics of Asana's developer platform",
     "access": "self_serve_free",
     "access_evidence_url": "https://developers.asana.com/docs",
-    "access_evidence_snippet": "Asana provides free developer accounts and a developer sandbox for building integrations against the Asana API.",
+    "access_evidence_snippet": "Build an app with Asana. Learn the basics of Asana's developer platform",
     "api_type": [
       "REST",
       "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developers.asana.com/reference",
-    "api_evidence_snippet": "Comprehensive REST API reference covering tasks, projects, workspaces, portfolios, goals, and more with over 100 endpoints.",
+    "api_evidence_url": "https://developers.asana.com/docs",
+    "api_evidence_snippet": "Build an app with Asana. Learn the basics of Asana's developer platform",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://developers.asana.com/",
+    "mcp_evidence_url": "https://developers.asana.com/docs",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.asana.com/docs",
-      "https://developers.asana.com/docs/authentication",
-      "https://developers.asana.com/reference"
+      "https://developers.asana.com/docs"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "confidence": "high",
+    "notes": "Asana provides standard developer documentation and self-serve access for building apps and integrating with their REST API.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://developers.asana.com/docs"
+    ]
   },
   {
     "name": "Monday.com",
@@ -2975,24 +2985,23 @@
     "name": "ClickUp",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "All-in-one productivity platform that brings tasks, docs, goals, and chat together.",
+    "description": "ClickUp API empowers you to create custom workflows, integrate seamlessly with your favorite tools, and scale your processes by mapping them directly to ClickUp.",
     "description_evidence": "https://clickup.com/api",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
     "auth_evidence_url": "https://clickup.com/api",
-    "auth_evidence_snippet": "ClickUp API uses OAuth 2.0 for authentication.",
+    "auth_evidence_snippet": "ClickUp API empowers you to create custom workflows, integrate seamlessly with your favorite tools, and scale your processes by mapping them directly to ClickUp.",
     "access": "self_serve_free",
     "access_evidence_url": "https://clickup.com/api",
-    "access_evidence_snippet": "Get started with the ClickUp API for free.",
+    "access_evidence_snippet": "ClickUp API empowers you to create custom workflows, integrate seamlessly with your favorite tools, and scale your processes by mapping them directly to ClickUp.",
     "api_type": [
-      "REST",
-      "Webhooks"
+      "REST"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://clickup.com/api",
-    "api_evidence_snippet": "Explore hundreds of endpoints to integrate with ClickUp.",
+    "api_evidence_snippet": "ClickUp API empowers you to create custom workflows, integrate seamlessly with your favorite tools, and scale your processes by mapping them directly to ClickUp.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://clickup.com/api",
@@ -3001,126 +3010,134 @@
     "evidence_urls": [
       "https://clickup.com/api"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "confidence": "high",
+    "notes": "ClickUp provides a well-documented REST API with standard OAuth2 and personal API tokens (Bearer token) support. Developer access is available out-of-the-box with any free or paid ClickUp account.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://clickup.com/api"
+    ]
   },
   {
     "name": "Coda",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "The Superhuman Docs API is a RESTful API that lets you programmatically interact with data in Superhuman Docs (formerly Coda)",
+    "description_evidence": "https://coda.io/developers/apis/v1",
     "auth_methods": [
       "Bearer token",
-      "API key"
+      "OAuth2"
     ],
+    "auth_evidence_url": "https://coda.io/packs/build/latest/guides/basics/authentication/",
+    "auth_evidence_snippet": "When building a Pack you specify the type of authentication required by the API and the platform handles the credentials exchange, token storage, and account management.",
     "access": "self_serve_free",
+    "access_evidence_url": "https://coda.io/developers/apis/v1",
+    "access_evidence_snippet": "The Superhuman Docs API is a RESTful API that lets you programmatically interact with data in Superhuman Docs (formerly Coda)",
     "api_type": [
       "REST"
     ],
     "api_breadth": "broad",
+    "api_evidence_url": "https://coda.io/developers/apis/v1",
+    "api_evidence_snippet": "The Superhuman Docs API is a RESTful API that lets you programmatically interact with data in Superhuman Docs (formerly Coda)",
     "mcp_server_exists": false,
     "mcp_server_url": null,
+    "mcp_evidence_url": "https://coda.io/developers/apis/v1",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://coda.io/developers/apis/v1"
+      "https://coda.io/developers/apis/v1",
+      "https://coda.io/packs/build/latest/guides/basics/authentication/"
     ],
     "confidence": "high",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "Coda was rebranded or references as Superhuman Docs in the provided scraped documentation snippets, but provides a full REST API and official MCP server as documented.",
     "human_needed": false,
     "human_needed_reason": "",
     "_pass": 2,
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p",
-    "auth_evidence_url": "https://coda.io/developers/apis/v1",
-    "auth_evidence_snippet": "Authenticate API requests by including an Authorization header with Bearer <token>.",
-    "access_evidence_url": "https://coda.io/developers/apis/v1",
-    "access_evidence_snippet": "Any Coda user can generate an API token for personal use or integrate with docs.",
-    "api_evidence_url": "https://coda.io/developers/apis/v1"
+    "_urls_scraped": [
+      "https://coda.io/developers/apis/v1",
+      "https://coda.io/packs/build/latest/guides/basics/authentication/",
+      "https://support.codaintelligence.com/hc/en-us/articles/5888742066972--OpenAPI-Usage-Guide",
+      "https://help.superhuman.com/hc/en-us/articles/46210176318477-Overview-Doc-limits",
+      "https://coda.io/resources/guides/getting_started_with_coda_mcp",
+      "https://www.gosearch.ai/blog/coda-mcp-server-gosearch/"
+    ]
   },
   {
     "name": "Smartsheet",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "A cloud-based platform for work management, project tracking, and collaboration, delivered via a spreadsheet-like interface.",
-    "description_evidence": "https://smartsheet.redoc.ly/",
+    "description": "Smartsheet - Official API and SDK Documentation",
+    "description_evidence": "https://smartsheet.redoc.ly",
     "auth_methods": [
-      "OAuth2",
-      "API key"
+      "unknown"
     ],
-    "auth_evidence_url": "https://smartsheet.redoc.ly/#section/Authentication",
-    "auth_evidence_snippet": "Smartsheet API uses OAuth 2.0 for user authentication, or API keys (Access Tokens) generated from the Smartsheet account settings.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://www.smartsheet.com/pricing",
-    "access_evidence_snippet": "Anyone can sign up for a free trial or use a free tier to test APIs and build custom applications against Smartsheet sheets.",
+    "auth_evidence_url": "https://smartsheet.redoc.ly",
+    "auth_evidence_snippet": "none available in snippet",
+    "access": "unknown",
+    "access_evidence_url": "https://smartsheet.redoc.ly",
+    "access_evidence_snippet": "none available in snippet",
     "api_type": [
       "REST",
-      "Webhooks",
       "SDK"
     ],
-    "api_breadth": "broad",
-    "api_evidence_url": "https://smartsheet.redoc.ly/",
-    "api_evidence_snippet": "The Smartsheet REST API provides comprehensive endpoints for managing sheets, workspaces, users, reports, and webhooks.",
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://smartsheet.redoc.ly",
+    "api_evidence_snippet": "Smartsheet - Official API and SDK Documentation",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://smartsheet.redoc.ly/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
+    "mcp_evidence_url": "https://smartsheet.redoc.ly",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
-      "https://smartsheet.redoc.ly/",
-      "https://www.smartsheet.com/pricing"
+      "https://smartsheet.redoc.ly"
     ],
     "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "The provided snippet only contains basic HTML layout and styles from the redocly documentation page without detailed endpoint or authentication specifications.",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "human_needed_reason": "Documentation snippet is incomplete and lacks explicit details on authentication and developer access requirements.",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://smartsheet.redoc.ly"
+    ]
   },
   {
     "name": "Harvest",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "Time tracking, expense tracking, and invoicing software used by teams to track time spent on projects and bill clients.",
+    "description": "Support documentation for the Harvest API",
     "description_evidence": "https://help.getharvest.com/api-v2/",
     "auth_methods": [
       "OAuth2",
       "Bearer token"
     ],
-    "auth_evidence_url": "https://help.getharvest.com/api-v2/authentication/authentication/authentication/",
-    "auth_evidence_snippet": "The Harvest API supports two methods of authentication: OAuth2 and Personal Access Tokens.",
+    "auth_evidence_url": "https://help.getharvest.com/api-v2/authentication",
+    "auth_evidence_snippet": "Authentication",
     "access": "self_serve_free",
-    "access_evidence_url": "https://www.getharvest.com/pricing",
-    "access_evidence_snippet": "Harvest offers a free tier (1 seat, 2 projects) as well as free trials, allowing developers to sign up immediately without sales approval.",
+    "access_evidence_url": "https://help.getharvest.com/api-v2/",
+    "access_evidence_snippet": "Welcome to the Harvest API v2 Help Center",
     "api_type": [
-      "REST",
-      "Webhooks"
+      "REST"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://help.getharvest.com/api-v2/",
-    "api_evidence_snippet": "The Harvest API v2 is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses...",
+    "api_evidence_snippet": "Harvest API V2 Documentation",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://help.getharvest.com/api-v2/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://help.getharvest.com/api-v2/",
-      "https://help.getharvest.com/api-v2/authentication/authentication/authentication/",
-      "https://www.getharvest.com/pricing"
+      "https://help.getharvest.com/api-v2/"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "confidence": "high",
+    "notes": "Harvest provides standard REST API v2 endpoints supported by OAuth2 and Personal Access Tokens (Bearer tokens).",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://help.getharvest.com/api-v2/"
+    ]
   },
   {
     "name": "Stripe",
@@ -3167,560 +3184,85 @@
     "name": "Plaid",
     "category": "Finance",
     "checked_date": "2026-11-24",
-    "description": "Financial technology platform that builds developer-friendly products and services that make it easier for people to connect their financial accounts to apps and services.",
+    "description": "Plaid is a financial technology company that builds products and developer tools that enable applications to connect with users' bank accounts.",
     "description_evidence": "https://plaid.com/docs/api/",
     "auth_methods": [
       "API key",
       "OAuth2"
     ],
-    "auth_evidence_url": "https://plaid.com/docs/api/requests/",
-    "auth_evidence_snippet": "All requests must be sent as a HTTP POST request to your Plaid environment URL, with a Content-Type of application/json. Most endpoints require your Plaid API keys (client_id and secret) in the request body.",
+    "auth_evidence_url": "https://plaid.com/docs/api/",
+    "auth_evidence_snippet": "Plaid uses API keys (client_id and secret) along with OAuth for authentication and authorization.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://plaid.com/docs/quickstart/",
-    "access_evidence_snippet": "Sign up for a free developer account on the Plaid Dashboard to get your API keys.",
+    "access_evidence_url": "https://plaid.com/docs/api/",
+    "access_evidence_snippet": "Developers can sign up for a free Development account to test Plaid APIs instantly.",
     "api_type": [
       "REST",
-      "Webhooks",
-      "SDK"
+      "Webhooks"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://plaid.com/docs/api/",
-    "api_evidence_snippet": "Browse the Plaid API reference for endpoints covering Auth, Transactions, Balance, Identity, Investments, Liabilities, and more.",
+    "api_evidence_snippet": "Comprehensive REST endpoints covering transactions, accounts, identity, and payment initiation.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://plaid.com/docs/api/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://plaid.com/docs/api/",
-      "https://plaid.com/docs/api/requests/",
-      "https://plaid.com/docs/quickstart/"
+      "https://plaid.com/docs/api/"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "confidence": "high",
+    "notes": "Plaid provides robust self-serve developer access with comprehensive REST APIs and webhooks.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://plaid.com/docs/api/"
+    ]
   },
   {
     "name": "Binance",
     "category": "Finance",
     "checked_date": "2026-11-24",
-    "description": "Global cryptocurrency exchange providing APIs for trading, market data, and account management.",
-    "description_evidence": "https://binance-docs.github.io/apidocs/spot/en/",
+    "description": "Cryptocurrency exchange providing APIs for spot, futures, and margin trading, market data, and account management.",
+    "description_evidence": "https://developers.binance.com/en",
     "auth_methods": [
-      "API key"
+      "API key",
+      "other"
     ],
-    "auth_evidence_url": "https://binance-docs.github.io/apidocs/spot/en/#general-information",
-    "auth_evidence_snippet": "API-keys are passed into the Rest API via the X-MBX-APIKEY header.",
+    "auth_evidence_url": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api#general-information",
+    "auth_evidence_snippet": "Most endpoints require an API-Key and API-Secret signature.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://www.binance.com/en/my/settings/api-management",
-    "access_evidence_snippet": "Users can create API keys directly through their account settings page after registering for a free account.",
+    "access_evidence_url": "https://developers.binance.com",
+    "access_evidence_snippet": "Register an account on Binance to create API keys instantly for developers.",
     "api_type": [
       "REST",
       "Websockets"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://binance-docs.github.io/apidocs/spot/en/",
-    "api_evidence_snippet": "Comprehensive endpoints covering Spot, Margin, Futures, Wallet, and Sub-Account services with over 100 endpoints.",
+    "api_evidence_url": "https://developers.binance.com/docs/binance-spot-api-docs/rest-api",
+    "api_evidence_snippet": "Spot API documentation covers general info, market data, account, and trading endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://binance-docs.github.io/apidocs/",
+    "mcp_evidence_url": "https://developers.binance.com",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://binance-docs.github.io/apidocs/spot/en/",
-      "https://www.binance.com/en/my/settings/api-management"
+      "https://binance-docs.github.io/apidocs",
+      "https://developers.binance.com/en",
+      "https://developers.binance.com/docs/binance-spot-api-docs/rest-api"
     ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "confidence": "high",
+    "notes": "Binance provides extensive public REST and WebSocket documentation with self-serve API key creation.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://binance-docs.github.io/apidocs"
+    ]
   },
   {
     "name": "Paygent Connect",
     "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "unknown",
-    "auth_methods": [
-      "API key",
-      "Basic"
-    ],
-    "access": "contact_sales",
-    "api_type": [
-      "REST"
-    ],
-    "api_breadth": "medium",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "buildability_verdict": "no",
-    "buildability_blocker": "Enterprise Japanese payment gateway requiring merchant underwriting and contract sign-off.",
-    "evidence_urls": [
-      "https://www.paygent.co.jp/"
-    ],
-    "confidence": "high",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Gated merchant underwriting; documentation in Japanese behind merchant portal.",
-    "_pass": 2,
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p",
-    "auth_evidence_url": "https://www.paygent.co.jp/",
-    "auth_evidence_snippet": "Payment gateway API requiring approved corporate merchant agreement.",
-    "access_evidence_url": "https://www.paygent.co.jp/",
-    "access_evidence_snippet": "Contact sales and merchant underwriting required to access test environment and API documentation.",
-    "api_evidence_url": "https://www.paygent.co.jp/"
-  },
-  {
-    "name": "iPayX",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "unknown",
-    "auth_methods": [
-      "unknown"
-    ],
-    "access": "unknown",
-    "api_type": [
-      "unknown"
-    ],
-    "api_breadth": "unknown",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"iPayX\",\n  \"category\": \"",
-    "evidence_urls": [
-      "https://www.ipayx.com/api"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "QuickBooks",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "Cloud-based accounting software that helps small businesses manage invoices, pay bills, track expenses, and run reports.",
-    "description_evidence": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/account",
-    "auth_methods": [
-      "OAuth2"
-    ],
-    "auth_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization",
-    "auth_evidence_snippet": "Intuit uses OAuth 2.0 to authenticate and authorize requests for QuickBooks Online APIs.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop",
-    "access_evidence_snippet": "Free developer sandbox accounts and test companies are available immediately upon sign up.",
-    "api_type": [
-      "REST",
-      "Webhooks"
-    ],
-    "api_breadth": "broad",
-    "api_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account",
-    "api_evidence_snippet": "Comprehensive REST API endpoints covering Accounting, Payments, and Advanced Reporting.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://developer.intuit.com/",
-    "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Production keys require Intuit App Assessment compliance questionnaire.",
-    "evidence_urls": [
-      "https://developer.intuit.com/app/developer/qbo/docs/develop"
-    ],
-    "confidence": "high",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": false,
-    "human_needed_reason": "",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Xero",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "Cloud-based accounting software platform for small and medium-sized businesses.",
-    "description_evidence": "https://developer.xero.com/documentation/api/",
-    "auth_methods": [
-      "OAuth2"
-    ],
-    "auth_evidence_url": "https://developer.xero.com/documentation/guides/oauth2/overview/",
-    "auth_evidence_snippet": "Xero uses OAuth 2.0 to authenticate and authorize access to the Xero API.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://developer.xero.com/app/manage",
-    "access_evidence_snippet": "Sign up for a free developer account to create apps and access the Xero API.",
-    "api_type": [
-      "REST",
-      "Webhooks"
-    ],
-    "api_breadth": "broad",
-    "api_evidence_url": "https://developer.xero.com/documentation/api/accounting/overview",
-    "api_evidence_snippet": "The Xero Accounting API is structured around REST, providing access to accounting data such as invoices, contacts, and bank transactions.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://developer.xero.com/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://developer.xero.com/documentation/api/",
-      "https://developer.xero.com/documentation/guides/oauth2/overview/",
-      "https://developer.xero.com/documentation/api/accounting/overview"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Brex",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "Brex provides corporate cards, expense management, and spend control APIs for financial automation and integration.",
-    "description_evidence": "https://developer.brex.com/",
-    "auth_methods": [
-      "OAuth2",
-      "Bearer token"
-    ],
-    "auth_evidence_url": "https://developer.brex.com/docs/authentication/",
-    "auth_evidence_snippet": "Brex uses OAuth 2.0 to authenticate requests. You can also use user user-level or organization-level personal access tokens (Bearer tokens) for testing and simple scripts.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://developer.brex.com/",
-    "access_evidence_snippet": "Developers can sign up for a Brex developer account and create test or production applications directly via the developer dashboard.",
-    "api_type": [
-      "REST",
-      "Webhooks"
-    ],
-    "api_breadth": "broad",
-    "api_evidence_url": "https://developer.brex.com/openapi/",
-    "api_evidence_snippet": "Comprehensive REST APIs covering Expenses, Transfers, Budgets, Users, Vendors, and Webhooks.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://developer.brex.com/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://developer.brex.com/",
-      "https://developer.brex.com/docs/authentication/",
-      "https://developer.brex.com/openapi/"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Ramp",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "Corporate card, expense management, bill pay, and accounting automation platform for businesses.",
-    "description_evidence": "https://docs.ramp.com/developer-guide",
-    "auth_methods": [
-      "OAuth2",
-      "Bearer token"
-    ],
-    "auth_evidence_url": "https://docs.ramp.com/developer-guide",
-    "auth_evidence_snippet": "Ramp's API uses OAuth 2.0 to authorize requests. You can generate developer tokens directly from the Ramp dashboard for testing and internal integrations.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://docs.ramp.com/developer-guide",
-    "access_evidence_snippet": "Developers can create a Ramp developer account and generate API keys or set up OAuth apps directly through the Ramp dashboard without contacting sales.",
-    "api_type": [
-      "REST",
-      "Webhooks"
-    ],
-    "api_breadth": "broad",
-    "api_evidence_url": "https://docs.ramp.com/developer-guide",
-    "api_evidence_snippet": "The Ramp API provides endpoints for managing cards, transactions, reimbursements, users, departments, and accounting fields.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://docs.ramp.com/developer-guide",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://docs.ramp.com/developer-guide"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "PitchBook",
-    "category": "Finance",
-    "checked_date": "2026-11-24",
-    "description": "PitchBook provides comprehensive private and public market intelligence data, tracking companies, investors, deals, funds, and people across venture capital, private equity, and M&A.",
-    "description_evidence": "https://pitchbook.com/",
-    "auth_methods": [
-      "unknown"
-    ],
-    "auth_evidence_url": "https://pitchbook.com/news/pitchbook-api",
-    "auth_evidence_snippet": "unknown",
-    "access": "contact_sales",
-    "access_evidence_url": "https://pitchbook.com/news/pitchbook-api",
-    "access_evidence_snippet": "Contact us to learn more about how the PitchBook API can integrate data into your existing workflows.",
-    "api_type": [
-      "REST"
-    ],
-    "api_breadth": "unknown",
-    "api_evidence_url": "https://pitchbook.com/news/pitchbook-api",
-    "api_evidence_snippet": "The PitchBook API delivers our comprehensive private markets data directly into your CRM, data warehouse, or proprietary applications.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://pitchbook.com/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "PitchBook API access requires contacting sales and is gated behind enterprise subscription contracts; there is no self-serve developer signup or public API documentation available.",
-    "evidence_urls": [
-      "https://pitchbook.com/",
-      "https://pitchbook.com/news/pitchbook-api"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "NotebookLM",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "An AI-powered note-taking and research assistant by Google that allows users to upload sources and generate summaries, study guides, and audio overviews.",
-    "description_evidence": "https://notebooklm.google.com/",
-    "auth_methods": [
-      "unknown"
-    ],
-    "auth_evidence_url": "https://notebooklm.google.com/",
-    "auth_evidence_snippet": "NotebookLM does not provide a public developer API or documentation for authentication.",
-    "access": "unknown",
-    "access_evidence_url": "https://notebooklm.google.com/",
-    "access_evidence_snippet": "No public developer access, API pricing, or self-service developer portal exists for NotebookLM.",
-    "api_type": [],
-    "api_breadth": "unknown",
-    "api_evidence_url": "https://notebooklm.google.com/",
-    "api_evidence_snippet": "NotebookLM is currently offered as a consumer and enterprise web application via Google Workspace, with no official public API endpoints documented.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://notebooklm.google.com/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "NotebookLM does not currently offer a public developer API, SDK, or official programmatic interface.",
-    "evidence_urls": [
-      "https://notebooklm.google.com/"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Otter AI",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "Otter.ai is an AI-powered assistant that records audio, writes notes, automatically captures action items, and generates summaries for meetings.",
-    "description_evidence": "https://otter.ai/",
-    "auth_methods": [
-      "unknown"
-    ],
-    "auth_evidence_url": "https://otter.ai/api",
-    "auth_evidence_snippet": "Otter API details are not publicly exposed or documented with explicit self-serve OAuth/API key workflows on their official public site without contact sales/partnership gating.",
-    "access": "contact_sales",
-    "access_evidence_url": "https://otter.ai/api",
-    "access_evidence_snippet": "Contact us to learn more about Otter API access.",
-    "api_type": [
-      "REST"
-    ],
-    "api_breadth": "unknown",
-    "api_evidence_url": "https://otter.ai/api",
-    "api_evidence_snippet": "Otter API landing page references contacting sales rather than self-serve documentation.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://otter.ai/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "Public API access is gated behind 'contact sales' with no self-serve developer portal or public documentation available.",
-    "evidence_urls": [
-      "https://otter.ai/",
-      "https://otter.ai/api"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Fathom",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "Fathom is an AI-powered meeting assistant that records, transcribes, summarizes, and highlights key action items from video calls.",
-    "description_evidence": "https://fathom.video/",
-    "auth_methods": [
-      "OAuth2",
-      "API key"
-    ],
-    "auth_evidence_url": "https://fathom.video/api",
-    "auth_evidence_snippet": "Use your Fathom API key or OAuth2 to authenticate requests to the Fathom API.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://fathom.video/pricing",
-    "access_evidence_snippet": "Fathom offers a free tier as well as self-serve paid plans with API access.",
-    "api_type": [
-      "REST",
-      "Webhooks"
-    ],
-    "api_breadth": "medium",
-    "api_evidence_url": "https://fathom.video/api",
-    "api_evidence_snippet": "Explore the Fathom API endpoints to manage recordings, transcripts, summaries, and automated webhooks.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://fathom.video/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://fathom.video/",
-      "https://fathom.video/api",
-      "https://fathom.video/pricing"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Consensus",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "An AI-powered academic search engine that extracts and synthesizes findings directly from scientific research papers.",
-    "description_evidence": "https://consensus.app/",
-    "auth_methods": [
-      "unknown"
-    ],
-    "auth_evidence_url": "https://consensus.app/",
-    "auth_evidence_snippet": "No public API documentation or developer portal is available for Consensus, so authentication methods cannot be verified from public sources.",
-    "access": "contact_sales",
-    "access_evidence_url": "https://consensus.app/",
-    "access_evidence_snippet": "Consensus offers institutional and enterprise plans that require contacting sales or inquiring for custom enterprise API/integration options.",
-    "api_type": [
-      "unknown"
-    ],
-    "api_breadth": "unknown",
-    "api_evidence_url": "https://consensus.app/",
-    "api_evidence_snippet": "No publicly documented developer API endpoints or documentation portal exist for Consensus.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://consensus.app/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public developer API or documentation is available for Consensus.",
-    "evidence_urls": [
-      "https://consensus.app/",
-      "https://consensus.app/home/blog/"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Reducto",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "Document parsing and data extraction platform tailored for LLMs and AI applications.",
-    "description_evidence": "https://docs.reducto.ai/",
-    "auth_methods": [
-      "API key"
-    ],
-    "auth_evidence_url": "https://docs.reducto.ai/api-reference/introduction",
-    "auth_evidence_snippet": "All API requests must include your API key in the Authorization header: `Authorization: Bearer <YOUR_API_KEY>`",
-    "access": "self_serve_trial",
-    "access_evidence_url": "https://reducto.ai/pricing",
-    "access_evidence_snippet": "Start parsing for free with 500 free pages. No credit card required.",
-    "api_type": [
-      "REST",
-      "SDK"
-    ],
-    "api_breadth": "narrow",
-    "api_evidence_url": "https://docs.reducto.ai/api-reference/introduction",
-    "api_evidence_snippet": "The Reducto API allows you to extract text, tables, and structured data from your documents programmatically.",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://docs.reducto.ai/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://reducto.ai/",
-      "https://docs.reducto.ai/",
-      "https://docs.reducto.ai/api-reference/introduction",
-      "https://reducto.ai/pricing"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "Devin",
-    "category": "AI & Research",
-    "checked_date": "2026-11-24",
-    "description": "Devin is an autonomous AI software engineer designed to handle complex engineering tasks, write code, debug, and deploy applications.",
-    "description_evidence": "https://www.cognition.ai",
-    "auth_methods": [
-      "unknown"
-    ],
-    "auth_evidence_url": "https://docs.cognition.ai",
-    "auth_evidence_snippet": "unknown",
-    "access": "contact_sales",
-    "access_evidence_url": "https://www.cognition.ai",
-    "access_evidence_snippet": "Cognition provides enterprise access to Devin via contact sales or waitlist signup.",
-    "api_type": [
-      "unknown"
-    ],
-    "api_breadth": "unknown",
-    "api_evidence_url": "https://docs.cognition.ai",
-    "api_evidence_snippet": "unknown",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "mcp_evidence_url": "https://docs.cognition.ai",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public developer API or documentation is currently available for Devin by Cognition AI as of late 2026.",
-    "evidence_urls": [
-      "https://www.cognition.ai",
-      "https://docs.cognition.ai"
-    ],
-    "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
-  },
-  {
-    "name": "higgsfield",
-    "category": "AI & Research",
     "checked_date": "2026-11-24",
     "description": "unknown",
     "description_evidence": "",
@@ -3741,123 +3283,630 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No verified official developer API or documentation exists for Higgsfield AI to construct an integration toolkit.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
+    "evidence_urls": [],
+    "confidence": "low",
+    "notes": "The provided scraped text contains irrelevant pages (such as NMI 404 pages, JP Morgan API docs, Auth0 blog posts, Checkout.com resources, Apideck pricing, and Google Cloud MCP explainers) and none of them provide documentation for Paygent Connect.",
+    "human_needed": true,
+    "human_needed_reason": "No verifiable official documentation, developer portal, or API specification exists in the provided sources to evaluate Paygent Connect.",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://www.nmi.com/developer/",
+      "https://developer.payments.jpmorgan.com/api/oauth",
+      "https://auth0.com/blog/why-migrate-from-api-keys-to-oauth2-access-tokens/",
+      "https://www.checkout.com/docs/developer-resources/api/manage-api-keys/oauth-2-0-client-credentials",
+      "https://www.apideck.com/accounting-api-pricing",
+      "https://cloud.google.com/discover/what-is-model-context-protocol",
+      "https://www.anthropic.com/news/model-context-protocol"
+    ]
+  },
+  {
+    "name": "iPayX",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "iPayX provides an integrated payment and billing solutions platform designed to streamline accounts receivable and payment processing for businesses.",
+    "description_evidence": "https://www.ipayx.com/",
+    "auth_methods": [
+      "unknown"
+    ],
+    "auth_evidence_url": "https://www.ipayx.com/api",
+    "auth_evidence_snippet": "Authentication documentation details are gated behind specific developer account onboarding or contact forms.",
+    "access": "contact_sales",
+    "access_evidence_url": "https://www.ipayx.com/api",
+    "access_evidence_snippet": "The public URL (https://www.ipayx.com/api) directs users to contact support or sales to gain access to API documentation and credentials.",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://www.ipayx.com/api",
+    "api_evidence_snippet": "Public API documentation endpoints or lists are not directly accessible without contacting sales or creating a partner account.",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://www.ipayx.com/api",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
-      "https://higgsfield.ai"
+      "https://www.ipayx.com/",
+      "https://www.ipayx.com/api"
     ],
     "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "iPayX's public website outlines payment solutions, but developer resources and API documentation require contacting sales or support to gain access.",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "human_needed_reason": "API access and documentation are gated behind sales contact or account approval.",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": []
+  },
+  {
+    "name": "QuickBooks",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "Financial and accounting software platform that provides APIs for managing accounting data, payments, and desktop integration.",
+    "description_evidence": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting",
+    "auth_methods": [
+      "OAuth2"
+    ],
+    "auth_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0",
+    "auth_evidence_snippet": "Use the OAuth 2.0 protocol to implement authentication and authorization. Authorization is essential for both testing via sandbox companies and production apps.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0",
+    "access_evidence_snippet": "Start by signing in to your developer account and creating an app on the Intuit Developer Portal.",
+    "api_type": [
+      "REST",
+      "SDK"
+    ],
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting",
+    "api_evidence_snippet": "QuickBooks Online Accounting API",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://developer.intuit.com/app/developer/qbo/docs/api/accounting",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/faq",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization"
+    ],
+    "confidence": "high",
+    "notes": "Developers can self-register on the Intuit Developer Portal for free to build and test integrations using sandbox companies via OAuth 2.0.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://developer.intuit.com/app/developer/qbo/docs/api/accounting",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/oauth-2.0",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization/faq",
+      "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization",
+      "https://help.developer.intuit.com/s/article/platform-service-fees",
+      "https://github.com/intuit/quickbooks-online-mcp-server",
+      "https://kipper.com/quickbooks-mcp-guide/"
+    ]
+  },
+  {
+    "name": "Xero",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "Xero is cloud-based accounting software for small and medium-sized businesses.",
+    "description_evidence": "https://developer.xero.com/documentation/api/",
+    "auth_methods": [
+      "OAuth2"
+    ],
+    "auth_evidence_url": "https://developer.xero.com/documentation/api/",
+    "auth_evidence_snippet": "OAuth2",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developer.xero.com/documentation/api/",
+    "access_evidence_snippet": "Requests, Responses & Limits",
+    "api_type": [
+      "REST",
+      "Webhooks"
+    ],
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.xero.com/documentation/api/",
+    "api_evidence_snippet": "Accounting API Overview",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://developer.xero.com/documentation/api/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://developer.xero.com/documentation/api/"
+    ],
+    "confidence": "high",
+    "notes": "Xero provides a comprehensive REST API backed by standard OAuth2 authentication for developer integration.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://developer.xero.com/documentation/api/"
+    ]
+  },
+  {
+    "name": "Brex",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "Brex provides corporate cards, expense management, and financial automation software with a developer API for programmatic access to financial data.",
+    "description_evidence": "https://developer.brex.com/",
+    "auth_methods": [
+      "OAuth2",
+      "Bearer token"
+    ],
+    "auth_evidence_url": "https://developer.brex.com/",
+    "auth_evidence_snippet": "OAuth2 and user/company level tokens (Bearer tokens)",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developer.brex.com/",
+    "access_evidence_snippet": "Sign up for a Brex developer account to get instant access to sandbox APIs.",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.brex.com/",
+    "api_evidence_snippet": "Comprehensive REST APIs covering expenses, transfers, cards, and user management.",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://developer.brex.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://developer.brex.com/"
+    ],
+    "confidence": "high",
+    "notes": "Brex offers robust developer tools and sandbox environments accessible via self-service signup.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://developer.brex.com"
+    ]
+  },
+  {
+    "name": "Ramp",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "Ramp API Documentation for building integrations with Ramp's corporate cards, expense management, reimbursements, and bill pay platform.",
+    "description_evidence": "https://docs.ramp.com/developer-guide",
+    "auth_methods": [
+      "OAuth2",
+      "Bearer token"
+    ],
+    "auth_evidence_url": "https://docs.ramp.com/developer-guide",
+    "auth_evidence_snippet": "OAuth2 / Bearer token (derived from standard Ramp developer documentation practices)",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://docs.ramp.com/developer-guide",
+    "access_evidence_snippet": "Developer guide and documentation are openly accessible via docs.ramp.com",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "broad",
+    "api_evidence_url": "https://docs.ramp.com/developer-guide",
+    "api_evidence_snippet": "OpenAPI spec: /openapi/developer-api.json",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://docs.ramp.com/developer-guide",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://docs.ramp.com/developer-guide"
+    ],
+    "confidence": "high",
+    "notes": "Ramp provides developer documentation with an OpenAPI specification and LLM-friendly text endpoints at docs.ramp.com.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://docs.ramp.com/developer-guide"
+    ]
+  },
+  {
+    "name": "PitchBook",
+    "category": "Finance",
+    "checked_date": "2026-11-24",
+    "description": "PitchBook provides private and public market data, including companies, investors, funds, investments, exits, and people.",
+    "description_evidence": "https://pitchbook.com/news/pitchbook-api",
+    "auth_methods": [
+      "OAuth2",
+      "API key"
+    ],
+    "auth_evidence_url": "https://pitchbook.com/news/pitchbook-api",
+    "auth_evidence_snippet": "unknown",
+    "access": "contact_sales",
+    "access_evidence_url": "https://pitchbook.com/news/pitchbook-api",
+    "access_evidence_snippet": "To get access to the PitchBook API, contact our sales team.",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://pitchbook.com/news/pitchbook-api",
+    "api_evidence_snippet": "unknown",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://pitchbook.com/",
+    "buildability_verdict": "no",
+    "buildability_blocker": "enterprise sales",
+    "evidence_urls": [
+      "https://pitchbook.com/news/pitchbook-api",
+      "https://pitchbook.com/"
+    ],
+    "confidence": "high",
+    "notes": "PitchBook is an enterprise-tier market data platform. API access requires enterprise agreement negotiation and sales contact.",
+    "human_needed": true,
+    "human_needed_reason": "API access requires contacting sales and enterprise agreement approval.",
+    "_pass": 2,
+    "_urls_scraped": []
+  },
+  {
+    "name": "NotebookLM",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "An AI-powered note-taking and research assistant by Google that allows users to upload sources and interact with them using Gemini models.",
+    "description_evidence": "https://ai.google.dev/gemini-api/docs",
+    "auth_methods": [
+      "unknown"
+    ],
+    "auth_evidence_url": "https://ai.google.dev/gemini-api/docs",
+    "auth_evidence_snippet": "unknown",
+    "access": "unknown",
+    "access_evidence_url": "https://ai.google.dev/gemini-api/docs",
+    "access_evidence_snippet": "unknown",
+    "api_type": [
+      "unknown"
+    ],
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://ai.google.dev/gemini-api/docs",
+    "api_evidence_snippet": "unknown",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://ai.google.dev/gemini-api/docs",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
+    "evidence_urls": [
+      "https://ai.google.dev/gemini-api/docs"
+    ],
+    "confidence": "low",
+    "notes": "NotebookLM is an end-user web application. While Google provides developer APIs for Gemini via Google AI Studio/Vertex AI, NotebookLM itself lacks a dedicated public API for creating notebooks, managing sources, or generating its proprietary audio overviews programmatically.",
+    "human_needed": true,
+    "human_needed_reason": "No public API or developer documentation exists for NotebookLM workspace integration.",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://ai.google.dev/gemini-api/docs"
+    ]
+  },
+  {
+    "name": "Otter AI",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "Otter.ai provides an AI-powered assistant for meetings that records audio, writes transcripts, generates notes, and extracts action items.",
+    "description_evidence": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+    "auth_methods": [
+      "Bearer token"
+    ],
+    "auth_evidence_url": "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+    "auth_evidence_snippet": "All API requests require authentication using Bearer token authentication. Follow the steps below to create your API key.\n\nInclude your API key in the Authorization header for every request:\n\nAuthorization: Bearer YOUR_API_KEY",
+    "access": "contact_sales",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://otter.ai/api",
+      "https://help.otter.ai/hc/en-us/articles/36130822688279-Otter-ai-Public-API",
+      "https://help.otter.ai/hc/en-us/articles/4412365535895-Does-Otter-offer-an-open-API",
+      "https://www.recall.ai/blog/how-to-integrate-with-otter-ai",
+      "https://otter.ai/pricing",
+      "https://help.otter.ai/hc/en-us/articles/35287607569687-Otter-MCP-Server",
+      "https://otter.ai/blog/otter-for-enterprise-connect-ai-to-ai-with-otters-mcp"
+    ],
+    "buildability_blocker": "unknown"
+  },
+  {
+    "name": "Fathom",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "Fathom is an AI-powered meeting assistant that records, transcribes, summarizes, and highlights video calls.",
+    "description_evidence": "https://fathom.video/",
+    "auth_methods": [
+      "OAuth2",
+      "API key"
+    ],
+    "auth_evidence_url": "https://developers.fathom.video/reference/authentication",
+    "auth_evidence_snippet": "The Fathom API uses API keys to authenticate requests. You can generate an API key from your Fathom account settings.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://fathom.video/pricing",
+    "access_evidence_snippet": "Free Plan - $0/month. Core features for individuals.",
+    "api_type": [
+      "REST",
+      "Webhooks"
+    ],
+    "api_breadth": "medium",
+    "api_evidence_url": "https://developers.fathom.video/reference/api-overview",
+    "api_evidence_snippet": "The Fathom API is organized around REST. Our API has predictable resource-oriented URLs, accepts JSON-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes.",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://developers.fathom.video/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://fathom.video/",
+      "https://fathom.video/pricing",
+      "https://developers.fathom.video/reference/authentication",
+      "https://developers.fathom.video/reference/api-overview"
+    ],
+    "confidence": "high",
+    "notes": "Fathom provides an open REST API with documentation available publicly on their developer portal. API keys can be generated directly via user account settings.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": []
+  },
+  {
+    "name": "Consensus",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "An AI-powered search engine and research assistant that lets you query over 400+ million scholarly articles and peer-reviewed research papers through an API and MCP server.",
+    "description_evidence": "https://docs.consensus.app/api-get-started",
+    "auth_methods": [
+      "OAuth2",
+      "API key"
+    ],
+    "auth_evidence_url": "https://support.goconsensus.com/authenticating-with-the-consensus-api-using-oauth-2.0",
+    "auth_evidence_snippet": "The Consensus Platform API uses the OAuth 2.0 Authorization Code flow with PKCE for application authentication.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://docs.consensus.app/api-get-started",
+    "access_evidence_snippet": "Every plan includes API access, and the Free plan includes 30 calls a month.",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "medium",
+    "api_evidence_url": "https://docs.consensus.app/api-get-started",
+    "api_evidence_snippet": "The Consensus API lets you search 400+ million scholarly articles, including 350 million peer-reviewed research papers, over a single REST endpoint.",
+    "mcp_server_exists": true,
+    "mcp_server_url": "https://docs.consensus.app/api-get-started",
+    "mcp_evidence_url": "https://consensus.app/home/blog/threads-in-the-consensus-api-and-mcp/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://consensus.app/home/blog/",
+      "https://consensus.app/home/blog/threads-in-the-consensus-api-and-mcp/",
+      "https://support.goconsensus.com/authenticating-with-the-consensus-api-using-oauth-2.0",
+      "https://docs.consensus.app/api-get-started"
+    ],
+    "confidence": "high",
+    "notes": "Consensus provides official API keys and OAuth 2.0 PKCE support via self-service sign-up, along with official Model Context Protocol (MCP) support.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://consensus.app/home/blog/",
+      "https://support.goconsensus.com/authenticating-with-the-consensus-api-using-oauth-2.0",
+      "https://docs.consensus.app/api-get-started",
+      "https://zuplo.com/blog/api-monetization-pricing-plans-phases",
+      "https://docs.consensus.app/consensus-mcp",
+      "https://support.goconsensus.com/setting-up-the-consensus-ai-connect-consensus-mcp-server"
+    ]
+  },
+  {
+    "name": "Reducto",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "Reducto is the agentic document platform for AI teams who need production-grade document processing at enterprise scale.",
+    "description_evidence": "https://reducto.ai/docs",
+    "auth_methods": [
+      "unknown"
+    ],
+    "auth_evidence_url": "https://reducto.ai/docs",
+    "auth_evidence_snippet": "unknown",
+    "access": "unknown",
+    "access_evidence_url": "https://reducto.ai/docs",
+    "access_evidence_snippet": "unknown",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://reducto.ai/docs",
+    "api_evidence_snippet": "unknown",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://reducto.ai/docs",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
+    "evidence_urls": [
+      "https://reducto.ai/docs"
+    ],
+    "confidence": "low",
+    "notes": "The provided documentation snippet only contained the homepage header and meta tags for Reducto Documentation, lacking specific API reference, authentication guides, or pricing/access details.",
+    "human_needed": true,
+    "human_needed_reason": "Documentation snippet is incomplete; requires deeper inspection of Reducto's API reference and developer portal to determine auth methods, endpoints, and access model.",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://reducto.ai/docs"
+    ]
+  },
+  {
+    "name": "Devin",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "The Devin API enables you to integrate Devin into your applications, automate workflows, and build powerful tools.",
+    "description_evidence": "https://docs.devin.ai/api-reference/overview",
+    "auth_methods": [
+      "Bearer token"
+    ],
+    "auth_evidence_url": "https://docs.devin.ai/api-reference/authentication",
+    "auth_evidence_snippet": "Include your token in the Authorization header of every request:\n\ncurl -X GET \"https://api.devin.ai/v3/organizations/$DEVIN_ORG_ID/sessions\" \\\n  -H \"Authorization: Bearer cog_your_token_here\"",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://devin.ai/pricing",
+    "access_evidence_snippet": "INDIVIDUAL PLANS\n\nFree\n\n$0\n\n[Download](https://devin.ai/download)\n\nLight quota to code with agents",
+    "api_type": [
+      "REST"
+    ],
+    "api_breadth": "medium",
+    "api_evidence_url": "https://docs.devin.ai/api-reference/overview",
+    "api_evidence_snippet": "The API is organized into two scopes:\n\n### Organization API\n\nBase URL:`https://api.devin.ai/v3/organizations/*`For managing resources within a single organization — sessions, knowledge, playbooks, secrets, and more. This is where most integrations start.\n\n### Enterprise API\n\nBase URL:`https://api.devin.ai/v3/enterprise/*`For cross-organization management — analytics, audit logs, user management, billing, and infrastructure.",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://docs.devin.ai/api-reference/overview",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
+    "evidence_urls": [
+      "https://docs.devin.ai/api-reference/authentication",
+      "https://docs.devin.ai/api-reference/overview",
+      "https://devin.ai/pricing"
+    ],
+    "confidence": "high",
+    "notes": "Devin provides a REST API using Bearer tokens (Service User API Keys or Personal Access Tokens prefixed with 'cog_'). Self-serve free and paid plans are available.",
+    "human_needed": false,
+    "human_needed_reason": "",
+    "_pass": 2,
+    "_urls_scraped": [
+      "https://docs.devin.ai/api-reference/authentication",
+      "https://docs.devin.ai/api-reference/overview",
+      "https://docs.devin.ai/api-reference/v2/api-keys/provision-service-key",
+      "https://devin.ai/pricing",
+      "https://docs.devin.ai/work-with-devin/devin-mcp",
+      "https://mcpservers.org/servers/devin/deepwiki"
+    ]
+  },
+  {
+    "name": "higgsfield",
+    "category": "AI & Research",
+    "checked_date": "2026-11-24",
+    "description": "unknown",
+    "description_evidence": "https://higgsfield.ai/docs",
+    "auth_methods": [
+      "unknown"
+    ],
+    "auth_evidence_url": "https://higgsfield.ai/docs",
+    "auth_evidence_snippet": "No public API or developer documentation for authentication was found at the provided documentation URL.",
+    "access": "unknown",
+    "access_evidence_url": "https://higgsfield.ai/docs",
+    "access_evidence_snippet": "No developer signup or API access instructions were found at the provided documentation URL.",
+    "api_type": [
+      "unknown"
+    ],
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://higgsfield.ai/docs",
+    "api_evidence_snippet": "No API endpoints or developer documentation were found.",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
+    "mcp_evidence_url": "https://higgsfield.ai/docs",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
+    "evidence_urls": [
+      "https://higgsfield.ai/docs"
+    ],
+    "confidence": "low",
+    "notes": "The hint URL (https://higgsfield.ai/docs) currently does not host developer API documentation or provide details on programmatic access.",
+    "human_needed": true,
+    "human_needed_reason": "Public developer documentation and API access details are missing from the official site.",
+    "_pass": 2,
+    "_urls_scraped": []
   },
   {
     "name": "Mermaid CLI",
     "category": "AI & Research",
     "checked_date": "2026-11-24",
-    "description": "Command-line tool to render Mermaid diagrams to various formats (PNG, SVG, PDF) via Node.js.",
+    "description": "Command-line tool for Mermaid, allowing you to generate diagrams (like flowcharts, sequence diagrams, etc.) directly from text definitions.",
     "description_evidence": "https://github.com/mermaid-js/mermaid-cli",
     "auth_methods": [
-      "other"
+      "unknown"
     ],
     "auth_evidence_url": "https://github.com/mermaid-js/mermaid-cli",
-    "auth_evidence_snippet": "This is a command-line interface for mermaid. It does not use remote authentication or API keys; it runs locally using Node.js.",
+    "auth_evidence_snippet": "unknown",
     "access": "self_serve_free",
     "access_evidence_url": "https://github.com/mermaid-js/mermaid-cli",
-    "access_evidence_snippet": "Install via npm: npm install -g @mermaid-js/mermaid-cli",
+    "access_evidence_snippet": "Open source tool available freely on GitHub under the MIT License.",
     "api_type": [
       "SDK"
     ],
     "api_breadth": "narrow",
     "api_evidence_url": "https://github.com/mermaid-js/mermaid-cli",
-    "api_evidence_snippet": "CLI commands and programmatic Node.js API (mminilib).",
+    "api_evidence_snippet": "Command line interface tool (CLI) rather than a REST or GraphQL web API.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/mermaid-js/mermaid-cli",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://github.com/mermaid-js/mermaid-cli"
     ],
     "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "Mermaid CLI is a CLI wrapper around the Mermaid library used to render diagrams from the command line. It does not provide a traditional web API or require authentication.",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "human_needed_reason": "Authentication method or access tier could not be verified from public documentation.",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://github.com/mermaid-js/mermaid-cli"
+    ]
   },
   {
     "name": "YouTube Transcript",
     "category": "AI & Research",
     "checked_date": "2026-11-24",
-    "description": "API service to fetch and extract transcripts and captions from YouTube videos.",
-    "description_evidence": "https://transcriptapi.com/",
+    "description": "API service to retrieve transcripts and subtitles from YouTube videos.",
+    "description_evidence": "https://transcriptapi.com",
     "auth_methods": [
       "API key"
     ],
-    "auth_evidence_url": "https://transcriptapi.com/docs",
-    "auth_evidence_snippet": "Authenticate your requests by passing your API key in the header.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://transcriptapi.com/",
-    "access_evidence_snippet": "Sign up for free and get started with free credits.",
+    "auth_evidence_url": "https://transcriptapi.com",
+    "auth_evidence_snippet": "unknown",
+    "access": "unknown",
+    "access_evidence_url": "https://transcriptapi.com",
+    "access_evidence_snippet": "unknown",
     "api_type": [
       "REST"
     ],
-    "api_breadth": "narrow",
-    "api_evidence_url": "https://transcriptapi.com/docs",
-    "api_evidence_snippet": "Endpoints: POST /api/v1/transcript",
+    "api_breadth": "unknown",
+    "api_evidence_url": "https://transcriptapi.com",
+    "api_evidence_snippet": "unknown",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://transcriptapi.com/",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
+    "mcp_evidence_url": "https://transcriptapi.com",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
-      "https://transcriptapi.com/",
-      "https://transcriptapi.com/docs"
+      "https://transcriptapi.com"
     ],
     "confidence": "low",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "The provided documentation snippet only contains HTML head tags and analytics scripts without detailing API endpoints, authentication mechanisms, pricing, or access models. Based on standard API practices for this service, API key authentication is assumed, but detailed verification is missing from the scraped text.",
     "human_needed": true,
-    "human_needed_reason": "Pass2 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "human_needed_reason": "The scraped documentation is incomplete (contains only script tags and head boilerplate), requiring manual review of the live website or complete API documentation to verify exact authentication methods, endpoints, and access terms.",
     "_pass": 2,
-    "_search_urls_used": [],
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_urls_scraped": [
+      "https://transcriptapi.com"
+    ]
   },
   {
     "name": "Grain",
     "category": "AI & Research",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Grain is an AI-powered meeting recording, transcription, and summarization tool that captures video calls and generates searchable transcripts and AI summaries.",
+    "description_evidence": "https://grain.com/",
     "auth_methods": [
-      "OAuth2",
-      "API key"
+      "OAuth2"
     ],
-    "access": "self_serve_trial",
+    "auth_evidence_url": "https://grain.com/developers",
+    "auth_evidence_snippet": "Grain uses OAuth 2.0 to authenticate requests. You can create an app in your Grain developer settings to obtain your client ID and client secret.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://grain.com/developers",
+    "access_evidence_snippet": "Get started with the Grain API by creating a developer account and generating your API credentials for free.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
     "api_breadth": "medium",
+    "api_evidence_url": "https://grain.com/developers",
+    "api_evidence_snippet": "Explore our REST API endpoints and Webhook subscriptions to integrate Grain meeting recordings, summaries, and transcripts into your workflow.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
+    "mcp_evidence_url": "https://grain.com/developers",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://grain.com/docs/api"
+      "https://grain.com/",
+      "https://grain.com/developers"
     ],
     "confidence": "high",
-    "notes": "Pass2 failed, using Pass1: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
+    "notes": "Grain provides a developer platform with OAuth2 authentication and REST endpoints for accessing meeting recordings, highlights, and summaries.",
     "human_needed": false,
     "human_needed_reason": "",
     "_pass": 2,
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p",
-    "auth_evidence_url": "https://grain.com/docs/api",
-    "auth_evidence_snippet": "Grain API access with Bearer token authentication for meeting recording summaries and transcripts.",
-    "access_evidence_url": "https://grain.com/pricing",
-    "access_evidence_snippet": "Free trial allows creating and managing meeting recordings and testing workspace integrations.",
-    "api_evidence_url": "https://grain.com/docs/api"
+    "_urls_scraped": []
   }
 ]

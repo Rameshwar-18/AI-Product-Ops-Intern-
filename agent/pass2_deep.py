@@ -15,7 +15,7 @@ load_dotenv()
 sys.path.insert(0, str(Path(__file__).parent))
 
 from apps import APPS
-from schema import EXTRACTION_PROMPT_TEMPLATE, is_vendor_mcp
+from schema import EXTRACTION_PROMPT_TEMPLATE, is_vendor_mcp, enforce_verdict_rule
 from llm_client import get_llm_response, extract_json_from_response
 from firecrawl_client import search_web, scrape_url
 
@@ -87,9 +87,14 @@ def research_app_pass2(app: dict, no_cache: bool = False) -> dict:
     all_content = []
     urls_used = []
     
-    # 1. Scrape hint URL
+    # 1. Scrape hint URL with retry
     if hint_url:
         content = scrape_url(hint_url, max_chars=4000)
+        if not content:
+            # Retry once with base URL or alternate path
+            alt_url = hint_url.rstrip("/").rsplit("/", 1)[0]
+            if alt_url and alt_url.startswith("http") and alt_url != hint_url:
+                content = scrape_url(alt_url, max_chars=4000)
         if content:
             all_content.append(f"=== OFFICIAL DOCS ({hint_url}) ===\n{content}")
             urls_used.append(hint_url)
@@ -151,22 +156,28 @@ Quote the EXACT text from the most authoritative source for each field.
         record["_urls_scraped"] = urls_used
         
         # Enforce official vendor MCP rule strictly
-        if name.lower() == "linear":
-            record["mcp_server_exists"] = True
-            record["mcp_server_url"] = "https://mcp.linear.app/mcp"
-            record["mcp_evidence_url"] = "https://linear.app/docs/mcp"
-            if "https://linear.app/docs/mcp" not in record.get("evidence_urls", []):
-                record["evidence_urls"].append("https://linear.app/docs/mcp")
-        elif name.lower() == "notion":
-            record["mcp_server_exists"] = True
-            record["mcp_server_url"] = "https://mcp.notion.com/mcp"
-            record["mcp_evidence_url"] = "https://developers.notion.com/docs/get-started-with-mcp"
-            if "https://developers.notion.com/docs/get-started-with-mcp" not in record.get("evidence_urls", []):
-                record["evidence_urls"].append("https://developers.notion.com/docs/get-started-with-mcp")
-        elif record.get("mcp_server_exists"):
+        if record.get("mcp_server_exists"):
             if not is_vendor_mcp(name, record.get("mcp_server_url", "")):
                 record["mcp_server_exists"] = False
                 record["mcp_server_url"] = None
+
+        # Extra search for official MCP server if none discovered yet
+        if not record.get("mcp_server_exists") or not record.get("mcp_server_url"):
+            try:
+                extra_mcp = search_web(f"{name} official MCP server", num_results=2)
+                for er in extra_mcp:
+                    url = er.get("url", "")
+                    if is_vendor_mcp(name, url):
+                        doc_content = scrape_url(url, max_chars=2000)
+                        if doc_content and "mcp" in doc_content.lower():
+                            record["mcp_server_exists"] = True
+                            record["mcp_server_url"] = url
+                            record["mcp_evidence_url"] = url
+                            if url not in record.get("evidence_urls", []):
+                                record["evidence_urls"].append(url)
+                            break
+            except Exception:
+                pass
 
         # Specific rule for Salesforce free Developer Edition
         if name.lower() == "salesforce":
@@ -176,6 +187,7 @@ Quote the EXACT text from the most authoritative source for each field.
             if "https://developer.salesforce.com/signup" not in record.get("evidence_urls", []):
                 record["evidence_urls"].append("https://developer.salesforce.com/signup")
         
+        record = enforce_verdict_rule(record)
         save_cached_p2(name, record)
         return record
     except Exception as e:
@@ -190,6 +202,7 @@ Quote the EXACT text from the most authoritative source for each field.
         fallback["confidence"] = "low"
         fallback["human_needed"] = True
         fallback["human_needed_reason"] = f"Pass2 extraction failed: {str(e)[:100]}"
+        fallback = enforce_verdict_rule(fallback)
         return fallback
 
 

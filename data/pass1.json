@@ -3,30 +3,44 @@
     "name": "Salesforce",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Salesforce CRM platform with REST, SOAP, and Bulk APIs.",
+    "description": "Salesforce is a leading customer relationship management (CRM) platform that enables AI agents to manage customer data, track sales pipelines, automate service operations, and interact with enterprise business objects.",
+    "description_evidence": "https://developer.salesforce.com/docs",
     "auth_methods": [
       "OAuth2",
+      "Bearer token",
       "API key"
     ],
-    "access": "self_serve_free",
+    "auth_evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_authentication.htm",
+    "auth_evidence_snippet": "REST API client applications must authenticate before making any other API requests. Client applications typically use OAuth 2.0 or Connected Apps to authenticate.",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://developer.salesforce.com/signup",
+    "access_evidence_snippet": "Sign up for a free Salesforce Developer Edition environment to build, test, and integrate.",
     "api_type": [
       "REST",
-      "SOAP"
+      "GraphQL",
+      "SOAP",
+      "Webhooks"
     ],
     "api_breadth": "broad",
+    "api_evidence_url": "https://developer.salesforce.com/docs/apis",
+    "api_evidence_snippet": "Salesforce offers comprehensive APIs including REST API, SOAP API, Bulk API, Composite APIs, and Connect REST API to access data and metadata.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
+    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
-      "https://developer.salesforce.com/docs"
+      "https://developer.salesforce.com/docs",
+      "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_authentication.htm",
+      "https://developer.salesforce.com/signup",
+      "https://developer.salesforce.com/docs/apis"
     ],
-    "confidence": "med",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Salesforce\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Enterprise cloud-based customer relationship management (CRM) platfo",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Salesforce provides robust enterprise APIs with extensive developer tooling. Building agent toolkits requires handling Connected App configuration and navigating object-level permissions, but developer accounts are freely accessible.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Salesforce\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Enterprise cloud-based customer relationship management (CRM) platform that provides customer s"
+    "_search_urls_used": []
   },
   {
     "name": "HubSpot",
@@ -109,28 +123,41 @@
     "name": "Attio",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "A flexible, data-driven CRM platform that lets you build custom workflows, manage relationships, and sync data via an extensive API.",
+    "description_evidence": "https://developers.attio.com/docs",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developers.attio.com/docs/authentication",
+    "auth_evidence_snippet": "Attio uses OAuth 2.0 to allow third-party applications to access user data. You can also generate internal integration access tokens (Bearer tokens) for testing and private applications.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://attio.com/pricing",
+    "access_evidence_snippet": "Get started for free with our Free plan. No credit card required.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developers.attio.com/reference/overview",
+    "api_evidence_snippet": "The Attio API is a fully-featured REST API allowing you to manage objects, records, lists, notes, tasks, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026",
+    "mcp_evidence_url": "https://developers.attio.com/docs",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.attio.com/docs"
+      "https://developers.attio.com/docs",
+      "https://developers.attio.com/docs/authentication",
+      "https://developers.attio.com/reference/overview",
+      "https://attio.com/pricing"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Attio provides a comprehensive self-serve developer platform with robust REST endpoints and official documentation supporting OAuth2 and token-based authentication.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Attio\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A"
+    "_search_urls_used": []
   },
   {
     "name": "Twenty",
@@ -173,28 +200,39 @@
     "name": "Podio",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Podio provides a flexible platform for organizing team communication, business processes, data, and content in workspaces.",
+    "description_evidence": "https://developers.podio.com/",
     "auth_methods": [
-      "unknown"
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developers.podio.com/authentication",
+    "auth_evidence_snippet": "All interaction with the Podio API must be authenticated. Podio uses OAuth 2.0 for authentication.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developers.podio.com/",
+    "access_evidence_snippet": "To start building on the Podio API, simply create an account on Podio and register your application.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developers.podio.com/doc",
+    "api_evidence_snippet": "The Podio API is structured around REST. Our API allows you to access and manage workspaces, apps, items, comments, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Podio\",\n  \"category\": \"CRM & Sales\",\n  \"",
+    "mcp_evidence_url": "https://developers.podio.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.podio.com"
+      "https://developers.podio.com/",
+      "https://developers.podio.com/authentication",
+      "https://developers.podio.com/doc"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Podio\",\n  \"category\": \"CRM & Sales\",\n  \"",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Podio provides a comprehensive REST API and standard OAuth2 authentication accessible directly through self-service developer registration.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Podio\",\n  \"category\": \"CRM & Sales\",\n  \""
+    "_search_urls_used": []
   },
   {
     "name": "Zoho CRM",
@@ -239,55 +277,80 @@
     "name": "Close",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Inside sales CRM software designed to help businesses manage leads, communicate via calls, emails, and SMS, and track sales pipelines.",
+    "description_evidence": "https://developer.close.com/",
     "auth_methods": [
-      "unknown"
+      "API key",
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.close.com/topics/authentication/",
+    "auth_evidence_snippet": "The Close API uses HTTP Basic Authentication. You can generate an API key from your Close settings and use it as the username with a blank password, or use OAuth2.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developer.close.com/",
+    "access_evidence_snippet": "API access is available on all Close plans. You can sign up for a trial or free account and immediately generate an API key from your settings.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.close.com/resources/",
+    "api_evidence_snippet": "The Close API provides comprehensive coverage of Leads, Contacts, Opportunities, Activities, Tasks, Custom Fields, and more across multiple REST endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: ",
+    "mcp_evidence_url": "https://developer.close.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.close.com"
+      "https://developer.close.com",
+      "https://developer.close.com/topics/authentication/",
+      "https://developer.close.com/resources/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: ",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Close offers an extensive REST API with robust documentation, supporting standard API keys and OAuth2 for integration development.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: "
+    "_search_urls_used": []
   },
   {
     "name": "Copper",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "A CRM built specifically for Google Workspace that integrates tightly with Gmail, Google Calendar, and Google Drive to manage relationships and pipeline.",
+    "description_evidence": "https://www.copper.com/",
     "auth_methods": [
-      "unknown"
+      "API key",
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.copper.com/#authentication",
+    "auth_evidence_snippet": "All requests to the Copper API must be authenticated. You can authenticate using an API key and user email, or via OAuth 2.0.",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://www.copper.com/pricing",
+    "access_evidence_snippet": "Try free for 14 days. No credit card required.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.copper.com/",
+    "api_evidence_snippet": "Comprehensive REST API covering People, Companies, Opportunities, Tasks, Projects, Leads, and Custom Fields.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Copper\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"202",
+    "mcp_evidence_url": "https://developer.copper.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.copper.com"
+      "https://www.copper.com/",
+      "https://developer.copper.com/",
+      "https://developer.copper.com/#authentication",
+      "https://www.copper.com/pricing"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Copper\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A CRM built specifically for Google Workspace that helps manage relation",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Copper provides well-documented REST APIs and standard authentication mechanisms, making it straightforward to build integrations.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Copper\",\n  \"category\": \"CRM & Sales\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A CRM built specifically for Google Workspace that helps manage relationships, pipelines, and proje"
+    "_search_urls_used": []
   },
   {
     "name": "DealCloud",
@@ -315,7 +378,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://dealcloud.com/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "DealCloud requires enterprise licensing and administrator provisioning to obtain API credentials, making self-serve developer signup impossible.",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
       "https://dealcloud.com/",
       "https://dealcloud.com/resources/integrations/",
@@ -332,82 +395,100 @@
     "name": "Zendesk",
     "category": "Support",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Zendesk is a customer service software company that provides a cloud-based customer support platform.",
+    "description_evidence": "https://developer.zendesk.com/api-reference/",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "API key",
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.zendesk.com/api-reference/introduction/security-and-authentication/",
+    "auth_evidence_snippet": "Zendesk APIs support several authentication methods, including OAuth 2.0, API tokens, and Basic Authentication (email/password or email/token).",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://www.zendesk.com/pricing/",
+    "access_evidence_snippet": "Start your 14-day free trial. No credit card required.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.zendesk.com/api-reference/",
+    "api_evidence_snippet": "The Zendesk API reference covers Core API, Help Center, Chat, Talk, Sunshine, and more, providing hundreds of endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Zendesk\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-1",
+    "mcp_evidence_url": "https://developer.zendesk.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.zendesk.com/api-reference"
+      "https://developer.zendesk.com/api-reference/",
+      "https://developer.zendesk.com/api-reference/introduction/security-and-authentication/",
+      "https://www.zendesk.com/pricing/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Zendesk\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Customer service software and support ticketing platform that helps busines",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Zendesk provides comprehensive public REST APIs with broad documentation, standard OAuth2 and token authentication, and readily available trial accounts for developer testing.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Zendesk\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Customer service software and support ticketing platform that helps businesses handle customer queries"
+    "_search_urls_used": []
   },
   {
     "name": "Intercom",
     "category": "Support",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Customer service platform with an AI-first helpdesk, ticketing, messaging, and proactive support capabilities.",
+    "description_evidence": "https://developers.intercom.com/docs",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developers.intercom.com/docs/build-an-integration/learn-basics/authentication",
+    "auth_evidence_snippet": "Intercom uses OAuth 2.0 to authenticate apps. ... You can also use Access Tokens for private apps.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://www.intercom.com/pricing",
+    "access_evidence_snippet": "Sign up for a free trial or access developer workspaces through the Intercom Developer Hub.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/",
+    "api_evidence_snippet": "Comprehensive API reference covering Contacts, Companies, Conversations, Articles, Tickets, and more with over 100 endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-",
+    "mcp_evidence_url": "https://developers.intercom.com/docs",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.intercom.com/docs"
+      "https://developers.intercom.com/docs",
+      "https://developers.intercom.com/docs/build-an-integration/learn-basics/authentication",
+      "https://developers.intercom.com/docs/references/rest-api/api.intercom.io/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Customer service platform providing conversational support tools, messenge",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Intercom provides robust REST APIs, developer workspaces, webhooks, and standard OAuth2 / Access Token authentication.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Intercom\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Customer service platform providing conversational support tools, messenger, and ticketing capabiliti"
+    "_search_urls_used": []
   },
   {
     "name": "Freshdesk",
     "category": "Support",
     "checked_date": "2026-11-24",
-    "description": "unknown",
-    "auth_methods": [
-      "unknown"
-    ],
-    "access": "unknown",
-    "api_type": [
-      "unknown"
-    ],
-    "api_breadth": "unknown",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"Y",
-    "evidence_urls": [
-      "https://developers.freshdesk.com/api"
-    ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "description": "Freshdesk is a cloud-based customer service software providing ticketing, SLA management, and customer support automation via APIs.",
+    "description_evidence": "https://developers.freshdesk.com/api/",
     "_pass": 1,
-    "_error": "Gemini API call failed after 3 attempts: HTTP 429: {\n  \"error\": {\n    \"code\": 429,\n    \"message\": \"You exceeded your current quota, please check your p"
+    "_search_urls_used": [
+      "https://developers.freshdesk.com/api/",
+      "https://developers.freshdesk.com/",
+      "https://api.freshservice.com/",
+      "https://developers.freshworks.com/docs/app-sdk/v3.0/support_company/oauth-implementation-in-apps/",
+      "https://support.freshdesk.com/support/solutions/articles/215517-how-to-find-your-api-key"
+    ],
+    "buildability_verdict": "unknown",
+    "confidence": "low",
+    "human_needed": true,
+    "human_needed_reason": "Authentication method or access tier could not be verified from public documentation.",
+    "buildability_blocker": "unknown"
   },
   {
     "name": "Front",
@@ -475,7 +556,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.usepylon.com/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "API access requires an active Pylon account and generated API keys from settings, which may require administrative rights or enterprise subscription.",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
       "https://docs.usepylon.com/",
       "https://docs.usepylon.com/reference/authentication",
@@ -530,28 +611,44 @@
     "name": "Plain",
     "category": "Support",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Customer support platform built for product-led companies with a complete GraphQL API and Model Context Protocol (MCP) server support.",
+    "description_evidence": "https://www.plain.com/docs/graphql/introduction",
     "auth_methods": [
-      "unknown"
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://www.plain.com/docs/graphql/introduction",
+    "auth_evidence_snippet": "Authorization: Bearer YOUR_TOKEN where the token is your API key.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://www.plain.com/docs/graphql/introduction",
+    "access_evidence_snippet": "Plain itself is built on this same GraphQL API. This means that there are no limitations in what can be done via the API vs the UI.",
     "api_type": [
-      "unknown"
+      "GraphQL",
+      "SDK"
     ],
-    "api_breadth": "unknown",
-    "mcp_server_exists": false,
-    "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Plain\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://www.plain.com/docs/graphql/introduction",
+    "api_evidence_snippet": "Plain itself is built on this same GraphQL API. This means that there are no limitations in what can be done via the API vs the UI.",
+    "mcp_server_exists": true,
+    "mcp_server_url": "https://www.plain.com/docs/integrations/mcp-server",
+    "mcp_evidence_url": "https://www.plain.com/docs/graphql/introduction",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://plain.com/docs"
+      "https://www.plain.com/docs/graphql/introduction",
+      "https://www.plain.com/docs/integrations/mcp-server"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Plain\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Plain is a customer support platform built for modern engineering and product",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Plain provides a first-party GraphQL API, a TypeScript SDK, and an official MCP server for AI agent integration.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Plain\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Plain is a customer support platform built for modern engineering and product teams, offering APIs to ma"
+    "_search_urls_used": [
+      "https://www.plain.com/docs/graphql/introduction",
+      "https://docs.plainid.io/apidocs/authorization-apis",
+      "https://developer.appdirect.com/user-guides/api-usage/api-auth",
+      "https://developer.cloud.precisely.com/apis/authentication",
+      "https://auth0.com/docs/api/authentication"
+    ]
   },
   {
     "name": "Help Scout",
@@ -657,7 +754,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.gladly.com/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Gladly API access typically requires an active enterprise account or partner sandbox, as there is no self-serve free developer tier.",
+    "buildability_blocker": "enterprise sales",
     "evidence_urls": [
       "https://developer.gladly.com/",
       "https://developer.gladly.com/api/",
@@ -758,28 +855,46 @@
     "name": "Zoho Cliq",
     "category": "Comms",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Zoho Cliq is a team collaboration software with messaging, voice/video calls, and file sharing, providing REST APIs for integrations and bots.",
+    "description_evidence": "https://www.zoho.com/cliq/",
     "auth_methods": [
-      "unknown"
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://www.zoho.com/cliq/help/restapi/v3/oauth/",
+    "auth_evidence_snippet": "Zoho APIs use OAuth 2.0 protocol for authentication and authorization.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://www.zoho.com/cliq/pricing.html",
+    "access_evidence_snippet": "Free Plan: Always free for up to 100 users with essential collaboration features.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://www.zoho.com/cliq/help/restapi/v3/introduction/",
+    "api_evidence_snippet": "The Zoho Cliq REST API allows you to interact with channels, chats, messages, users, and bots.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Zoho Cliq\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-1",
+    "mcp_evidence_url": "https://www.zoho.com/cliq/help/restapi/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://www.zoho.com/cliq/help/restapi/v2/"
+      "https://www.zoho.com/cliq/",
+      "https://www.zoho.com/cliq/pricing.html",
+      "https://www.zoho.com/cliq/help/restapi/",
+      "https://www.zoho.com/cliq/help/restapi/v3/oauth/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Zoho Cliq\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Zoho Cliq is a team collaboration and communication software featuring chan",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Zoho Cliq provides robust REST APIs (version 2 and version 3) and OAuth 2.0 authentication. Developers can sign up for a free account immediately.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Zoho Cliq\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Zoho Cliq is a team collaboration and communication software featuring channels, direct messaging, aud"
+    "_search_urls_used": [
+      "https://www.zoho.com/cliq/help/restapi/",
+      "https://www.zoho.com/cliq/help/restapi/v3/oauth/",
+      "https://www.zoho.com/cliq/help/restapi/v3/postman/",
+      "https://apitracker.io/a/zoho-cliq",
+      "https://www.zoho.com/cliq/help/restapi/v2/glossary/"
+    ]
   },
   {
     "name": "Lark",
@@ -904,28 +1019,38 @@
     "name": "Telegram",
     "category": "Comms",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Telegram is a cloud-based mobile and desktop instant messaging service with a Bot API for creating automated bots.",
+    "description_evidence": "https://core.telegram.org/bots",
     "auth_methods": [
-      "unknown"
+      "API key"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://core.telegram.org/bots/api#authorizing-your-bot",
+    "auth_evidence_snippet": "Each bot is given a unique authentication token when it is created. The token looks something like 123456789:ABCdefGhIJKlmNoPQRsTUVwxyZ. You do not need to enter any username or password.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://core.telegram.org/bots#6-botfather",
+    "access_evidence_snippet": "To create a new bot, use the BotFather bot... /newbot - create a new bot. You will be asked for a name and a username, and then the HTTP API token will be generated.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://core.telegram.org/bots/api",
+    "api_evidence_snippet": "The Bot API is an HTTP-based interface created for developers keen on building bots for Telegram.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Telegram\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11",
+    "mcp_evidence_url": "https://core.telegram.org/bots/api",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
+      "https://core.telegram.org/bots",
       "https://core.telegram.org/bots/api"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Telegram\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Telegram is a cloud-based mobile and desktop instant messaging service with ",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Telegram Bot API provides programmatic access via a token obtained directly from @BotFather on Telegram, requiring no manual approval or paid subscription.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Telegram\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Telegram is a cloud-based mobile and desktop instant messaging service with a Bot API for programmatic "
+    "_search_urls_used": []
   },
   {
     "name": "WhatsApp Business",
@@ -970,28 +1095,40 @@
     "name": "Aircall",
     "category": "Comms",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Aircall is a cloud-based phone system and call center software designed for modern business communication.",
+    "description_evidence": "https://developer.aircall.io/",
     "auth_methods": [
-      "unknown"
+      "API key",
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.aircall.io/api-references/",
+    "auth_evidence_snippet": "Authentication: Aircall API uses Basic Authentication with an API ID and API Token, or OAuth 2.0.",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://aircall.io/pricing/",
+    "access_evidence_snippet": "Try Aircall free for 7 days. No credit card required.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.aircall.io/api-references/",
+    "api_evidence_snippet": "Explore the Aircall API references to manage users, phone numbers, calls, tags, contacts, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Aircall\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-",
+    "mcp_evidence_url": "https://developer.aircall.io/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.aircall.io/api-references/"
+      "https://developer.aircall.io/",
+      "https://developer.aircall.io/api-references/",
+      "https://aircall.io/pricing/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Aircall\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Aircall is a cloud-based phone system and call center software designed for m",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Aircall provides comprehensive developer documentation and an API dashboard accessible via standard company trial or paid plans.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Aircall\",\n  \"category\": \"Comms\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Aircall is a cloud-based phone system and call center software designed for modern business communicatio"
+    "_search_urls_used": []
   },
   {
     "name": "Vonage",
@@ -1346,28 +1483,38 @@
     "name": "Threads",
     "category": "Marketing & Ads",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Threads API allows developers to integrate Threads functionality, enabling users to publish content, fetch their own posts, manage replies, and view insights.",
+    "description_evidence": "https://developers.facebook.com/docs/threads",
     "auth_methods": [
-      "unknown"
+      "OAuth2"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developers.facebook.com/docs/threads/overview#authentication",
+    "auth_evidence_snippet": "The Threads API uses Facebook Login and Meta Access Tokens for authentication and authorization.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developers.facebook.com/",
+    "access_evidence_snippet": "Create a Meta Developer account for free to start building apps and integrating with our APIs.",
     "api_type": [
-      "unknown"
+      "REST"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "narrow",
+    "api_evidence_url": "https://developers.facebook.com/docs/threads/reference",
+    "api_evidence_snippet": "Endpoints include posting, reading threads, user profile details, and media insights.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Threads\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\":",
+    "mcp_evidence_url": "https://developers.facebook.com/docs/threads",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.facebook.com/docs/threads"
+      "https://developers.facebook.com/docs/threads",
+      "https://developers.facebook.com/docs/threads/overview",
+      "https://developers.facebook.com/docs/threads/reference"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Threads\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Threads API allows developers and creators to integrate their apps ",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Meta provides the Threads API as part of the Meta Developers ecosystem. Developers can sign up for free, create a Meta App, and authenticate using OAuth 2.0.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Threads\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Threads API allows developers and creators to integrate their apps with Threads to manage cont"
+    "_search_urls_used": []
   },
   {
     "name": "SendGrid",
@@ -1454,55 +1601,80 @@
     "name": "WooCommerce",
     "category": "Ecommerce",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Open-source, customizable eCommerce platform built on WordPress.",
+    "description_evidence": "https://woocommerce.com/about/",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "API key",
+      "Basic"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://woocommerce.github.io/woocommerce-rest-api-docs/#authentication",
+    "auth_evidence_snippet": "The REST API uses a mechanism similar to OAuth 1.0a... You can also use Consumer Key / Consumer Secret over HTTPS (Basic Authentication) for development and testing.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://woocommerce.com/",
+    "access_evidence_snippet": "Built on WordPress, WooCommerce is the world’s most customizable eCommerce platform. Get started for free.",
     "api_type": [
-      "unknown"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://woocommerce.github.io/woocommerce-rest-api-docs/",
+    "api_evidence_snippet": "The WooCommerce REST API is structured around CRUD operations on WordPress custom post types (Products, Orders, Customers, Coupons, etc.).",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"WooCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"",
+    "mcp_evidence_url": "https://woocommerce.github.io/woocommerce-rest-api-docs/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
+      "https://woocommerce.com/",
       "https://woocommerce.github.io/woocommerce-rest-api-docs/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"WooCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"An open-source, customizable e-commerce platform built on WordPress f",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "WooCommerce is self-hosted (open-source WordPress plugin), meaning API access requires a running WordPress/WooCommerce site with REST API enabled and generated Consumer Key/Secret credentials.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"WooCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"An open-source, customizable e-commerce platform built on WordPress for setting up and running o"
+    "_search_urls_used": []
   },
   {
     "name": "BigCommerce",
     "category": "Ecommerce",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "An open SaaS ecommerce platform that enables merchants to build, manage, and scale online storefronts via APIs.",
+    "description_evidence": "https://developer.bigcommerce.com/docs",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.bigcommerce.com/docs/start/authentication",
+    "auth_evidence_snippet": "BigCommerce APIs use two forms of authentication: OAuth and Store-Level API Accounts.",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://www.bigcommerce.com/essentials/pricing/",
+    "access_evidence_snippet": "Start your 15-day free trial. No credit card required.",
     "api_type": [
-      "unknown"
+      "REST",
+      "GraphQL",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.bigcommerce.com/docs/rest-management",
+    "api_evidence_snippet": "BigCommerce provides comprehensive REST and GraphQL APIs covering catalog, customers, orders, checkout, and store configuration.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"BigCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"",
+    "mcp_evidence_url": "https://developer.bigcommerce.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.bigcommerce.com/docs"
+      "https://developer.bigcommerce.com/docs",
+      "https://developer.bigcommerce.com/docs/start/authentication",
+      "https://www.bigcommerce.com/essentials/pricing/"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"BigCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"An open SaaS ecommerce platform that enables merchants to build, run,",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "BigCommerce provides standard self-serve sandbox/trial access for developers to generate API credentials and build apps.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"BigCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"An open SaaS ecommerce platform that enables merchants to build, run, and scale online stores vi"
+    "_search_urls_used": []
   },
   {
     "name": "Salesforce Commerce Cloud",
@@ -1530,7 +1702,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.salesforce.com/docs/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires enterprise or partner account context to provision sandbox and API credentials.",
+    "buildability_blocker": "partner approval",
     "evidence_urls": [
       "https://developer.salesforce.com/docs/commerce/sfdc-core/overview",
       "https://developer.salesforce.com/docs/commerce/commerce-api/guide/authorization.html",
@@ -1724,7 +1896,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer-docs.amazon.com/sp-api/docs/what-is-the-selling-partner-api",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires a Professional Seller/Vendor account and completion of a security profile/developer registration approval process with Amazon.",
+    "buildability_blocker": "partner approval",
     "evidence_urls": [
       "https://developer-docs.amazon.com/sp-api/docs/what-is-the-selling-partner-api",
       "https://developer-docs.amazon.com/sp-api/docs/authorization-from-vendors",
@@ -1761,12 +1933,12 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://fanbasis.com",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No publicly documented or self-serve developer API, SDK, or developer portal exists for Fanbasis.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://fanbasis.com"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Fanbasis operates as a consumer and creator-facing web platform without a public developer API or documentation accessible for third-party toolkit integrations.",
     "human_needed": true,
     "human_needed_reason": "Partner portal or contact sales is required to check if private API access is available for enterprise integrations.",
@@ -1872,7 +2044,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.ahrefs.com/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Requires an active Ahrefs paid subscription (Advanced or Enterprise plan) to obtain API credentials.",
+    "buildability_blocker": "paid plan",
     "evidence_urls": [
       "https://docs.ahrefs.com/docs/ahrefs-api",
       "https://ahrefs.com/api"
@@ -2061,16 +2233,16 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/sherlock-project/sherlock",
-    "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Sherlock is a Python command-line utility / library rather than a cloud API service with endpoints; integration requires wrapping it as a Python library or CLI execution.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://sherlock-project.github.io/",
       "https://github.com/sherlock-project/sherlock"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Sherlock (sherlock-project) is an open-source OSINT tool written in Python that hunts down social media accounts by username across hundreds of social networks. It is distributed as a Python package and CLI utility rather than a traditional web API, meaning it runs locally or within a container rather than connecting via OAuth/REST API endpoints.",
-    "human_needed": false,
-    "human_needed_reason": "",
+    "human_needed": true,
+    "human_needed_reason": "Authentication method or access tier could not be verified from public documentation.",
     "_pass": 1,
     "_search_urls_used": []
   },
@@ -2098,7 +2270,7 @@
     "mcp_server_url": null,
     "mcp_evidence_url": "https://waterfall.io/api",
     "buildability_verdict": "unknown",
-    "buildability_blocker": "Insufficient verifiable documentation or accessible API reference found on official channels for Waterfall.io to confirm endpoints, authentication methods, and access procedures.",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://waterfall.io/api"
     ],
@@ -2153,28 +2325,42 @@
     "name": "GitHub",
     "category": "Dev & Infra",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "GitHub is a code hosting platform for version control and collaboration, letting you and others work together on projects.",
+    "description_evidence": "https://docs.github.com/en/get-started/start-your-journey/about-github-and-git",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token",
+      "API key"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api",
+    "auth_evidence_snippet": "Depending on your use case, you can authenticate to the REST API using personal access tokens, GitHub App installation access tokens, or OAuth apps.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://github.com/pricing",
+    "access_evidence_snippet": "Free: For individual developers and small teams. $0 USD / month.",
     "api_type": [
-      "unknown"
+      "REST",
+      "GraphQL",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://docs.github.com/en/rest",
+    "api_evidence_snippet": "The GitHub REST API provides comprehensive coverage of GitHub features, including repositories, issues, pull requests, users, and organizations across hundreds of endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"GitHub\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"202",
+    "mcp_evidence_url": "https://docs.github.com/en",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://docs.github.com/en/rest"
+      "https://docs.github.com/en/rest",
+      "https://docs.github.com/en/rest/authentication/authenticating-to-the-rest-api",
+      "https://github.com/pricing"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"GitHub\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A developer platform for version control and collaboration, allowing org",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "GitHub provides completely free self-serve API access via personal access tokens or OAuth apps, supporting comprehensive REST and GraphQL APIs.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"GitHub\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A developer platform for version control and collaboration, allowing organizations and developers t"
+    "_search_urls_used": []
   },
   {
     "name": "Vercel",
@@ -2674,13 +2860,13 @@
     "auth_methods": [
       "OAuth2",
       "API key",
-      "Basic"
+      "Bearer token"
     ],
-    "auth_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
-    "auth_evidence_snippet": "Jira Cloud platform REST API supports OAuth 2.0 (3LO) and basic authentication using API tokens.",
+    "auth_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#authentication",
+    "auth_evidence_snippet": "Atlassian REST APIs support several authentication methods. For Jira cloud apps, OAuth 2.0 (3LO) and API tokens (Basic auth with email and API token) are standard.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
-    "access_evidence_snippet": "Free developer cloud instances and sandbox sites available with standard REST API support.",
+    "access_evidence_url": "https://www.atlassian.com/software/jira/pricing",
+    "access_evidence_snippet": "Free plan available for up to 10 users with 2 GB storage.",
     "api_type": [
       "REST",
       "Webhooks"
@@ -2694,7 +2880,8 @@
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/"
+      "https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/",
+      "https://www.atlassian.com/software/jira/pricing"
     ],
     "confidence": "high",
     "notes": "Jira provides comprehensive REST APIs and webhooks with self-serve developer access.",
@@ -2746,28 +2933,41 @@
     "name": "Monday.com",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "A cloud-based work operating system that allows teams to run projects, workflows, and everyday work.",
+    "description_evidence": "https://developer.monday.com/api-reference/docs/access-the-api",
     "auth_methods": [
-      "unknown"
+      "OAuth2",
+      "Bearer token"
     ],
-    "access": "unknown",
+    "auth_evidence_url": "https://developer.monday.com/api-reference/docs/authentication",
+    "auth_evidence_snippet": "Authentication to the monday.com API can be done using personal API tokens or OAuth 2.0.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://monday.com/pricing",
+    "access_evidence_snippet": "Free plan available for up to 2 seats with basic features.",
     "api_type": [
-      "unknown"
+      "GraphQL",
+      "Webhooks"
     ],
-    "api_breadth": "unknown",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.monday.com/api-reference/docs/introduction-to-graphql",
+    "api_evidence_snippet": "The monday.com API is built on GraphQL.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"Monday.com\",\n  \"category\": \"Productivity\",\n  \"checked_date\":",
+    "mcp_evidence_url": "https://developer.monday.com/",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.monday.com/api-reference"
+      "https://developer.monday.com/api-reference/docs/access-the-api",
+      "https://developer.monday.com/api-reference/docs/authentication",
+      "https://developer.monday.com/api-reference/docs/introduction-to-graphql",
+      "https://monday.com/pricing"
     ],
-    "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Monday.com\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A cloud-based work operating system that allows teams to run projec",
-    "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "confidence": "high",
+    "notes": "Monday.com primarily utilizes a robust GraphQL API for integrations, alongside personal tokens and OAuth 2.0 for authentication.",
+    "human_needed": false,
+    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Monday.com\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"A cloud-based work operating system that allows teams to run projects, workflows, and everyday"
+    "_search_urls_used": []
   },
   {
     "name": "ClickUp",
@@ -2810,34 +3010,44 @@
     "name": "Coda",
     "category": "Productivity",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "Coda is a doc that brings words, data, and teams together into an interactive workspace with a powerful REST API.",
+    "description_evidence": "https://coda.io/developers",
     "auth_methods": [
       "Bearer token",
-      "API key"
+      "OAuth2"
     ],
+    "auth_evidence_url": "https://coda.io/developers/apis/v1",
+    "auth_evidence_snippet": "All API requests must be made over HTTPS and must include a Bearer token in the Authorization header. You can generate a personal API token in your Coda account settings, or use OAuth2.",
     "access": "self_serve_free",
+    "access_evidence_url": "https://coda.io/developers/apis/v1",
+    "access_evidence_snippet": "Free and Paid Workspaces: The Coda API is available to users on all plans, including free workspaces, subject to rate limits.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
     "api_breadth": "broad",
+    "api_evidence_url": "https://coda.io/developers/apis/v1",
+    "api_evidence_snippet": "The Coda API provides comprehensive endpoints for managing docs, pages, tables, rows, columns, automations, and permissions.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
+    "mcp_evidence_url": "https://coda.io/developers",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
+      "https://coda.io/developers",
       "https://coda.io/developers/apis/v1"
     ],
     "confidence": "high",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Coda\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Coda is an all-in-one doc that brings docs, spreadsheets, and apps togeth",
+    "notes": "Coda provides a fully documented REST API with OpenAPI/Swagger specifications and client libraries, easily accessible via self-serve accounts and API tokens.",
     "human_needed": false,
     "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Coda\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"Coda is an all-in-one doc that brings docs, spreadsheets, and apps together for team collaboration a",
-    "auth_evidence_url": "https://coda.io/developers/apis/v1",
-    "auth_evidence_snippet": "Authenticate API requests by including an Authorization header with Bearer <token>.",
-    "access_evidence_url": "https://coda.io/developers/apis/v1",
-    "access_evidence_snippet": "Any Coda user can generate an API token for personal use or integrate with docs.",
-    "api_evidence_url": "https://coda.io/developers/apis/v1"
+    "_search_urls_used": [
+      "https://coda.io/developers",
+      "https://docs.useparagon.com/resources/integrations/coda",
+      "https://connect.superhuman.com/t/accessing-coda-api-from-a-3rd-party-software/47539",
+      "https://apis.io/apis/coda/coda-account-api/"
+    ]
   },
   {
     "name": "Smartsheet",
@@ -3041,33 +3251,39 @@
     "category": "Finance",
     "checked_date": "2026-11-24",
     "description": "unknown",
+    "description_evidence": "",
     "auth_methods": [
-      "API key",
-      "Basic"
+      "unknown"
     ],
-    "access": "contact_sales",
+    "auth_evidence_url": "",
+    "auth_evidence_snippet": "",
+    "access": "unknown",
+    "access_evidence_url": "",
+    "access_evidence_snippet": "",
     "api_type": [
-      "REST"
+      "unknown"
     ],
-    "api_breadth": "medium",
+    "api_breadth": "unknown",
+    "api_evidence_url": "",
+    "api_evidence_snippet": "",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "no",
-    "buildability_blocker": "Enterprise Japanese payment gateway requiring merchant underwriting and contract sign-off.",
-    "evidence_urls": [
-      "https://www.paygent.co.jp/"
-    ],
-    "confidence": "high",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Paygent Connect\",\n  \"category\": \"Finance\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"unknown\",\n  \"description_evidence\": \"unknown\",\n  \"auth_methods\": [\n",
-    "human_needed": true,
-    "human_needed_reason": "Gated merchant underwriting; documentation in Japanese behind merchant portal.",
+    "mcp_evidence_url": "",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
+    "evidence_urls": [],
+    "confidence": "low",
+    "notes": "The search results returned information for Authorize.net and Cybersource, but provided no specific documentation, endpoints, authentication methods, or access instructions",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Paygent Connect\",\n  \"category\": \"Finance\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"unknown\",\n  \"description_evidence\": \"unknown\",\n  \"auth_methods\": [\n    \"unknown\"\n  ],\n  \"auth_",
-    "auth_evidence_url": "https://www.paygent.co.jp/",
-    "auth_evidence_snippet": "Payment gateway API requiring approved corporate merchant agreement.",
-    "access_evidence_url": "https://www.paygent.co.jp/",
-    "access_evidence_snippet": "Contact sales and merchant underwriting required to access test environment and API documentation.",
-    "api_evidence_url": "https://www.paygent.co.jp/"
+    "_search_urls_used": [
+      "https://developer.authorize.net/api/reference/index.html",
+      "https://developer.cybersource.com/api-reference-assets/index.html",
+      "https://developer.payments.jpmorgan.com/api/oauth",
+      "https://www.youtube.com/watch?v=nVKReCDBNpE",
+      "https://api-reference.checkout.com/tag/access/POST/connect/token"
+    ],
+    "human_needed": true,
+    "human_needed_reason": "Authentication method or access tier could not be verified from public documentation."
   },
   {
     "name": "iPayX",
@@ -3085,16 +3301,16 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"iPayX\",\n  \"category\": \"",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://www.ipayx.com/api"
     ],
     "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"iPayX\",\n  \"category\": \"",
+    "notes": "Pass1 extraction failed: No JSON found in response: ```json",
     "human_needed": true,
     "human_needed_reason": "automated extraction failed",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"iPayX\",\n  \"category\": \""
+    "_error": "No JSON found in response: ```json"
   },
   {
     "name": "QuickBooks",
@@ -3105,25 +3321,27 @@
     "auth_methods": [
       "OAuth2"
     ],
-    "auth_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop/authentication-and-authorization",
-    "auth_evidence_snippet": "Intuit uses OAuth 2.0 to authenticate and authorize requests for QuickBooks Online APIs.",
+    "auth_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/get-started/authorization-and-authentication",
+    "auth_evidence_snippet": "QuickBooks Online APIs use OAuth 2.0 to authenticate and authorize requests.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/develop",
-    "access_evidence_snippet": "Free developer sandbox accounts and test companies are available immediately upon sign up.",
+    "access_evidence_url": "https://developer.intuit.com/app/developer/myapps",
+    "access_evidence_snippet": "Create an account on the Intuit Developer Portal and create an app to obtain production and sandbox credentials for free.",
     "api_type": [
       "REST",
       "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/all-entities/account",
+    "api_evidence_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/account",
     "api_evidence_snippet": "Comprehensive REST API endpoints covering Accounting, Payments, and Advanced Reporting.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://developer.intuit.com/",
-    "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Production keys require Intuit App Assessment compliance questionnaire.",
+    "buildability_verdict": "yes_today",
+    "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.intuit.com/app/developer/qbo/docs/develop"
+      "https://developer.intuit.com/app/developer/qbo/docs/api/accounting/most-commonly-used/account",
+      "https://developer.intuit.com/app/developer/qbo/docs/get-started/authorization-and-authentication",
+      "https://developer.intuit.com/app/developer/myapps"
     ],
     "confidence": "high",
     "notes": "Intuit developer portal allows instant self-serve creation of sandbox and production apps using OAuth 2.0.",
@@ -3269,13 +3487,13 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://pitchbook.com/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "PitchBook API access requires contacting sales and is gated behind enterprise subscription contracts; there is no self-serve developer signup or public API documentation available.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://pitchbook.com/",
       "https://pitchbook.com/news/pitchbook-api"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "PitchBook does not provide public self-service developer documentation or free developer signups. All API access requires direct enterprise sales engagement.",
     "human_needed": true,
     "human_needed_reason": "API access requires contacting enterprise sales and navigating a custom commercial agreement.",
@@ -3303,12 +3521,12 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://notebooklm.google.com/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "NotebookLM does not currently offer a public developer API, SDK, or official programmatic interface.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://notebooklm.google.com/"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "NotebookLM is available as a web app interface powered by Google's Gemini models, but lacks any public developer API or tool integration endpoints as of November 2026.",
     "human_needed": true,
     "human_needed_reason": "There is no public API or developer documentation available for NotebookLM.",
@@ -3338,13 +3556,13 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://otter.ai/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "Public API access is gated behind 'contact sales' with no self-serve developer portal or public documentation available.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://otter.ai/",
       "https://otter.ai/api"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Otter AI offers an API landing page, but it requires contacting sales for access, and no public API documentation or developer sandbox is available for self-serve integration.",
     "human_needed": true,
     "human_needed_reason": "API access requires contacting sales and partnering directly with Otter.ai, as there is no self-serve developer portal.",
@@ -3413,13 +3631,13 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://consensus.app/",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public developer API or documentation is available for Consensus.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://consensus.app/",
       "https://consensus.app/home/blog/"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Consensus is a consumer and institutional web application for searching research papers using AI. It does not provide a self-service public developer API or documented integration endpoints.",
     "human_needed": true,
     "human_needed_reason": "Consensus does not provide a public developer portal or API documentation; custom enterprise access requires contacting sales.",
@@ -3488,13 +3706,13 @@
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://docs.cognition.ai",
-    "buildability_verdict": "no",
-    "buildability_blocker": "No public developer API or documentation is currently available for Devin by Cognition AI as of late 2026.",
+    "buildability_verdict": "unknown",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
       "https://www.cognition.ai",
       "https://docs.cognition.ai"
     ],
-    "confidence": "high",
+    "confidence": "low",
     "notes": "Devin is productized as an autonomous agent interface/application rather than an API platform with public developer endpoints.",
     "human_needed": true,
     "human_needed_reason": "Public API documentation and self-serve developer signup are not available; access requires sales contact.",
@@ -3506,27 +3724,35 @@
     "category": "AI & Research",
     "checked_date": "2026-11-24",
     "description": "unknown",
+    "description_evidence": "",
     "auth_methods": [
       "unknown"
     ],
+    "auth_evidence_url": "",
+    "auth_evidence_snippet": "",
     "access": "unknown",
+    "access_evidence_url": "",
+    "access_evidence_snippet": "",
     "api_type": [
       "unknown"
     ],
     "api_breadth": "unknown",
+    "api_evidence_url": "",
+    "api_evidence_snippet": "",
     "mcp_server_exists": false,
     "mcp_server_url": null,
+    "mcp_evidence_url": "",
     "buildability_verdict": "unknown",
-    "buildability_blocker": "Research error: No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"category\": \"AI & Research\",\n  \"checked_date\"",
+    "buildability_blocker": "unknown",
     "evidence_urls": [
-      "https://higgsfield.ai/docs"
+      "https://higgsfield.ai"
     ],
     "confidence": "low",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"AI-powered video generation and creative tools platform.\",\n  \"desc",
+    "notes": "Higgsfield AI (higgsfield.ai) is known as a consumer/creator AI video generation platform (e.g., Diffuse, creator apps), and currently does not publicly document or offer a developer API, SDK, or developer portal. The hint URL provided (https://higgsfield.ai/docs) or public developer docs do not yield an active REST/GraphQL developer interface.",
     "human_needed": true,
-    "human_needed_reason": "automated extraction failed",
+    "human_needed_reason": "No public developer API documentation or self-serve API access exists; requires contacting sales or partnership confirmation to verify if an enterprise API is available.",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"AI-powered video generation and creative tools platform.\",\n  \"description_evidence\": \"https:/"
+    "_search_urls_used": []
   },
   {
     "name": "Mermaid CLI",
@@ -3603,33 +3829,34 @@
     "name": "Grain",
     "category": "AI & Research",
     "checked_date": "2026-11-24",
-    "description": "unknown",
+    "description": "The Grain API lets you read and manage recordings, highlights, uploads, and more.",
+    "description_evidence": "https://developers.grain.com/",
     "auth_methods": [
-      "OAuth2",
-      "API key"
+      "Bearer token",
+      "OAuth2"
     ],
-    "access": "self_serve_trial",
+    "auth_evidence_url": "https://developers.grain.com/",
+    "auth_evidence_snippet": "A Personal Access Token (PAT) authenticates requests as you, with the same access you have in Grain.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developers.grain.com/",
+    "access_evidence_snippet": "Generate one here: https://grain.com/app/settings/integrations?tab=api",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
     "api_breadth": "medium",
+    "api_evidence_url": "https://developers.grain.com/",
+    "api_evidence_snippet": "The Grain API lets you read and manage recordings, highlights, uploads, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
-    "evidence_urls": [
-      "https://grain.com/docs/api"
-    ],
-    "confidence": "high",
-    "notes": "Pass1 extraction failed: No JSON found in response: {\n  \"name\": \"Grain\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"AI-powered meeting recorder, transcription, and summarization tool for ",
-    "human_needed": false,
-    "human_needed_reason": "",
     "_pass": 1,
-    "_error": "No JSON found in response: {\n  \"name\": \"Grain\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": \"2026-11-24\",\n  \"description\": \"AI-powered meeting recorder, transcription, and summarization tool for capturing and sharing custo",
-    "auth_evidence_url": "https://grain.com/docs/api",
-    "auth_evidence_snippet": "Grain API access with Bearer token authentication for meeting recording summaries and transcripts.",
-    "access_evidence_url": "https://grain.com/pricing",
-    "access_evidence_snippet": "Free trial allows creating and managing meeting recordings and testing workspace integrations.",
-    "api_evidence_url": "https://grain.com/docs/api"
+    "_search_urls_used": [
+      "https://developers.grain.com/",
+      "https://nango.dev/docs/integrations/all/grain",
+      "https://www.scalekit.com/blog/grain-mcp-vs-api",
+      "https://apitracker.io/a/grain-co",
+      "https://pipedream.com/apps/grain"
+    ],
+    "buildability_blocker": "unknown"
   }
 ]

@@ -1,217 +1,207 @@
 {
   "total_apps": 100,
   "auth_methods": {
-    "OAuth2": 59,
-    "Bearer token": 37,
-    "API key": 37,
-    "unknown": 21,
-    "Basic": 7,
+    "OAuth2": 44,
+    "Bearer token": 27,
+    "API key": 21,
+    "unknown": 46,
     "OAuth 2.0": 1,
+    "Basic": 3,
     "Digest access authentication": 1,
     "Personal API tokens": 1,
     "other": 1
   },
   "dominant_auth": [
     "OAuth2",
-    59
+    44
   ],
   "auth_by_category": {
     "CRM & Sales": {
-      "OAuth2": 8,
-      "Bearer token": 2,
+      "OAuth2": 7,
+      "Bearer token": 1,
       "API key": 4,
-      "unknown": 2
+      "unknown": 3
     },
     "Support": {
-      "OAuth2": 6,
-      "API key": 6,
-      "Bearer token": 4,
-      "Basic": 2
+      "OAuth2": 4,
+      "API key": 1,
+      "Bearer token": 3,
+      "unknown": 6
     },
     "Comms": {
-      "OAuth2": 8,
-      "Bearer token": 6,
-      "API key": 3,
-      "Basic": 1,
-      "unknown": 1
+      "OAuth2": 6,
+      "Bearer token": 5,
+      "unknown": 3,
+      "API key": 2
     },
     "Marketing & Ads": {
-      "OAuth2": 6,
+      "OAuth2": 5,
       "OAuth 2.0": 1,
-      "API key": 3,
-      "unknown": 2
+      "unknown": 4,
+      "API key": 1,
+      "Basic": 1
     },
     "Ecommerce": {
-      "OAuth2": 8,
+      "OAuth2": 5,
       "API key": 3,
       "Basic": 1,
-      "Bearer token": 4,
-      "unknown": 2
+      "Bearer token": 2,
+      "unknown": 5
     },
     "Data & SEO": {
       "Basic": 1,
-      "unknown": 3,
+      "unknown": 5,
       "OAuth2": 1,
       "API key": 3,
-      "Bearer token": 4
+      "Bearer token": 2
     },
     "Dev & Infra": {
-      "OAuth2": 6,
-      "Bearer token": 7,
-      "API key": 4,
-      "unknown": 3,
+      "OAuth2": 3,
+      "Bearer token": 4,
+      "API key": 2,
+      "unknown": 6,
       "Digest access authentication": 1
     },
     "Productivity": {
-      "OAuth2": 8,
-      "Bearer token": 7,
-      "API key": 3,
-      "Basic": 1,
+      "OAuth2": 6,
+      "Bearer token": 6,
+      "unknown": 3,
       "Personal API tokens": 1
     },
     "Finance": {
-      "API key": 4,
+      "API key": 3,
       "Bearer token": 3,
-      "OAuth2": 6,
-      "unknown": 2,
-      "other": 1,
-      "Basic": 1
+      "OAuth2": 5,
+      "unknown": 4,
+      "other": 1
     },
     "AI & Research": {
-      "unknown": 6,
+      "unknown": 7,
       "OAuth2": 2,
-      "API key": 4
+      "API key": 2,
+      "Bearer token": 1
     }
   },
   "access_distribution": {
-    "self_serve_trial": 9,
-    "self_serve_free": 63,
-    "unknown": 13,
-    "contact_sales": 10,
-    "paid_plan_required": 3,
-    "partner_gated": 2
+    "self_serve_trial": 4,
+    "unknown": 40,
+    "self_serve_free": 49,
+    "contact_sales": 5,
+    "partner_gated": 1,
+    "paid_plan_required": 1
   },
-  "self_serve_count": 72,
-  "gated_count": 15,
+  "self_serve_count": 53,
+  "gated_count": 7,
   "access_by_category": {
     "CRM & Sales": {
       "self_serve_trial": 3,
-      "self_serve_free": 5,
-      "unknown": 1,
+      "unknown": 2,
+      "self_serve_free": 4,
       "contact_sales": 1
     },
     "Support": {
-      "self_serve_trial": 2,
-      "self_serve_free": 6,
-      "paid_plan_required": 1,
-      "contact_sales": 1
+      "self_serve_trial": 1,
+      "self_serve_free": 3,
+      "unknown": 6
     },
     "Comms": {
-      "self_serve_free": 9,
-      "unknown": 1
+      "self_serve_free": 7,
+      "unknown": 3
     },
     "Marketing & Ads": {
-      "self_serve_free": 7,
-      "paid_plan_required": 1,
-      "unknown": 2
+      "self_serve_free": 6,
+      "unknown": 4
     },
     "Ecommerce": {
-      "self_serve_free": 6,
-      "partner_gated": 2,
-      "unknown": 2
+      "self_serve_free": 4,
+      "partner_gated": 1,
+      "unknown": 5
     },
     "Data & SEO": {
-      "self_serve_free": 6,
-      "unknown": 1,
+      "self_serve_free": 5,
+      "unknown": 3,
       "paid_plan_required": 1,
-      "self_serve_trial": 1,
       "contact_sales": 1
     },
     "Dev & Infra": {
-      "self_serve_free": 7,
-      "unknown": 2,
-      "self_serve_trial": 1
+      "self_serve_free": 5,
+      "unknown": 5
     },
     "Productivity": {
-      "self_serve_free": 8,
-      "unknown": 1,
-      "self_serve_trial": 1
+      "self_serve_free": 6,
+      "unknown": 4
     },
     "Finance": {
-      "self_serve_free": 6,
-      "unknown": 1,
-      "contact_sales": 3
+      "self_serve_free": 5,
+      "unknown": 3,
+      "contact_sales": 2
     },
     "AI & Research": {
-      "unknown": 2,
-      "contact_sales": 4,
-      "self_serve_free": 3,
-      "self_serve_trial": 1
+      "unknown": 5,
+      "contact_sales": 1,
+      "self_serve_free": 4
     }
   },
   "buildability": {
-    "yes_with_caveats": 7,
-    "yes_today": 82,
-    "no": 11
+    "yes_with_caveats": 2,
+    "unknown": 47,
+    "yes_today": 50,
+    "no": 1
   },
   "buildability_by_category": {
     "CRM & Sales": {
       "yes_with_caveats": 1,
-      "yes_today": 8,
-      "no": 1
+      "unknown": 3,
+      "yes_today": 6
     },
     "Support": {
-      "yes_today": 8,
-      "yes_with_caveats": 2
+      "yes_today": 4,
+      "unknown": 6
     },
     "Comms": {
-      "yes_today": 10
+      "yes_today": 7,
+      "unknown": 3
     },
     "Marketing & Ads": {
-      "yes_today": 9,
-      "yes_with_caveats": 1
+      "yes_today": 6,
+      "unknown": 4
     },
     "Ecommerce": {
-      "yes_today": 7,
-      "yes_with_caveats": 2,
-      "no": 1
+      "yes_today": 4,
+      "yes_with_caveats": 1,
+      "unknown": 5
     },
     "Data & SEO": {
-      "yes_today": 9,
-      "no": 1
+      "yes_today": 5,
+      "unknown": 5
     },
     "Dev & Infra": {
-      "yes_today": 10
+      "yes_today": 4,
+      "unknown": 6
     },
     "Productivity": {
-      "yes_today": 10
+      "yes_today": 6,
+      "unknown": 4
     },
     "Finance": {
-      "yes_today": 6,
-      "no": 3,
-      "yes_with_caveats": 1
+      "yes_today": 5,
+      "unknown": 4,
+      "no": 1
     },
     "AI & Research": {
-      "no": 5,
-      "yes_today": 5
+      "unknown": 7,
+      "yes_today": 3
     }
   },
-  "mcp_coverage_count": 3,
-  "mcp_coverage_pct": 3.0,
+  "mcp_coverage_count": 5,
+  "mcp_coverage_pct": 5.0,
   "top_blockers": {
-    "Connected App configuration, profile permissions, and IP restrictions required by Salesforce admin.": 1,
-    "Insufficient public API documentation or developer portal access available via the provided page to determine endpoints, authentication flows, or self-serve developer access.": 1,
-    "Requires paid plan or workspace admin token for API access.": 1,
-    "Enterprise support platform requiring sandbox access provisioning.": 1,
-    "Agency marketplace developer registration and OAuth2 client approval required.": 1,
-    "Requires enterprise or partner sandbox access for credentials and tenant setup; not fully self-serve free.": 1,
-    "Requires professional seller verification and AWS SigV4 request signing.": 1,
-    "No publicly documented developer API or documentation exists on the official website.": 1,
-    "No public API available; enterprise data enrichment requiring corporate sales contact.": 1,
-    "Enterprise Japanese payment gateway requiring merchant underwriting and contract sign-off.": 1
+    "none": 50,
+    "unknown": 47,
+    "enterprise sales": 2,
+    "partner approval": 1
   },
   "easy_wins": [
-    "HubSpot",
     "Pipedrive",
     "Attio",
     "Podio",
@@ -220,161 +210,134 @@
     "Copper",
     "Zendesk",
     "Intercom",
-    "Freshdesk",
     "Front",
-    "LiveAgent",
-    "Plain",
     "Help Scout",
-    "Gorgias",
-    "Twilio",
+    "Slack",
     "Zoho Cliq",
     "Lark",
-    "Pumble",
     "Discord",
     "Telegram",
+    "WhatsApp Business",
     "Vonage",
     "Google Ads",
     "Meta Ads",
     "Mailchimp",
-    "Klaviyo",
-    "systeme.io",
     "Pinterest",
     "Threads",
     "Shopify",
     "BigCommerce",
     "Magento",
-    "Squarespace",
-    "Gumroad",
     "DataForSEO",
-    "SE Ranking",
     "Ahrefs",
-    "Apify",
-    "Firecrawl",
-    "Sherlock",
+    "MrScraper",
+    "Bright Data",
     "Clay",
+    "GitHub",
     "Netlify",
-    "Cloudflare",
-    "Supabase",
-    "Neo4j",
-    "Snowflake",
     "MongoDB Atlas",
     "Sentry",
     "Notion",
     "Airtable",
     "Linear",
-    "Jira",
     "Asana",
     "ClickUp",
-    "Coda",
-    "Smartsheet",
     "Harvest",
     "Stripe",
-    "Plaid",
     "Binance",
     "Xero",
     "Brex",
     "Ramp",
     "Fathom",
-    "Reducto",
-    "Mermaid CLI",
-    "Grain"
+    "Consensus",
+    "Devin"
   ],
   "yes_with_caveats": [
     "Salesforce",
-    "Pylon",
-    "Gladly",
-    "GoHighLevel",
-    "Salesforce Commerce Cloud",
-    "Amazon Selling Partner",
-    "QuickBooks"
+    "Salesforce Commerce Cloud"
   ],
   "not_buildable": [
-    "DealCloud",
-    "fanbasis",
-    "Waterfall.io",
-    "Paygent Connect",
-    "iPayX",
-    "PitchBook",
-    "NotebookLM",
-    "Otter AI",
-    "Consensus",
-    "Devin",
-    "higgsfield"
+    "PitchBook"
   ],
   "human_needed": [
+    "HubSpot",
     "Twenty",
     "DealCloud",
-    "Front",
+    "Freshdesk",
+    "Pylon",
     "LiveAgent",
     "Plain",
+    "Gorgias",
     "Gladly",
     "Slack",
     "Twilio",
-    "Lark",
-    "Telegram",
-    "WhatsApp Business",
+    "Pumble",
     "Aircall",
     "Google Ads",
     "LinkedIn Ads",
-    "Mailchimp",
+    "GoHighLevel",
     "Klaviyo",
+    "systeme.io",
     "SendGrid",
     "WooCommerce",
-    "BigCommerce",
     "Salesforce Commerce Cloud",
     "Magento",
     "Squarespace",
     "Ecwid",
+    "Gumroad",
     "Amazon Selling Partner",
     "fanbasis",
     "SE Ranking",
     "MrScraper",
-    "Bright Data",
+    "Apify",
+    "Firecrawl",
     "Sherlock",
     "Waterfall.io",
-    "GitHub",
     "Vercel",
     "Cloudflare",
     "Supabase",
     "Neo4j",
+    "Snowflake",
     "Datadog",
-    "Asana",
+    "Jira",
     "Monday.com",
+    "Coda",
+    "Smartsheet",
     "Stripe",
     "Plaid",
     "Paygent Connect",
     "iPayX",
-    "Brex",
+    "QuickBooks",
     "PitchBook",
     "NotebookLM",
     "Otter AI",
-    "Consensus",
-    "Devin",
+    "Reducto",
     "higgsfield",
-    "YouTube Transcript"
+    "Mermaid CLI",
+    "YouTube Transcript",
+    "Grain"
   ],
   "confidence_distribution": {
-    "high": 73,
-    "low": 18,
-    "med": 9
+    "high": 49,
+    "low": 49,
+    "med": 2
   },
   "api_type_distribution": {
-    "REST": 80,
-    "GraphQL": 13,
-    "SDK": 15,
-    "Webhooks": 46,
-    "unknown": 15,
+    "REST": 75,
+    "GraphQL": 11,
+    "SDK": 11,
+    "Webhooks": 43,
+    "unknown": 20,
     "gRPC": 1,
     "SOAP": 2,
     "Websockets": 1
   },
   "insights": [
-    "1. Authentication: OAuth2 is the leading auth mechanism (59/100 apps = 59.0%), with OAuth2 closely following in CRM and Social/Marketing platforms.",
-    "2. Buildability: 82/100 apps (82.0%) are immediately buildable today with zero blockers; 7 require handling rate limits or paid developer tiers.",
-    "3. Official MCP Gap: Only 3/100 apps (3.0%) currently provide official vendor-hosted or vendor-documented MCP servers \u2014 leaving a massive open market gap for Composio.",
-    "4. Access Tiers: Self-serve access (free tiers or automated trials) covers 72/100 apps (72.0%), while 15/100 apps require enterprise contracts or manual approval.",
-    "5. Main Blocker: 'Connected App configuration, profile permissions, and IP restrictions required by Salesforce admin.' is the most common blocker, affecting 1 apps.",
-    "6. Enterprise Gating: Finance tools exhibit the highest gating resistance, with 3/10 apps requiring sales outreach or partner underwriting.",
-    "7. Quick Rollouts: Dev & Infra (10/10 buildable today) and Productivity (10/10 buildable today) provide the clearest immediate wins for Composio's tool catalog."
+    "1. Authentication: OAuth2 is the leading auth mechanism (44/88 apps with known auth = 50.0%); undetermined: 12 apps.",
+    "2. Buildability: 50 of 100 buildable; 47 undetermined.",
+    "3. Official MCP Gap: Only 5/100 apps (5.0%) currently provide official vendor-hosted or vendor-documented MCP servers \u2014 leaving a massive open market gap for Composio.",
+    "4. Access Tiers: Self-serve access (free tiers or automated trials) covers 53/100 apps (53.0%), while 7/100 apps require enterprise contracts or manual approval.",
+    "5. Main Blocker: 'enterprise sales' is the leading constraint (2/100 apps), categorized under standard fixed blocker taxonomy.",
+    "6. Enterprise Gating: Finance tools exhibit the highest gating resistance, with 2/10 apps requiring sales outreach or partner underwriting.",
+    "7. Quick Rollouts: Dev & Infra (4/10 buildable today) and Productivity (6/10 buildable today) provide the clearest immediate wins for Composio's tool catalog."
   ]
 }

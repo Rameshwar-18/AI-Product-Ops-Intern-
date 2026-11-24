@@ -15,7 +15,7 @@ load_dotenv()
 sys.path.insert(0, str(Path(__file__).parent))
 
 from apps import APPS
-from schema import VERIFIER_PROMPT_TEMPLATE, is_vendor_mcp
+from schema import VERIFIER_PROMPT_TEMPLATE, is_vendor_mcp, enforce_verdict_rule
 from llm_client import get_llm_response, extract_json_from_response
 from firecrawl_client import scrape_url, search_web
 
@@ -111,19 +111,7 @@ def verify_record(record: dict, no_cache: bool = False) -> dict:
         new_url = verification.get("correction_evidence_url", "").strip()
         
         # Enforce MCP vendor domain rule strictly
-        if name.lower() == "linear":
-            verified_record["mcp_server_exists"] = True
-            verified_record["mcp_server_url"] = "https://mcp.linear.app/mcp"
-            verified_record["mcp_evidence_url"] = "https://linear.app/docs/mcp"
-            if "https://linear.app/docs/mcp" not in verified_record.get("evidence_urls", []):
-                verified_record["evidence_urls"].append("https://linear.app/docs/mcp")
-        elif name.lower() == "notion":
-            verified_record["mcp_server_exists"] = True
-            verified_record["mcp_server_url"] = "https://mcp.notion.com/mcp"
-            verified_record["mcp_evidence_url"] = "https://developers.notion.com/docs/get-started-with-mcp"
-            if "https://developers.notion.com/docs/get-started-with-mcp" not in verified_record.get("evidence_urls", []):
-                verified_record["evidence_urls"].append("https://developers.notion.com/docs/get-started-with-mcp")
-        elif verified_record.get("mcp_server_exists"):
+        if verified_record.get("mcp_server_exists"):
             if not is_vendor_mcp(name, verified_record.get("mcp_server_url", "")):
                 corrections_applied.append(f"mcp_server_exists: True → False (disallowed community/generic repo)")
                 verified_record["mcp_server_exists"] = False
@@ -181,6 +169,7 @@ def verify_record(record: dict, no_cache: bool = False) -> dict:
             verified_record["human_needed_reason"] = (existing_reason + " | verification_note: " + 
                                                        verification.get("notes", ""))[:300].strip(" | ")
         
+        verified_record = enforce_verdict_rule(verified_record)
         save_cached_p3(name, verified_record)
         return verified_record
         
@@ -191,6 +180,7 @@ def verify_record(record: dict, no_cache: bool = False) -> dict:
         fallback["_verification_error"] = str(e)
         fallback["human_needed"] = True
         fallback["human_needed_reason"] = f"Verification failed: {str(e)[:100]}"
+        fallback = enforce_verdict_rule(fallback)
         return fallback
 
 

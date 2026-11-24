@@ -92,19 +92,7 @@ def research_app_pass1(app: dict, no_cache: bool = False) -> dict:
         record["_search_urls_used"] = [r.get("url","") for r in (results if 'results' in dir() else [])]
         
         # Enforce official vendor MCP rule strictly
-        if name.lower() == "linear":
-            record["mcp_server_exists"] = True
-            record["mcp_server_url"] = "https://mcp.linear.app/mcp"
-            record["mcp_evidence_url"] = "https://linear.app/docs/mcp"
-            if "https://linear.app/docs/mcp" not in record.get("evidence_urls", []):
-                record["evidence_urls"].append("https://linear.app/docs/mcp")
-        elif name.lower() == "notion":
-            record["mcp_server_exists"] = True
-            record["mcp_server_url"] = "https://mcp.notion.com/mcp"
-            record["mcp_evidence_url"] = "https://developers.notion.com/docs/get-started-with-mcp"
-            if "https://developers.notion.com/docs/get-started-with-mcp" not in record.get("evidence_urls", []):
-                record["evidence_urls"].append("https://developers.notion.com/docs/get-started-with-mcp")
-        elif record.get("mcp_server_exists"):
+        if record.get("mcp_server_exists"):
             if not is_vendor_mcp(name, record.get("mcp_server_url", "")):
                 record["mcp_server_exists"] = False
                 record["mcp_server_url"] = None

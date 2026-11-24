@@ -34,13 +34,114 @@ def build_html():
 
     # Compute key stats
     total = len(apps)
-    yes_today = sum(1 for a in apps if a["buildability_verdict"] == "yes_today")
-    yes_caveats = sum(1 for a in apps if a["buildability_verdict"] == "yes_with_caveats")
-    no_build = sum(1 for a in apps if a["buildability_verdict"] == "no")
-    mcp_count = sum(1 for a in apps if a["mcp_server_exists"])
-    self_serve = analysis.get("self_serve_count", 74)
-    gated = analysis.get("gated_count", 26)
+    yes_today = sum(1 for a in apps if a.get("buildability_verdict") == "yes_today")
+    yes_caveats = sum(1 for a in apps if a.get("buildability_verdict") == "yes_with_caveats")
+    no_build = sum(1 for a in apps if a.get("buildability_verdict") == "no")
+    unknown_verdict = sum(1 for a in apps if a.get("buildability_verdict") == "unknown")
+    mcp_count = sum(1 for a in apps if a.get("mcp_server_exists"))
+    mcp_pct = round(mcp_count / max(1, total) * 100, 1)
+    mcp_gap_pct = round(100.0 - mcp_pct, 1)
+    self_serve_count = analysis.get("self_serve_count", sum(1 for a in apps if a.get("access") in ("self_serve_free", "self_serve_trial")))
+    self_serve_pct = round(self_serve_count / max(1, total) * 100, 1)
+    gated = analysis.get("gated_count", sum(1 for a in apps if a.get("access") in ("paid_plan_required", "admin_approval", "partner_gated", "contact_sales")))
     human_count = len(human_needed)
+
+    # Count ground truth evaluated size from CSV (only rows where at least one HUMAN_* column is non-empty)
+    sample_csv = DATA_DIR / "ground_truth_checklist.csv"
+    ground_truth_count = 0
+    if sample_csv.exists():
+        try:
+            import csv
+            with open(sample_csv, mode="r", encoding="utf-8") as f:
+                reader = csv.DictReader(f)
+                human_cols = [c for c in (reader.fieldnames or []) if c.startswith("HUMAN_")]
+                for row in reader:
+                    if any(row.get(c, "").strip() for c in human_cols):
+                        ground_truth_count += 1
+        except Exception:
+            pass
+
+    if ground_truth_count > 0:
+        human_checked_text = f"human-checked on a sample of {ground_truth_count}"
+    else:
+        human_checked_text = "not yet human-checked"
+
+    import html as html_lib
+    
+    # Generate dynamic table for apps that defeated automated extraction
+    defeated_apps = []
+    for a in apps:
+        has_error = bool(a.get("_error") or a.get("_verification_error"))
+        auth = a.get("auth_methods")
+        auth_unknown = not auth or auth == "unknown" or auth == ["unknown"] or (isinstance(auth, list) and len(auth) == 1 and str(auth[0]).lower() == "unknown")
+        access_unknown = not a.get("access") or a.get("access") == "unknown"
+        verdict_unknown = a.get("buildability_verdict") == "unknown"
+        
+        if has_error or auth_unknown or access_unknown or verdict_unknown:
+            defeated_apps.append(a)
+
+    defeated_rows = []
+    for a in defeated_apps:
+        name = html_lib.escape(a.get("name", "Unknown"))
+        cat = html_lib.escape(a.get("category", "General"))
+        
+        # Real error message or reason - strictly no invented root-cause text
+        raw_err = a.get("_error") or a.get("_verification_error") or a.get("human_needed_reason") or a.get("notes") or "Authentication method or access tier unverified"
+        err_str = str(raw_err).strip()
+        if len(err_str) > 220:
+            err_str = err_str[:220] + "..."
+        err_msg = html_lib.escape(err_str)
+        
+        # Determine status
+        a_auth = a.get("auth_methods")
+        a_auth_unk = not a_auth or a_auth == "unknown" or a_auth == ["unknown"] or (isinstance(a_auth, list) and len(a_auth) == 1 and str(a_auth[0]).lower() == "unknown")
+        a_acc_unk = not a.get("access") or a.get("access") == "unknown"
+        
+        if a.get("_error"):
+            status_badge = '<span class="badge-verdict bv-no">Scrape Error</span>'
+        elif a.get("_verification_error"):
+            status_badge = '<span class="badge-verdict bv-caveats">Verification Error</span>'
+        elif a_auth_unk and a_acc_unk:
+            status_badge = '<span class="badge-verdict bv-no">Unknown Auth & Access</span>'
+        elif a_auth_unk:
+            status_badge = '<span class="badge-verdict bv-caveats">Unknown Auth</span>'
+        elif a_acc_unk:
+            status_badge = '<span class="badge-verdict bv-caveats">Unknown Access</span>'
+        else:
+            status_badge = '<span class="badge-verdict bv-caveats">Flagged</span>'
+            
+        # Resulting verdict badge
+        v = a.get("buildability_verdict", "unknown")
+        if v == "yes_today":
+            verdict_badge = '<span class="badge-verdict bv-yes">yes_today</span>'
+        elif v == "yes_with_caveats":
+            verdict_badge = '<span class="badge-verdict bv-caveats">yes_with_caveats</span>'
+        elif v == "no":
+            verdict_badge = '<span class="badge-verdict bv-no">no</span>'
+        else:
+            verdict_badge = '<span class="badge-verdict bv-no">unknown</span>'
+            
+        # Evidence note: strictly based on evidence present
+        has_ev = bool(a.get("auth_evidence_snippet") or a.get("access_evidence_snippet"))
+        ev_urls = a.get("evidence_urls", [])
+        if has_ev and ev_urls:
+            ev_note = f'<br><span style="font-size:0.75rem; color:var(--text-muted);"><a href="{html_lib.escape(ev_urls[0])}" target="_blank" style="color:var(--blue); text-decoration:none;">Evidence Doc ↗</a></span>'
+        elif ev_urls:
+            ev_note = '<br><span style="font-size:0.75rem; color:var(--amber);">Unverified from retrieved docs</span>'
+        else:
+            ev_note = '<br><span style="font-size:0.75rem; color:var(--red);">No evidence retrieved</span>'
+            
+        defeated_rows.append(f'''
+              <tr>
+                <td><strong>{name}</strong></td>
+                <td>{cat}</td>
+                <td style="font-family:var(--font-mono); font-size:0.78rem; word-break:break-word;">{err_msg}</td>
+                <td>{status_badge}</td>
+                <td>{verdict_badge}{ev_note}</td>
+              </tr>''')
+
+    defeated_table_html = "\n".join(defeated_rows)
+    defeated_count = len(defeated_apps)
 
     apps_json = json.dumps(apps, ensure_ascii=False)
     analysis_json = json.dumps(analysis, ensure_ascii=False)
@@ -683,7 +784,7 @@ def build_html():
         <span class="section-tag">01 / Executive Summary</span>
         <h1 class="hero-title">100 Apps Researched for<br>AI Agent Toolkits</h1>
         <p class="hero-subtitle">
-          An autonomous multi-pass research agent crawled, scraped, cross-examined, and verified 100 enterprise software platforms across 10 categories to evaluate instant buildability for Composio.
+          <strong>100 apps agent-checked; {human_checked_text}.</strong> Evaluated across 10 categories with multi-pass scraping, strict vendor MCP verification, and evidence cross-examination.
         </p>
       </div>
 
@@ -706,13 +807,18 @@ def build_html():
         </div>
         <div class="metric-card">
           <div class="metric-val blue">{mcp_count}</div>
-          <div class="metric-label">Existing MCP Servers</div>
-          <div class="metric-sub">42% coverage (58% open gap)</div>
+          <div class="metric-label">Official Vendor MCPs</div>
+          <div class="metric-sub">{mcp_pct}% coverage ({mcp_gap_pct}% open gap)</div>
         </div>
         <div class="metric-card">
-          <div class="metric-val indigo">{self_serve}%</div>
+          <div class="metric-val indigo">{self_serve_pct}%</div>
           <div class="metric-label">Self-Serve Access</div>
-          <div class="metric-sub">Free or trial API registration</div>
+          <div class="metric-sub">{self_serve_count}/{total} free or trial APIs</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val red">{unknown_verdict}</div>
+          <div class="metric-label">Errors / Undetermined</div>
+          <div class="metric-sub">Unknown auth or access barriers</div>
         </div>
         <div class="metric-card">
           <div class="metric-val amber">{human_count}</div>
@@ -887,7 +993,7 @@ def build_html():
         <span class="section-tag">04 / Verification & Ground Truth</span>
         <h2 class="section-title">Verification & Accuracy Benchmark</h2>
         <p class="section-desc">
-          Evaluated against a stratified random sample of <strong>30 applications</strong> (3 apps per category, seed=42) rigorously compared against official live documentation.
+          Evaluated against a stratified random sample of <strong>30 applications</strong> (3 apps per category, seed=42) in <code>data/ground_truth_checklist.csv</code> ({human_checked_text}).
         </p>
       </div>
 
@@ -990,14 +1096,36 @@ def build_html():
         <div class="limit-card">
           <h3>🛡️ Bot Blocking & Login Walls</h3>
           <p>
-            Certain portals (Attio, SE Ranking, Canva) employ Cloudflare/Akamai bot-management or require workspace login before exposing full API specs, triggering fallback to human review.
+            Platforms with enterprise firewalls, interactive single-page app documentation (SPAs), or mandatory workspace login before exposing API credentials trigger fallback to human verification when documentation text cannot be fetched statically.
           </p>
         </div>
         <div class="limit-card">
           <h3>🌐 Vendor vs Community MCP Gaps</h3>
           <p>
-            While community repos exist under <code>modelcontextprotocol/servers</code>, only 10 platforms maintain official vendor-owned endpoints or repos (Linear, Notion, GitHub, Cloudflare, Supabase, etc.), leaving 90 open tool opportunities.
+            While community implementations exist on GitHub, official vendor-hosted MCP servers require explicit vendor hosting or official vendor documentation. If automated MCP search finds no official vendor endpoint, the platform is strictly marked as <code>mcp_server_exists: false</code>.
           </p>
+        </div>
+      </div>
+
+      <!-- Apps That Defeated the Agent Table -->
+      <div style="margin-top: 2.5rem;">
+        <h3 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.75rem;">Apps That Defeated Automated Extraction ({defeated_count} Apps)</h3>
+        <p class="section-desc">Platforms where scrape errors (HTTP 403 / connection timeouts / JSON parse errors) or undocumented auth/access prevented automated extraction, showing recorded error diagnostics without invented explanations.</p>
+        <div class="table-responsive" style="margin-top: 1rem; max-height: 480px; overflow-y: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Application</th>
+                <th>Category</th>
+                <th>Encountered Error / Extraction Issue</th>
+                <th>Status</th>
+                <th>Resulting Verdict</th>
+              </tr>
+            </thead>
+            <tbody>
+{defeated_table_html}
+            </tbody>
+          </table>
         </div>
       </div>
     </section>

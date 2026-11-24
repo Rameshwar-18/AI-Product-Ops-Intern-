@@ -56,6 +56,80 @@ def is_vendor_mcp(app_name: str, url: str) -> bool:
         return False
 
 
+FIXED_BLOCKER_CATEGORIES = [
+    "none",
+    "paid plan",
+    "partner approval",
+    "enterprise sales",
+    "no public API",
+    "app review",
+    "unknown"
+]
+
+def normalize_blocker(raw: str, verdict: str, access: str) -> str:
+    """Normalize freeform blocker text to fixed taxonomy."""
+    if verdict == "unknown" or access == "unknown":
+        return "unknown"
+    if verdict == "yes_today":
+        return "none"
+    
+    r = (raw or "").lower()
+    acc = (access or "").lower()
+    
+    if "no public" in r or "no developer api" in r or "consumer only" in r or "closed platform" in r or "no api" in r:
+        return "no public API"
+    if "sales" in r or "contact_sales" in acc or "enterprise contract" in r or "enterprise agreement" in r:
+        return "enterprise sales"
+    if "partner" in r or "partner_gated" in acc or "underwriting" in r:
+        return "partner approval"
+    if "review" in r or "connected app" in r or "admin approval" in r or "admin" in r or "questionnaire" in r:
+        return "app review"
+    if "paid" in r or "paid_plan" in acc or "subscription" in r or "pricing" in r or "license" in r or "quota" in r:
+        return "paid plan"
+    return "unknown"
+
+def enforce_verdict_rule(record: dict) -> dict:
+    """
+    Enforce strict consistency rule:
+    1. If auth_methods is 'unknown' OR access is 'unknown',
+       buildability_verdict must be 'unknown' and confidence low.
+    2. Normalize blocker to fixed taxonomy.
+    3. Strictly enforce official vendor MCP ownership (no hardcoded overrides).
+    """
+    name = record.get("name", "")
+    auth = record.get("auth_methods", [])
+    if isinstance(auth, str):
+        auth = [auth]
+    
+    auth_is_unknown = (
+        not auth or 
+        auth == ["unknown"] or 
+        (len(auth) == 1 and auth[0].lower() == "unknown")
+    )
+    access_is_unknown = (record.get("access") == "unknown" or not record.get("access"))
+    
+    if auth_is_unknown or access_is_unknown:
+        record["buildability_verdict"] = "unknown"
+        record["confidence"] = "low"
+        record["human_needed"] = True
+        if not record.get("human_needed_reason"):
+            record["human_needed_reason"] = "Authentication method or access tier could not be verified from public documentation."
+        record["buildability_blocker"] = "unknown"
+    else:
+        v = record.get("buildability_verdict", "unknown")
+        acc = record.get("access", "unknown")
+        record["buildability_blocker"] = normalize_blocker(record.get("buildability_blocker", ""), v, acc)
+        
+    # Enforce official vendor MCP rule strictly via is_vendor_mcp
+    if record.get("mcp_server_exists"):
+        url = record.get("mcp_server_url", "")
+        if not is_vendor_mcp(name, url):
+            record["mcp_server_exists"] = False
+            record["mcp_server_url"] = None
+
+    return record
+
+
 APP_SCHEMA = {
     "type": "object",
     "required": [
