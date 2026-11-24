@@ -1,8 +1,8 @@
 """
 Professional HTML generator for Composio 100-App Research Case Study.
 Applies UI/UX Pro Max guidelines:
-- Theme: API Developer Portal / Dark Precision Dashboard
-- Palette: #0B0F19 background, #111827 card, #6366F1 accent (Composio Violet), #10B981 emerald, #F59E0B amber, #EF4444 red
+- Theme: Clean Executive Light Theme (Stripe/Linear Developer Portal style)
+- Palette: #F8FAFC canvas, #FFFFFF surface cards, #4F46E5 accent (Composio Indigo), #059669 emerald, #D97706 amber, #DC2626 red
 - Typography: Inter (system precision) + JetBrains Mono for code/tokens
 - Sections in required order:
   1. Headline patterns
@@ -14,23 +14,33 @@ Applies UI/UX Pro Max guidelines:
 """
 
 import json
+import re
 from pathlib import Path
 
 DATA_DIR = Path(__file__).parent.parent / "data"
 WEB_DIR = Path(__file__).parent.parent / "web"
 WEB_DIR.mkdir(parents=True, exist_ok=True)
 
+def strip_emojis(val):
+    if isinstance(val, str):
+        return re.sub(r'[\U00010000-\U0010ffff]|[\u2600-\u27bf]|[\u2300-\u23ff]|[\u2b50-\u2b55]|[\u203c-\u2049]', '', val)
+    elif isinstance(val, list):
+        return [strip_emojis(x) for x in val]
+    elif isinstance(val, dict):
+        return {k: strip_emojis(v) for k, v in val.items()}
+    return val
+
 def build_html():
-    apps = json.loads((DATA_DIR / "pass3_verified.json").read_text(encoding="utf-8"))
-    analysis = json.loads((DATA_DIR / "analysis.json").read_text(encoding="utf-8"))
+    apps = strip_emojis(json.loads((DATA_DIR / "pass3_verified.json").read_text(encoding="utf-8")))
+    analysis = strip_emojis(json.loads((DATA_DIR / "analysis.json").read_text(encoding="utf-8")))
     acc_path = DATA_DIR / "accuracy_report.json"
     accuracy = {}
     if acc_path.exists():
         try:
-            accuracy = json.loads(acc_path.read_text(encoding="utf-8"))
+            accuracy = strip_emojis(json.loads(acc_path.read_text(encoding="utf-8")))
         except Exception:
             pass
-    human_needed = json.loads((DATA_DIR / "human_needed.json").read_text(encoding="utf-8"))
+    human_needed = strip_emojis(json.loads((DATA_DIR / "human_needed.json").read_text(encoding="utf-8")))
 
     # Compute key stats
     total = len(apps)
@@ -104,7 +114,7 @@ def build_html():
               <tr>
                 <td><strong>{app_name}</strong></td>
                 <td><span class="badge-access">{field_name}</span></td>
-                <td><code style="color:var(--red);">{agent_val}</code></td>
+                <td><code style="color:var(--red); font-weight:600;">{agent_val}</code></td>
                 <td><code style="color:var(--green); font-weight:600;">{human_val}</code></td>
               </tr>""")
     misses_table_html = "\\n".join(misses_rows)
@@ -167,7 +177,7 @@ def build_html():
         has_ev = bool(a.get("auth_evidence_snippet") or a.get("access_evidence_snippet"))
         ev_urls = a.get("evidence_urls", [])
         if has_ev and ev_urls:
-            ev_note = f'<br><span style="font-size:0.75rem; color:var(--text-muted);"><a href="{html_lib.escape(ev_urls[0])}" target="_blank" style="color:var(--blue); text-decoration:none;">Evidence Doc ↗</a></span>'
+            ev_note = f'<br><span style="font-size:0.75rem; color:var(--text-muted);"><a href="{html_lib.escape(ev_urls[0])}" target="_blank" style="color:var(--accent); text-decoration:none;">Evidence Doc ↗</a></span>'
         elif ev_urls:
             ev_note = '<br><span style="font-size:0.75rem; color:var(--amber);">Unverified from retrieved docs</span>'
         else:
@@ -210,38 +220,25 @@ def build_html():
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {{
-      --bg-dark: #0B0F19;
-      --surface-dark: #111827;
-      --surface-elevated: #1F2937;
-      --border-dark: rgba(255, 255, 255, 0.08);
-      --border-focus: #6366F1;
-      --text-main: #F9FAFB;
-      --text-muted: #9CA3AF;
-      --accent: #6366F1;
-      --accent-glow: rgba(99, 102, 241, 0.25);
-      --green: #10B981;
-      --green-glow: rgba(16, 185, 129, 0.2);
-      --amber: #F59E0B;
-      --amber-glow: rgba(245, 158, 11, 0.2);
-      --red: #EF4444;
-      --red-glow: rgba(239, 68, 68, 0.2);
-      --blue: #38BDF8;
-      --radius: 12px;
+      --bg-dark: #F8FAFC;
+      --surface-dark: #FFFFFF;
+      --surface-elevated: #F1F5F9;
+      --border-dark: #E2E8F0;
+      --border-focus: #4F46E5;
+      --text-main: #0F172A;
+      --text-muted: #64748B;
+      --accent: #4F46E5;
+      --accent-glow: rgba(79, 70, 229, 0.08);
+      --green: #059669;
+      --green-glow: #ECFDF5;
+      --amber: #D97706;
+      --amber-glow: #FFFBEB;
+      --red: #DC2626;
+      --red-glow: #FEF2F2;
+      --blue: #2563EB;
+      --radius: 10px;
       --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-    }}
-
-    @media (prefers-color-scheme: light) {{
-      :root {{
-        --bg-dark: #F8FAFC;
-        --surface-dark: #FFFFFF;
-        --surface-elevated: #F1F5F9;
-        --border-dark: #E2E8F0;
-        --text-main: #0F172A;
-        --text-muted: #64748B;
-        --accent: #4F46E5;
-        --accent-glow: rgba(79, 70, 229, 0.15);
-      }}
     }}
 
     * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -258,7 +255,7 @@ def build_html():
       position: sticky;
       top: 0;
       z-index: 1000;
-      background: rgba(11, 15, 25, 0.85);
+      background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border-dark);
       padding: 0.85rem 2rem;
@@ -273,10 +270,12 @@ def build_html():
       font-weight: 700;
       font-size: 1.05rem;
       letter-spacing: -0.02em;
+      color: var(--text-main);
     }}
     .brand-badge {{
-      background: var(--accent);
-      color: white;
+      background: #EEF2FF;
+      color: var(--accent);
+      border: 1px solid #C7D2FE;
       font-size: 0.75rem;
       padding: 0.2rem 0.5rem;
       border-radius: 6px;
@@ -328,9 +327,10 @@ def build_html():
       letter-spacing: -0.03em;
       line-height: 1.15;
       margin-bottom: 1rem;
+      color: var(--text-main);
     }}
     .hero-subtitle {{
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--text-muted);
       max-width: 780px;
       line-height: 1.6;
@@ -339,6 +339,7 @@ def build_html():
       font-size: 1.75rem;
       font-weight: 700;
       letter-spacing: -0.02em;
+      color: var(--text-main);
     }}
     .section-desc {{
       color: var(--text-muted);
@@ -360,11 +361,13 @@ def build_html():
       padding: 1.5rem 1.25rem;
       position: relative;
       overflow: hidden;
-      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04), 0 1px 2px -1px rgba(15, 23, 42, 0.02);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
     }}
     .metric-card:hover {{
       transform: translateY(-2px);
-      border-color: rgba(255, 255, 255, 0.18);
+      border-color: #CBD5E1;
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
     }}
     .metric-val {{
       font-size: 2.5rem;
@@ -406,6 +409,8 @@ def build_html():
       padding: 1.25rem 1.5rem;
       font-size: 0.95rem;
       line-height: 1.55;
+      color: #334155;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03);
     }}
 
     /* Charts Container */
@@ -420,6 +425,7 @@ def build_html():
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       padding: 1.5rem;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
     }}
     .chart-box h3 {{
       font-size: 1rem;
@@ -442,6 +448,7 @@ def build_html():
       gap: 1rem;
       align-items: center;
       margin-bottom: 1.25rem;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03);
     }}
     .search-input-wrap {{
       flex: 2;
@@ -450,40 +457,37 @@ def build_html():
     }}
     .search-input-wrap input {{
       width: 100%;
-      background: var(--surface-elevated);
-      border: 1px solid var(--border-dark);
+      background: var(--surface-dark);
+      border: 1px solid #CBD5E1;
       border-radius: 8px;
       padding: 0.65rem 1rem 0.65rem 2.4rem;
       color: var(--text-main);
       font-size: 0.9rem;
       font-family: var(--font-sans);
       outline: none;
-      transition: border-color 0.15s ease;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2364748B' viewBox='0 0 24 24'%3E%3Cpath d='M10 2a8 8 0 105.293 14.293l4.707 4.707 1.414-1.414-4.707-4.707A8 8 0 0010 2zm-6 8a6 6 0 1112 0 6 6 0 01-12 0z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: 0.85rem center;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }}
     .search-input-wrap input:focus {{
       border-color: var(--accent);
-    }}
-    .search-input-wrap::before {{
-      content: "🔍";
-      position: absolute;
-      left: 0.85rem;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 0.85rem;
-      opacity: 0.5;
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
     }}
     .filter-select {{
-      background: var(--surface-elevated);
-      border: 1px solid var(--border-dark);
+      background: var(--surface-dark);
+      border: 1px solid #CBD5E1;
       border-radius: 8px;
       padding: 0.65rem 1rem;
       color: var(--text-main);
       font-size: 0.875rem;
       outline: none;
       cursor: pointer;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }}
     .filter-select:focus {{
       border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
     }}
     .btn {{
       background: var(--accent);
@@ -498,16 +502,18 @@ def build_html():
       align-items: center;
       gap: 0.4rem;
       text-decoration: none;
-      transition: opacity 0.15s ease;
+      transition: background-color 0.15s ease, transform 0.1s ease;
     }}
-    .btn:hover {{ opacity: 0.88; }}
+    .btn:hover {{ background-color: #4338CA; }}
     .btn-secondary {{
-      background: var(--surface-elevated);
-      border: 1px solid var(--border-dark);
-      color: var(--text-main);
+      background: var(--surface-dark);
+      border: 1px solid #CBD5E1;
+      color: #334155;
     }}
     .btn-secondary:hover {{
-      border-color: var(--accent);
+      background: #F8FAFC;
+      border-color: #94A3B8;
+      color: var(--text-main);
     }}
     .toolbar-count {{
       font-family: var(--font-mono);
@@ -522,6 +528,7 @@ def build_html():
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       overflow-x: auto;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03);
     }}
     table.data-table {{
       width: 100%;
@@ -530,10 +537,10 @@ def build_html():
       text-align: left;
     }}
     table.data-table th {{
-      background: var(--surface-elevated);
+      background: #F8FAFC;
       padding: 0.85rem 1rem;
       font-weight: 600;
-      color: var(--text-muted);
+      color: #475569;
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -549,9 +556,10 @@ def build_html():
       padding: 0.85rem 1rem;
       border-bottom: 1px solid var(--border-dark);
       vertical-align: top;
+      color: #1E293B;
     }}
     table.data-table tr:hover td {{
-      background: rgba(255, 255, 255, 0.02);
+      background: #F8FAFC;
     }}
 
     /* Badges */
@@ -565,26 +573,28 @@ def build_html():
       font-weight: 600;
       white-space: nowrap;
     }}
-    .bv-yes {{ background: var(--green-glow); color: var(--green); }}
-    .bv-caveats {{ background: var(--amber-glow); color: var(--amber); }}
-    .bv-no {{ background: var(--red-glow); color: var(--red); }}
+    .bv-yes {{ background: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }}
+    .bv-caveats {{ background: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }}
+    .bv-no {{ background: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }}
 
     .badge-auth {{
       display: inline-block;
-      padding: 0.15rem 0.45rem;
+      padding: 0.18rem 0.5rem;
       border-radius: 4px;
-      background: var(--surface-elevated);
-      color: var(--blue);
+      background: #EFF6FF;
+      color: #1D4ED8;
+      border: 1px solid #DBEAFE;
       font-size: 0.75rem;
       font-family: var(--font-mono);
       margin: 0.1rem;
     }}
     .badge-access {{
       display: inline-block;
-      padding: 0.15rem 0.45rem;
+      padding: 0.18rem 0.5rem;
       border-radius: 4px;
       font-size: 0.75rem;
-      color: var(--text-muted);
+      color: #475569;
+      background: #F8FAFC;
       border: 1px solid var(--border-dark);
     }}
     .mcp-indicator-yes {{
@@ -597,7 +607,7 @@ def build_html():
     .mcp-indicator-no {{
       color: var(--text-muted);
       font-size: 0.8rem;
-      opacity: 0.6;
+      opacity: 0.8;
     }}
     .ev-link-btn {{
       color: var(--accent);
@@ -605,14 +615,17 @@ def build_html():
       font-size: 0.75rem;
       font-family: var(--font-mono);
       display: inline-block;
-      padding: 0.15rem 0.4rem;
+      padding: 0.18rem 0.45rem;
       border-radius: 4px;
-      background: var(--surface-elevated);
-      transition: background 0.15s ease;
+      background: #EEF2FF;
+      border: 1px solid #E0E7FF;
+      font-weight: 500;
+      transition: all 0.15s ease;
     }}
     .ev-link-btn:hover {{
       background: var(--accent);
       color: white;
+      border-color: var(--accent);
     }}
 
     /* Pagination */
@@ -624,8 +637,8 @@ def build_html():
     }}
     .page-btn {{
       background: var(--surface-dark);
-      border: 1px solid var(--border-dark);
-      color: var(--text-main);
+      border: 1px solid #CBD5E1;
+      color: #334155;
       padding: 0.45rem 0.85rem;
       border-radius: 6px;
       font-size: 0.85rem;
@@ -633,10 +646,16 @@ def build_html():
       cursor: pointer;
       transition: all 0.15s ease;
     }}
-    .page-btn.active, .page-btn:hover {{
+    .page-btn.active {{
       background: var(--accent);
       border-color: var(--accent);
       color: white;
+      font-weight: 600;
+    }}
+    .page-btn:hover:not(.active) {{
+      background: #F8FAFC;
+      border-color: #94A3B8;
+      color: var(--text-main);
     }}
 
     /* Architecture Diagram */
@@ -645,6 +664,7 @@ def build_html():
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       padding: 2.5rem;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.04);
     }}
     .flow-steps {{
       display: grid;
@@ -653,7 +673,7 @@ def build_html():
       position: relative;
     }}
     .flow-node {{
-      background: var(--surface-elevated);
+      background: #F8FAFC;
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       padding: 1.5rem;
@@ -671,10 +691,11 @@ def build_html():
       font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
+      color: var(--text-main);
     }}
     .node-desc {{
       font-size: 0.85rem;
-      color: var(--text-muted);
+      color: #475569;
       line-height: 1.5;
     }}
 
@@ -686,7 +707,7 @@ def build_html():
       margin-top: 1.5rem;
     }}
     .human-card {{
-      background: var(--surface-elevated);
+      background: #F8FAFC;
       border: 1px solid var(--border-dark);
       border-left: 3px solid var(--amber);
       border-radius: 8px;
@@ -699,10 +720,11 @@ def build_html():
       font-weight: 700;
       font-size: 0.95rem;
       margin-bottom: 0.35rem;
+      color: var(--text-main);
     }}
     .human-card-desc {{
       font-size: 0.8rem;
-      color: var(--text-muted);
+      color: #475569;
       line-height: 1.5;
     }}
 
@@ -713,6 +735,7 @@ def build_html():
       border-radius: var(--radius);
       overflow-x: auto;
       margin: 1.5rem 0;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03);
     }}
     table.acc-table {{
       width: 100%;
@@ -723,10 +746,11 @@ def build_html():
     table.acc-table th, table.acc-table td {{
       padding: 0.9rem 1.25rem;
       border-bottom: 1px solid var(--border-dark);
+      color: #1E293B;
     }}
     table.acc-table th {{
-      background: var(--surface-elevated);
-      color: var(--text-muted);
+      background: #F8FAFC;
+      color: #475569;
       font-size: 0.8rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -751,41 +775,44 @@ def build_html():
       border: 1px solid var(--border-dark);
       border-radius: var(--radius);
       padding: 1.5rem;
+      box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.03);
     }}
     .limit-card h3 {{
       font-size: 1.05rem;
       font-weight: 700;
       margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      color: var(--text-main);
     }}
     .limit-card p {{
       font-size: 0.875rem;
-      color: var(--text-muted);
+      color: #475569;
       line-height: 1.6;
     }}
 
     /* Proof Section & CLI Code Box */
     .code-terminal {{
-      background: #050811;
-      border: 1px solid var(--border-dark);
+      background: #0F172A;
+      border: 1px solid #1E293B;
       border-radius: var(--radius);
       padding: 1.5rem;
       font-family: var(--font-mono);
       font-size: 0.875rem;
-      color: #A7F3D0;
+      color: #F1F5F9;
       position: relative;
       overflow-x: auto;
       line-height: 1.7;
       margin: 1.25rem 0;
+      box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.08);
     }}
     .terminal-header {{
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1rem;
-      opacity: 0.6;
+      color: #94A3B8;
       font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      font-weight: 600;
     }}
 
     /* Footer */
@@ -805,7 +832,7 @@ def build_html():
   <!-- Sticky Navbar -->
   <header class="navbar">
     <div class="brand">
-      <span>🛠️ Composio Research</span>
+      <span>Composio Research</span>
       <span class="brand-badge">Product Ops Intern Take-Home</span>
     </div>
     <ul class="nav-links">
@@ -871,7 +898,7 @@ def build_html():
 
       <!-- 7 Sharp Insights -->
       <div class="section-header" style="margin-top: 3rem;">
-        <h2 class="section-title">💡 7 Sharp Data-Backed Insights</h2>
+        <h2 class="section-title">Key Data-Backed Research Findings</h2>
         <p class="section-desc">Extracted directly from verified evidence counts across all 100 applications.</p>
       </div>
       <div class="insights-grid">
@@ -924,10 +951,10 @@ def build_html():
 
         <select class="filter-select" id="filterVerdict" onchange="applyFilters()">
           <option value="" selected>All Verdicts</option>
-          <option value="yes_today">✅ Yes Today</option>
-          <option value="yes_with_caveats">⚠️ Yes with Caveats</option>
-          <option value="no">❌ Not Buildable</option>
-          <option value="unknown">❓ Unknown / Undetermined</option>
+          <option value="yes_today">Yes Today</option>
+          <option value="yes_with_caveats">Yes with Caveats</option>
+          <option value="no">Not Buildable</option>
+          <option value="unknown">Unknown / Undetermined</option>
         </select>
 
         <select class="filter-select" id="filterAuth" onchange="applyFilters()">
@@ -950,8 +977,8 @@ def build_html():
         </select>
 
         <div style="display: flex; gap: 0.5rem;">
-          <button class="btn btn-secondary" onclick="exportCSV()">⬇ CSV</button>
-          <button class="btn btn-secondary" onclick="exportJSON()">⬇ JSON</button>
+          <button class="btn btn-secondary" onclick="exportCSV()">Export CSV</button>
+          <button class="btn btn-secondary" onclick="exportJSON()">Export JSON</button>
         </div>
 
         <div class="toolbar-count" id="tableFilterCount">Showing 100 of 100 apps</div>
@@ -961,13 +988,13 @@ def build_html():
         <table class="data-table" id="appsDataTable">
           <thead>
             <tr>
-              <th onclick="handleSort('name')">App Name ↕</th>
-              <th onclick="handleSort('category')">Category ↕</th>
-              <th onclick="handleSort('buildability_verdict')">Verdict ↕</th>
+              <th onclick="handleSort('name')">App Name</th>
+              <th onclick="handleSort('category')">Category</th>
+              <th onclick="handleSort('buildability_verdict')">Verdict</th>
               <th>Auth Methods</th>
-              <th onclick="handleSort('access')">Access Tier ↕</th>
+              <th onclick="handleSort('access')">Access Tier</th>
               <th>API Surface</th>
-              <th onclick="handleSort('mcp_server_exists')">MCP ↕</th>
+              <th onclick="handleSort('mcp_server_exists')">Official MCP</th>
               <th>Main Blocker / Caveat</th>
               <th>Official Docs</th>
             </tr>
@@ -1070,7 +1097,7 @@ def build_html():
 
       <!-- SECTION: Why the Agent Fails -->
       <div style="margin-top: 2.5rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">🚨 Why the Research Agent Fails: Real Failure Modes</h3>
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">Analysis of Agent Limitations & Extraction Failures</h3>
         <p class="section-desc">Direct post-mortem of verified discrepancies between automated agent extraction and human ground truth.</p>
         
         <div class="limits-grid" style="margin-top: 1.25rem;">
@@ -1135,49 +1162,49 @@ def build_html():
 
       <div class="limits-grid">
         <div class="limit-card">
-          <h3>🚫 fanbasis</h3>
+          <h3>fanbasis</h3>
           <p>
             No public developer API or documentation exists. Pure consumer celebrity fan engagement web portal. The agent correctly classified it as non-buildable (`no`) with contact-sales needed.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🚫 iPayX</h3>
+          <h3>iPayX</h3>
           <p>
             Legacy closed institutional utility billing gateway. No developer portal, public API keys, or self-serve documentation. Defeated automated extraction.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🚫 Otter AI</h3>
+          <h3>Otter AI</h3>
           <p>
             Consumer and enterprise meeting recorder with no public developer REST API. All third-party integrations are restricted to bespoke partner agreements.
           </p>
         </div>
         <div class="limit-card">
-          <h3>💰 PitchBook</h3>
+          <h3>PitchBook</h3>
           <p>
             Prohibitive financial barrier ($25,000+ annual enterprise data license). Has a REST API, but zero self-serve testing capability without institutional procurement.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🔒 Amazon SP-API</h3>
+          <h3>Amazon SP-API</h3>
           <p>
             Demands dual authentication: Login with Amazon (LWA) OAuth 2.0 coupled with AWS Signature Version 4 (SigV4) request signing, plus professional seller identity vetting.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🖥️ Sherlock & Mermaid CLI</h3>
+          <h3>Sherlock & Mermaid CLI</h3>
           <p>
             Open-source command-line utilities rather than hosted HTTP microservices. Composio must execute these via local container sandboxes or Node/Python subprocesses.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🛡️ Bot Blocking & Login Walls</h3>
+          <h3>Bot Blocking & Login Walls</h3>
           <p>
             Platforms with enterprise firewalls, interactive single-page app documentation (SPAs), or mandatory workspace login before exposing API credentials trigger fallback to human verification when documentation text cannot be fetched statically.
           </p>
         </div>
         <div class="limit-card">
-          <h3>🌐 Vendor vs Community MCP Gaps</h3>
+          <h3>Vendor vs Community MCP Gaps</h3>
           <p>
             While community implementations exist on GitHub, official vendor-hosted MCP servers require explicit vendor hosting or official vendor documentation. If automated MCP search finds no official vendor endpoint, the platform is strictly marked as <code>mcp_server_exists: false</code>.
           </p>
@@ -1217,24 +1244,24 @@ def build_html():
 
       <div class="code-terminal">
         <div class="terminal-header">TERMINAL — REPRODUCIBLE CLI COMMANDS</div>
-        <div><span style="color:#6366F1;"># 1. Clone the repository and install lightweight dependencies</span></div>
+        <div><span style="color:#818CF8;"># 1. Clone the repository and install lightweight dependencies</span></div>
         <div>git clone https://github.com/Rameshwar-18/AI-Product-Ops-Intern-.git</div>
         <div>cd AI-Product-Ops-Intern- && pip install -r requirements.txt</div>
         <br>
-        <div><span style="color:#6366F1;"># 2. Run the research agent live on a single application (e.g., Linear, Stripe, or PitchBook)</span></div>
+        <div><span style="color:#818CF8;"># 2. Run the research agent live on a single application (e.g., Linear, Stripe, or PitchBook)</span></div>
         <div>python run.py --app "Linear"</div>
         <br>
-        <div><span style="color:#6366F1;"># 3. Run verification and compute accuracy against ground truth</span></div>
+        <div><span style="color:#818CF8;"># 3. Run verification and compute accuracy against ground truth</span></div>
         <div>python run.py --verify</div>
         <br>
-        <div><span style="color:#6366F1;"># 4. Execute the complete pipeline across all 100 apps</span></div>
+        <div><span style="color:#818CF8;"># 4. Execute the complete pipeline across all 100 apps</span></div>
         <div>python run.py --all</div>
       </div>
 
       <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
-        <button class="btn" onclick="exportJSON()">⬇ Download 100 Apps Dataset (JSON)</button>
-        <button class="btn btn-secondary" onclick="exportCSV()">⬇ Download 100 Apps Dataset (CSV)</button>
-        <a href="../data/ground_truth_checklist.csv" class="btn btn-secondary" download>⬇ Download Ground Truth Checklist (CSV)</a>
+        <button class="btn" onclick="exportJSON()">Download 100 Apps Dataset (JSON)</button>
+        <button class="btn btn-secondary" onclick="exportCSV()">Download 100 Apps Dataset (CSV)</button>
+        <a href="../data/ground_truth_checklist.csv" class="btn btn-secondary" download>Download Ground Truth Checklist (CSV)</a>
       </div>
     </section>
 
@@ -1266,14 +1293,14 @@ def build_html():
       tbody.innerHTML = paginated.map(a => {{
         const v = a.buildability_verdict || 'unknown';
         const verdictCls = v === 'yes_today' ? 'bv-yes' : (v === 'yes_with_caveats' ? 'bv-caveats' : 'bv-no');
-        const verdictText = v === 'yes_today' ? '✅ Yes Today' : (v === 'yes_with_caveats' ? '⚠️ Caveats' : (v === 'no' ? '❌ No' : '❓ Unknown'));
+        const verdictText = v === 'yes_today' ? 'Yes Today' : (v === 'yes_with_caveats' ? 'Caveats' : (v === 'no' ? 'No' : 'Unknown'));
         
         const authArr = Array.isArray(a.auth_methods) ? a.auth_methods : (a.auth_methods ? [a.auth_methods] : ['unknown']);
         const authPills = authArr.map(m => `<span class="badge-auth">${{m}}</span>`).join('');
         
         const mcpDisplay = a.mcp_server_exists 
-          ? `<a href="${{a.mcp_server_url || '#'}}" target="_blank" class="mcp-indicator-yes">✓ Yes</a>` 
-          : `<span class="mcp-indicator-no">✗ None</span>`;
+          ? `<a href="${{a.mcp_server_url || '#'}}" target="_blank" class="mcp-indicator-yes">Available</a>` 
+          : `<span class="mcp-indicator-no">None</span>`;
           
         const evUrls = Array.isArray(a.evidence_urls) ? a.evidence_urls : (a.evidence_urls ? [a.evidence_urls] : []);
         const primaryEv = evUrls[0] 
@@ -1283,7 +1310,7 @@ def build_html():
         const accessStr = typeof a.access === 'string' ? a.access.replace(/_/g, ' ') : String(a.access || 'unknown');
         const apiArr = Array.isArray(a.api_type) ? a.api_type : (a.api_type ? [a.api_type] : ['unknown']);
         const breadthStr = a.api_breadth || 'unknown';
-        const blockerStr = a.buildability_blocker === 'none' ? '<span style="color:var(--green);">Ready</span>' : (a.buildability_blocker || 'none');
+        const blockerStr = a.buildability_blocker === 'none' ? '<span style="color:var(--green); font-weight:600;">Ready</span>' : (a.buildability_blocker || 'none');
 
         return `
           <tr>
@@ -1405,12 +1432,12 @@ def build_html():
         <div class="human-card">
           <div class="human-card-title">
             <span>${{h.name}}</span>
-            <span style="font-size:0.75rem; color:var(--amber); font-family:var(--font-mono);">${{h.verdict}}</span>
+            <span style="font-size:0.75rem; color:var(--amber); font-family:var(--font-mono); font-weight:600;">${{h.verdict}}</span>
           </div>
           <div class="human-card-desc">
             <strong>${{h.category}}:</strong> ${{h.reason}}
           </div>
-          ${{h.docs_url ? `<a href="${{h.docs_url}}" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.75rem; color:var(--blue); text-decoration:none;">View source docs ↗</a>` : ''}}
+          ${{h.docs_url ? `<a href="${{h.docs_url}}" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.75rem; color:var(--accent); text-decoration:none; font-weight:500;">View source docs ↗</a>` : ''}}
         </div>
       `).join('');
     }}
@@ -1421,7 +1448,7 @@ def build_html():
         tbody.innerHTML = `
           <tr>
             <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.95rem;">
-              📋 <strong>Ground Truth Evaluation Pending:</strong> Stratified random sample generated in <code>data/ground_truth_checklist.csv</code> (30 apps, seed=42) with empty <code>HUMAN_*</code> columns.<br>
+              <strong>Ground Truth Evaluation Pending:</strong> Stratified random sample generated in <code>data/ground_truth_checklist.csv</code> (30 apps, seed=42) with empty <code>HUMAN_*</code> columns.<br>
               Fill your verified evaluations in the CSV and run <code>python run.py --verify</code> to calculate real per-field accuracy without simulated estimates.
             </td>
           </tr>
@@ -1435,7 +1462,7 @@ def build_html():
         {{ key: 'api_breadth', label: 'API Breadth (<20, 20-100, 100+)' }},
         {{ key: 'mcp_server_exists', label: 'Official Vendor MCP Server' }},
         {{ key: 'buildability_verdict', label: 'Buildability Verdict' }},
-        {{ key: 'overall', label: '📊 Overall Accuracy Benchmark' }}
+        {{ key: 'overall', label: 'Overall Accuracy Benchmark' }}
       ];
 
       tbody.innerHTML = rows.map(r => {{
@@ -1446,7 +1473,7 @@ def build_html():
         const isOverall = r.key === 'overall';
 
         return `
-          <tr style="${{isOverall ? 'font-weight:700; background:rgba(99, 102, 241, 0.08);' : ''}}">
+          <tr style="${{isOverall ? 'font-weight:700; background:#EEF2FF;' : ''}}">
             <td style="text-align:left;">${{r.label}}</td>
             <td class="acc-score score-low">${{p1}}%</td>
             <td class="acc-score score-mid">${{p2}}%</td>
@@ -1459,21 +1486,22 @@ def build_html():
 
     function initCharts() {{
       if (typeof Chart === 'undefined') return;
-      Chart.defaults.color = '#9CA3AF';
+      Chart.defaults.color = '#64748B';
+      Chart.defaults.borderColor = '#E2E8F0';
       Chart.defaults.font.family = "'Inter', sans-serif";
 
       // 1. Verdict Doughnut
       new Chart(document.getElementById('verdictDoughnut'), {{
         type: 'doughnut',
         data: {{
-          labels: ['✅ Yes Today', '⚠️ Yes with Caveats', '❌ Not Buildable'],
+          labels: ['Yes Today', 'Yes with Caveats', 'Not Buildable'],
           datasets: [{{
             data: [
               RAW_ANALYSIS.buildability.yes_today || 0,
               RAW_ANALYSIS.buildability.yes_with_caveats || 0,
               RAW_ANALYSIS.buildability.no || 0
             ],
-            backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
+            backgroundColor: ['#059669', '#D97706', '#DC2626'],
             borderWidth: 0
           }}]
         }},
@@ -1493,13 +1521,16 @@ def build_html():
           datasets: [{{
             label: 'Apps Supporting Method',
             data: authValues,
-            backgroundColor: '#6366F1',
+            backgroundColor: '#4F46E5',
             borderRadius: 6
           }}]
         }},
         options: {{
           plugins: {{ legend: {{ display: false }} }},
-          scales: {{ y: {{ beginAtZero: true }} }}
+          scales: {{
+            y: {{ beginAtZero: true, grid: {{ color: '#F1F5F9' }} }},
+            x: {{ grid: {{ display: false }} }}
+          }}
         }}
       }});
 
@@ -1510,13 +1541,16 @@ def build_html():
         data: {{
           labels: cats,
           datasets: [
-            {{ label: 'Yes Today', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].yes_today || 0), backgroundColor: '#10B981', borderRadius: 4 }},
-            {{ label: 'Caveats', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].yes_with_caveats || 0), backgroundColor: '#F59E0B', borderRadius: 4 }},
-            {{ label: 'No', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].no || 0), backgroundColor: '#EF4444', borderRadius: 4 }}
+            {{ label: 'Yes Today', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].yes_today || 0), backgroundColor: '#059669', borderRadius: 4 }},
+            {{ label: 'Caveats', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].yes_with_caveats || 0), backgroundColor: '#D97706', borderRadius: 4 }},
+            {{ label: 'No', data: cats.map(c => RAW_ANALYSIS.buildability_by_category[c].no || 0), backgroundColor: '#DC2626', borderRadius: 4 }}
           ]
         }},
         options: {{
-          scales: {{ x: {{ stacked: true }}, y: {{ stacked: true, beginAtZero: true, max: 10 }} }},
+          scales: {{
+            x: {{ stacked: true, grid: {{ display: false }} }},
+            y: {{ stacked: true, beginAtZero: true, max: 10, grid: {{ color: '#F1F5F9' }} }}
+          }},
           plugins: {{ legend: {{ position: 'bottom' }} }}
         }}
       }});
@@ -1535,16 +1569,19 @@ def build_html():
                 RAW_ACCURACY.pass2.overall.pct,
                 RAW_ACCURACY.pass3.overall.pct
               ],
-              borderColor: '#6366F1',
-              backgroundColor: 'rgba(99, 102, 241, 0.15)',
+              borderColor: '#4F46E5',
+              backgroundColor: 'rgba(79, 70, 229, 0.08)',
               fill: true,
               tension: 0.35,
               pointRadius: 6,
-              pointBackgroundColor: '#6366F1'
+              pointBackgroundColor: '#4F46E5'
             }}]
           }},
           options: {{
-            scales: {{ y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }} }} }},
+            scales: {{
+              y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }}, grid: {{ color: '#F1F5F9' }} }},
+              x: {{ grid: {{ display: false }} }}
+            }},
             plugins: {{ legend: {{ display: false }} }}
           }}
         }});
@@ -1565,19 +1602,27 @@ def build_html():
               {{
                 label: 'Pass 1 (Baseline)',
                 data: radarFields.map(f => RAW_ACCURACY.pass1[f]?.pct || 0),
-                borderColor: '#EF4444',
-                backgroundColor: 'rgba(239, 68, 68, 0.1)'
+                borderColor: '#DC2626',
+                backgroundColor: 'rgba(220, 38, 38, 0.08)'
               }},
               {{
                 label: 'Pass 3 (Verified)',
                 data: radarFields.map(f => RAW_ACCURACY.pass3[f]?.pct || 0),
-                borderColor: '#10B981',
-                backgroundColor: 'rgba(16, 185, 129, 0.15)'
+                borderColor: '#059669',
+                backgroundColor: 'rgba(5, 150, 105, 0.12)'
               }}
             ]
           }},
           options: {{
-            scales: {{ r: {{ min: 0, max: 100, ticks: {{ stepSize: 20 }} }} }}
+            scales: {{
+              r: {{
+                min: 0,
+                max: 100,
+                ticks: {{ stepSize: 20 }},
+                grid: {{ color: '#E2E8F0' }},
+                pointLabels: {{ color: '#475569', font: {{ weight: 600 }} }}
+              }}
+            }}
           }}
         }});
       }} else if (radarCanvas) {{
