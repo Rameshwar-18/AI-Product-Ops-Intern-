@@ -12,7 +12,7 @@
     "category": "CRM & Sales",
     "reason": "verification_note: Most detailed fields lack explicit confirmation in the fetched page stub, requiring human review or deeper scraping.",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://twenty.com/developers"
   },
   {
@@ -20,7 +20,7 @@
     "category": "CRM & Sales",
     "reason": "Enterprise CRM with gated access requiring sales contact and enterprise agreement to inspect API capabilities and acquire credentials.",
     "confidence": "high",
-    "verdict": "no",
+    "verdict": "unknown",
     "docs_url": "https://dealcloud.com/resources/integrations/"
   },
   {
@@ -44,7 +44,7 @@
     "category": "Support",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | Unverified claim: api_breadth flagged by verifier",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://www.liveagent.com/app/api/"
   },
   {
@@ -52,7 +52,7 @@
     "category": "Support",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet.",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://plain.com/docs"
   },
   {
@@ -84,7 +84,7 @@
     "category": "Comms",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | verification_note: Some claims such as specific a",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://www.twilio.com/docs"
   },
   {
@@ -92,7 +92,7 @@
     "category": "Comms",
     "reason": "verification_note: The scraped index page shows an official Pumble MCP server guide exists on their domain ('How to use the Pumble MCP server'), meaning mcp_server_exists is actually true according to vendor documentation rules. Auth methods and access level lack direct textual proof in the provi",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://pumble.com/help/integrations/"
   },
   {
@@ -100,7 +100,7 @@
     "category": "Comms",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | verification_note: Auth methods, access, and api_",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://developer.aircall.io/api-references/"
   },
   {
@@ -132,7 +132,7 @@
     "category": "Marketing & Ads",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: The scraped documentation page contains only a brief overview snippet, which does not provide explicit confirmati",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://developers.klaviyo.com/en/reference/api_overview"
   },
   {
@@ -148,7 +148,7 @@
     "category": "Marketing & Ads",
     "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"SendGrid\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\" | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://docs.sendgrid.com/api-reference"
   },
   {
@@ -180,7 +180,7 @@
     "category": "Ecommerce",
     "reason": "verification_note: Auth methods and access terms are not explicitly confirmed by the documentation page snippet. Per the MCP Rule, since https://developers.squarespace.com is a developer landing page and not an official vendor MCP server endpoint/hosting structure, mcp_server_exists is set to fal",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://developers.squarespace.com"
   },
   {
@@ -188,7 +188,7 @@
     "category": "Ecommerce",
     "reason": "verification_note: The scraped page confirms an official vendor-hosted MCP server exists at https://docs.ecwid.com/~gitbook/mcp. Other fields lack explicit text proof in the fetched snippet, requiring human verification or setting to unknown.",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://api-docs.ecwid.com"
   },
   {
@@ -212,7 +212,7 @@
     "category": "Ecommerce",
     "reason": "No public API docs are available; requires contacting sales or support to see if developer access is available.",
     "confidence": "high",
-    "verdict": "no",
+    "verdict": "unknown",
     "docs_url": "https://fanbasis.com"
   },
   {
@@ -220,7 +220,7 @@
     "category": "Data & SEO",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: Although the page mentions querying via MCP, it lacks an official vendor-hosted MCP server implementation link, v",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://seranking.com/api.html"
   },
   {
@@ -260,7 +260,7 @@
     "category": "Dev & Infra",
     "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Vercel\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"202 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://vercel.com/docs/rest-api"
   },
   {
@@ -268,7 +268,7 @@
     "category": "Dev & Infra",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: Auth methods and access terms lack explicit text support in the provided page snippet, so they are marked as unkn",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://developers.cloudflare.com/api"
   },
   {
@@ -284,7 +284,7 @@
     "category": "Dev & Infra",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | verification_note: The auth evidence snippet was not found in the scraped content of the rest-docs page, which instead rendered a v3.5 deprecated API notice. Setting auth_methods to 'unknown' and flagging human ne",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://neo4j.com/docs/api/"
   },
   {
@@ -300,7 +300,7 @@
     "category": "Dev & Infra",
     "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Datadog\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"20 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://docs.datadoghq.com/api/"
   },
   {
@@ -316,7 +316,7 @@
     "category": "Productivity",
     "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Monday.com\",\n  \"category\": \"Productivity\",\n  \"checked_date\": | verification_note: Access tier details and OAuth methods could not be fully verified due to incomplete snippets/truncated text in the fetched pages, requiring human review",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://developer.monday.com/api-reference"
   },
   {
@@ -348,7 +348,7 @@
     "category": "Finance",
     "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: The scraped documentation page content was incomplete/truncated and did not contain the specific evidence snippet",
     "confidence": "med",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://plaid.com/docs/api/"
   },
   {
@@ -364,7 +364,7 @@
     "category": "Finance",
     "reason": "API access and documentation are gated behind sales contact or account approval.",
     "confidence": "high",
-    "verdict": "no",
+    "verdict": "unknown",
     "docs_url": "https://www.ipayx.com/api"
   },
   {
@@ -388,7 +388,7 @@
     "category": "AI & Research",
     "reason": "No public API or developer documentation exists for NotebookLM workspace integration.",
     "confidence": "high",
-    "verdict": "no",
+    "verdict": "unknown",
     "docs_url": "https://ai.google.dev/gemini-api/docs"
   },
   {
@@ -396,7 +396,7 @@
     "category": "AI & Research",
     "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Otter AI\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": ",
     "confidence": "low",
-    "verdict": "no",
+    "verdict": "unknown",
     "docs_url": "https://otter.ai/api"
   },
   {
@@ -420,7 +420,7 @@
     "category": "AI & Research",
     "reason": "The scraped documentation is incomplete (contains only script tags and head boilerplate), requiring manual review of the live website or complete API documentation to verify exact authentication methods, endpoints, and access terms. | verification_note: The documentation mentions REST API and YouTub",
     "confidence": "low",
-    "verdict": "yes_today",
+    "verdict": "unknown",
     "docs_url": "https://transcriptapi.com"
   },
   {

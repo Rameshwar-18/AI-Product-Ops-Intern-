@@ -42,6 +42,12 @@ def build_html():
             pass
     human_needed = strip_emojis(json.loads((DATA_DIR / "human_needed.json").read_text(encoding="utf-8")))
 
+    # Ensure human_needed entries reflect the exact same verdict as pass3_verified.json
+    apps_by_name = {a.get("name"): a for a in apps}
+    for h in human_needed:
+        if h.get("name") in apps_by_name:
+            h["verdict"] = apps_by_name[h["name"]].get("buildability_verdict", "unknown")
+
     # Compute key stats
     total = len(apps)
     yes_today = sum(1 for a in apps if a.get("buildability_verdict") == "yes_today")
@@ -117,7 +123,7 @@ def build_html():
                 <td><code style="color:var(--red); font-weight:600;">{agent_val}</code></td>
                 <td><code style="color:var(--green); font-weight:600;">{human_val}</code></td>
               </tr>""")
-    misses_table_html = "\\n".join(misses_rows)
+    misses_table_html = "\n".join(misses_rows)
     misses_count = len(misses_list)
     
     # Generate dynamic table for apps that defeated automated extraction
@@ -853,7 +859,7 @@ def build_html():
         <span class="section-tag">01 / Executive Summary</span>
         <h1 class="hero-title">100 Apps Researched for<br>AI Agent Toolkits</h1>
         <p class="hero-subtitle">
-          <strong>100 apps agent-checked; {ground_truth_count} apps human-checked ({ground_truth_count} from the CSV). The first 7 were chosen where errors were suspected, so accuracy is likely understated.</strong> Evaluated across 10 categories with multi-pass scraping, strict vendor MCP verification, and evidence cross-examination.
+          <strong>100 apps agent-checked; {ground_truth_count} apps human-checked.</strong> Evaluated across 10 categories with multi-pass scraping, strict vendor MCP verification, and evidence cross-examination.
         </p>
       </div>
 
@@ -872,7 +878,7 @@ def build_html():
         <div class="metric-card">
           <div class="metric-val red">{no_build}</div>
           <div class="metric-label">Not Buildable</div>
-          <div class="metric-sub">No API, closed, or $25k+ gating</div>
+          <div class="metric-sub">No API, closed, or enterprise gating</div>
         </div>
         <div class="metric-card">
           <div class="metric-val blue">{mcp_count}</div>
@@ -1162,51 +1168,56 @@ def build_html():
 
       <div class="limits-grid">
         <div class="limit-card">
-          <h3>fanbasis</h3>
+          <h3>Otter AI (Official MCP Sourced; Enterprise REST)</h3>
           <p>
-            No public developer API or documentation exists. Pure consumer celebrity fan engagement web portal. The agent correctly classified it as non-buildable (`no`) with contact-sales needed.
+            <strong>Sourced (Ground Truth Checklist):</strong> Official MCP server exists at <code>mcp.otter.ai</code> (evidenced via Anthropic connector at <code>claude.com/marketplace/connectors/otter-ai</code> and OpenAI business plugins). REST API keys require an Enterprise workspace tier (evidenced via <code>cotlet.dev/integrations/otter-api-mcp-server</code>).<br>
+            <em style="color:var(--text-muted); font-size:0.8rem;">Unverified claims: Consumer marketing pages omit programmatic documentation, causing automated scrapers to initially conclude no API existed.</em>
           </p>
         </div>
         <div class="limit-card">
-          <h3>iPayX</h3>
+          <h3>Amazon SP-API (SigV4 Deprecation Sourced; Seller Access)</h3>
           <p>
-            Legacy closed institutional utility billing gateway. No developer portal, public API keys, or self-serve documentation. Defeated automated extraction.
+            <strong>Sourced (Ground Truth Checklist):</strong> AWS Signature Version 4 (SigV4) request signing was officially deprecated by Amazon on October 2, 2023 in favor of standard LWA OAuth 2.0 exchange tokens (evidenced via official changelog at <code>developer-docs.amazon.com/sp-api/v2.0/changelog/sp-api-will-no-longer-require-aws-iam-or-aws-signature-version-4</code>).<br>
+            <em style="color:var(--text-muted); font-size:0.8rem;">Unverified claims: Access tier and sandbox endpoints remain unverified without a verified Professional Seller account and completed data protection assessment.</em>
           </p>
         </div>
         <div class="limit-card">
-          <h3>Otter AI</h3>
+          <h3>PitchBook (Institutional Gating Sourced; Pricing Unverified)</h3>
           <p>
-            Consumer and enterprise meeting recorder with no public developer REST API. All third-party integrations are restricted to bespoke partner agreements.
+            <strong>Sourced (Record):</strong> Direct REST API endpoints are documented at <code>pitchbook.com/news/pitchbook-api</code>, but access is strictly gated behind enterprise sales agreements and institutional procurement.<br>
+            <em style="color:var(--text-muted); font-size:0.8rem;">Unverified claims: Pricing is not public as PitchBook does not publish tier or API pricing on its website.</em>
           </p>
         </div>
         <div class="limit-card">
-          <h3>PitchBook</h3>
+          <h3>fanbasis (Consumer Platform Sourced; API Unverified)</h3>
           <p>
-            Prohibitive financial barrier ($25,000+ annual enterprise data license). Has a REST API, but zero self-serve testing capability without institutional procurement.
+            <strong>Sourced (Record):</strong> Scraped domain (<code>fanbasis.com</code>) indicates a consumer celebrity and creator engagement platform. No public developer documentation, endpoint references, or API keys were retrieved.<br>
+            <em style="color:var(--text-muted); font-size:0.8rem;">Unverified claims: Developer API availability is unverified without direct corporate sales outreach.</em>
           </p>
         </div>
         <div class="limit-card">
-          <h3>Amazon SP-API</h3>
+          <h3>iPayX (Institutional Utility Gateway; Endpoints Unverified)</h3>
           <p>
-            Demands dual authentication: Login with Amazon (LWA) OAuth 2.0 coupled with AWS Signature Version 4 (SigV4) request signing, plus professional seller identity vetting.
+            <strong>Sourced (Record):</strong> Scraped portal (<code>ipayx.com</code>) represents an institutional utility bill payment processing service. Documentation details and authentication specs are gated behind client onboarding forms.<br>
+            <em style="color:var(--text-muted); font-size:0.8rem;">Unverified claims: Self-serve developer sandbox, REST endpoints, and public API keys are unverified without commercial onboarding.</em>
+          </p>
+        </div>
+        <div class="limit-card" style="border-left: 3px solid var(--amber);">
+          <h3>Official MCP Undercount (Pumble & Ecwid)</h3>
+          <p>
+            Verifier notes state official MCP servers exist for Pumble and Ecwid, but the stored mcp_server_exists value is false — a pipeline inconsistency, so the 5% count is an undercount.
           </p>
         </div>
         <div class="limit-card">
-          <h3>Sherlock & Mermaid CLI</h3>
+          <h3>Sherlock & Mermaid CLI (Local CLI Utilities)</h3>
           <p>
-            Open-source command-line utilities rather than hosted HTTP microservices. Composio must execute these via local container sandboxes or Node/Python subprocesses.
+            <strong>Sourced (Records):</strong> Open-source command-line utilities rather than hosted HTTP microservices. Composio must execute these via local container sandboxes or Node/Python subprocesses rather than remote HTTP requests.
           </p>
         </div>
         <div class="limit-card">
           <h3>Bot Blocking & Login Walls</h3>
           <p>
-            Platforms with enterprise firewalls, interactive single-page app documentation (SPAs), or mandatory workspace login before exposing API credentials trigger fallback to human verification when documentation text cannot be fetched statically.
-          </p>
-        </div>
-        <div class="limit-card">
-          <h3>Vendor vs Community MCP Gaps</h3>
-          <p>
-            While community implementations exist on GitHub, official vendor-hosted MCP servers require explicit vendor hosting or official vendor documentation. If automated MCP search finds no official vendor endpoint, the platform is strictly marked as <code>mcp_server_exists: false</code>.
+            <strong>Sourced (Pipeline Logs):</strong> Platforms utilizing Cloudflare anti-bot verification, single-page app (SPA) documentation rendering, or mandatory workspace logins before revealing credentials prevent static scraper retrieval, routing to human review.
           </p>
         </div>
       </div>
@@ -1261,7 +1272,7 @@ def build_html():
       <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
         <button class="btn" onclick="exportJSON()">Download 100 Apps Dataset (JSON)</button>
         <button class="btn btn-secondary" onclick="exportCSV()">Download 100 Apps Dataset (CSV)</button>
-        <a href="../data/ground_truth_checklist.csv" class="btn btn-secondary" download>Download Ground Truth Checklist (CSV)</a>
+        <a href="https://raw.githubusercontent.com/Rameshwar-18/AI-Product-Ops-Intern-/main/data/ground_truth_checklist.csv" class="btn btn-secondary" target="_blank" download="ground_truth_checklist.csv">Download Ground Truth Checklist (CSV)</a>
       </div>
     </section>
 
@@ -1428,18 +1439,24 @@ def build_html():
 
     function renderHumanQueue() {{
       const container = document.getElementById('humanReviewContainer');
-      container.innerHTML = RAW_HUMAN_NEEDED.map(h => `
+      container.innerHTML = RAW_HUMAN_NEEDED.map(h => {{
+        const appRecord = RAW_APPS.find(a => a.name === h.name);
+        const v = appRecord ? (appRecord.buildability_verdict || 'unknown') : (h.verdict || 'unknown');
+        const verdictCls = v === 'yes_today' ? 'bv-yes' : (v === 'yes_with_caveats' ? 'bv-caveats' : 'bv-no');
+        const verdictText = v === 'yes_today' ? 'Yes Today' : (v === 'yes_with_caveats' ? 'Caveats' : (v === 'no' ? 'No' : 'Unknown'));
+
+        return `
         <div class="human-card">
           <div class="human-card-title">
             <span>${{h.name}}</span>
-            <span style="font-size:0.75rem; color:var(--amber); font-family:var(--font-mono); font-weight:600;">${{h.verdict}}</span>
+            <span class="badge-verdict ${{verdictCls}}">${{verdictText}}</span>
           </div>
           <div class="human-card-desc">
             <strong>${{h.category}}:</strong> ${{h.reason}}
           </div>
           ${{h.docs_url ? `<a href="${{h.docs_url}}" target="_blank" style="display:inline-block; margin-top:0.35rem; font-size:0.75rem; color:var(--accent); text-decoration:none; font-weight:500;">View source docs ↗</a>` : ''}}
         </div>
-      `).join('');
+      `;}}).join('');
     }}
 
     function renderAccuracyTable() {{
@@ -1657,6 +1674,14 @@ def build_html():
     output_path.write_text(html_content, encoding="utf-8")
     root_path = Path(__file__).parent.parent / "index.html"
     root_path.write_text(html_content, encoding="utf-8")
+    
+    # Ensure ground_truth_checklist.csv is always reachable from web output
+    chk_src = DATA_DIR / "ground_truth_checklist.csv"
+    if chk_src.exists():
+        (WEB_DIR / "ground_truth_checklist.csv").write_text(chk_src.read_text(encoding="utf-8"), encoding="utf-8")
+        (WEB_DIR / "data").mkdir(parents=True, exist_ok=True)
+        (WEB_DIR / "data" / "ground_truth_checklist.csv").write_text(chk_src.read_text(encoding="utf-8"), encoding="utf-8")
+    
     print(f"Generated clean HTML case-study page: {output_path} and root {root_path} ({len(html_content)} bytes)")
 
 if __name__ == "__main__":
