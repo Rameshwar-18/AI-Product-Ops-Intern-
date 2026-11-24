@@ -25,14 +25,14 @@ def get_llm_response(prompt: str, model: str = "gemini", max_retries: int = 3) -
         raise ValueError("No LLM API key found. Set GEMINI_API_KEY or OPENAI_API_KEY in .env")
 
 
-def _call_gemini(prompt: str, api_key: str, max_retries: int) -> str:
-    """Call Google Gemini REST API with modern model fallback and retries."""
+def _call_gemini(prompt: str, api_key: str, max_retries: int = 5) -> str:
+    """Call Google Gemini REST API with rate-limit cooldown and retry backoff."""
     import requests
     
+    # Preferred order of models
     models_to_try = [
         "gemini-flash-lite-latest",
         "gemini-flash-latest",
-        "gemini-3.8-flash",
         "gemini-2.5-flash"
     ]
     
@@ -47,7 +47,7 @@ def _call_gemini(prompt: str, api_key: str, max_retries: int) -> str:
         for model in models_to_try:
             url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={api_key}"
             try:
-                resp = requests.post(url, headers=headers, json=payload, timeout=20)
+                resp = requests.post(url, headers=headers, json=payload, timeout=25)
                 if resp.status_code == 200:
                     data = resp.json()
                     candidates = data.get("candidates", [])
@@ -56,60 +56,114 @@ def _call_gemini(prompt: str, api_key: str, max_retries: int) -> str:
                         if parts:
                             return parts[0].get("text", "")
                 elif resp.status_code == 404:
-                    # Model not supported for this key/tier, try next model
+                    # Model not available on this API key/tier
                     continue
-                elif resp.status_code in (429, 503):
-                    # Rate limit or temporary high demand
-                    last_error = f"HTTP {resp.status_code}: {resp.text[:100]}"
+                elif resp.status_code == 429:
+                    # Gemini free-tier quota (15 RPM) exceeded
+                    last_error = f"HTTP 429: Rate limit hit"
+                    cooldown = 15 + (attempt * 5)
+                    print(f"  [LLM] 429 Quota limit hit on {model}. Pausing {cooldown}s for window reset (attempt {attempt+1}/{max_retries})...")
+                    time.sleep(cooldown)
+                    break # Break inner model loop to retry after cooldown
+                elif resp.status_code == 503:
+                    last_error = f"HTTP 503: Model overloaded"
+                    time.sleep(3)
                     continue
                 else:
-                    last_error = f"HTTP {resp.status_code}: {resp.text[:100]}"
+                    last_error = f"HTTP {resp.status_code}: {resp.text[:120]}"
             except Exception as e:
                 last_error = str(e)
                 continue
         
         if attempt < max_retries - 1:
-            wait = 2 ** attempt * 2
-            print(f"  [LLM] Retry {attempt+1} after {wait}s ({last_error})")
+            wait = 3 * (attempt + 1)
             time.sleep(wait)
     
     raise RuntimeError(f"Gemini API call failed after {max_retries} attempts: {last_error}")
 
 
-def _call_openai(prompt: str, api_key: str, max_retries: int) -> str:
-    from openai import OpenAI
-    client = OpenAI(api_key=api_key)
+def _repair_json(text: str) -> Optional[dict]:
+    """Attempt heuristic repair on truncated or malformed JSON."""
+    cleaned = text.strip()
+    if not cleaned.startswith("{"):
+        start = cleaned.find("{")
+        if start != -1:
+            cleaned = cleaned[start:]
+        else:
+            return None
     
-    for attempt in range(max_retries):
+    # Strip markdown fences
+    cleaned = re.sub(r'```json\s*', '', cleaned)
+    cleaned = re.sub(r'```\s*', '', cleaned)
+    
+    # Try direct parse
+    try:
+        return json.loads(cleaned)
+    except Exception:
+        pass
+    
+    # Trim to last complete key-value if trailing string is truncated
+    # If unclosed quote, close it
+    quotes = len(re.findall(r'(?<!\\)"', cleaned))
+    if quotes % 2 != 0:
+        cleaned += '"'
+    
+    # Count open braces/brackets
+    open_curly = cleaned.count("{") - cleaned.count("}")
+    open_square = cleaned.count("[") - cleaned.count("]")
+    
+    # Remove trailing commas
+    cleaned = re.sub(r',\s*$', '', cleaned)
+    
+    # Close brackets and braces
+    cleaned += ("]" * max(0, open_square))
+    cleaned += ("}" * max(0, open_curly))
+    
+    try:
+        return json.loads(cleaned)
+    except Exception:
+        pass
+    
+    # As a secondary fallback, remove the last incomplete key-value line
+    lines = cleaned.split("\n")
+    for i in range(len(lines) - 1, 0, -1):
+        test_chunk = "\n".join(lines[:i]).strip()
+        test_chunk = re.sub(r',\s*$', '', test_chunk)
+        q = len(re.findall(r'(?<!\\)"', test_chunk))
+        if q % 2 != 0:
+            test_chunk += '"'
+        oc = test_chunk.count("{") - test_chunk.count("}")
+        osq = test_chunk.count("[") - test_chunk.count("]")
+        test_chunk += ("]" * max(0, osq))
+        test_chunk += ("}" * max(0, oc))
         try:
-            response = client.chat.completions.create(
-                model="gpt-4o-mini",
-                messages=[{"role": "user", "content": prompt}],
-                temperature=0.1,
-                max_tokens=4096
-            )
-            return response.choices[0].message.content
-        except Exception as e:
-            if attempt < max_retries - 1:
-                wait = 2 ** attempt * 2
-                print(f"  [LLM] Retry {attempt+1} after {wait}s: {e}")
-                time.sleep(wait)
-            else:
-                raise
+            return json.loads(test_chunk)
+        except Exception:
+            continue
+    return None
 
 
 def extract_json_from_response(text: str) -> dict:
-    """Extract JSON from LLM response, handling markdown code blocks."""
+    """Extract JSON from LLM response, handling markdown code blocks and repairing truncations."""
     # Remove markdown code blocks
-    text = re.sub(r'```json\s*', '', text)
-    text = re.sub(r'```\s*', '', text)
-    text = text.strip()
+    cleaned = re.sub(r'```json\s*', '', text)
+    cleaned = re.sub(r'```\s*', '', cleaned)
+    cleaned = cleaned.strip()
     
     # Find the first { and last }
-    start = text.find('{')
-    end = text.rfind('}')
-    if start == -1 or end == -1:
-        raise ValueError(f"No JSON found in response: {text[:200]}")
+    start = cleaned.find('{')
+    end = cleaned.rfind('}')
     
-    json_str = text[start:end+1]
-    return json.loads(json_str)
+    if start != -1 and end != -1 and end > start:
+        json_str = cleaned[start:end+1]
+        try:
+            return json.loads(json_str)
+        except Exception:
+            pass
+    
+    # Attempt repair
+    repaired = _repair_json(cleaned)
+    if repaired is not None and isinstance(repaired, dict):
+        return repaired
+    
+    raise ValueError(f"No JSON found in response: {text[:200]}")

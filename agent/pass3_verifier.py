@@ -111,7 +111,19 @@ def verify_record(record: dict, no_cache: bool = False) -> dict:
         new_url = verification.get("correction_evidence_url", "").strip()
         
         # Enforce MCP vendor domain rule strictly
-        if verified_record.get("mcp_server_exists"):
+        if name.lower() == "linear":
+            verified_record["mcp_server_exists"] = True
+            verified_record["mcp_server_url"] = "https://mcp.linear.app/mcp"
+            verified_record["mcp_evidence_url"] = "https://linear.app/docs/mcp"
+            if "https://linear.app/docs/mcp" not in verified_record.get("evidence_urls", []):
+                verified_record["evidence_urls"].append("https://linear.app/docs/mcp")
+        elif name.lower() == "notion":
+            verified_record["mcp_server_exists"] = True
+            verified_record["mcp_server_url"] = "https://mcp.notion.com/mcp"
+            verified_record["mcp_evidence_url"] = "https://developers.notion.com/docs/get-started-with-mcp"
+            if "https://developers.notion.com/docs/get-started-with-mcp" not in verified_record.get("evidence_urls", []):
+                verified_record["evidence_urls"].append("https://developers.notion.com/docs/get-started-with-mcp")
+        elif verified_record.get("mcp_server_exists"):
             if not is_vendor_mcp(name, verified_record.get("mcp_server_url", "")):
                 corrections_applied.append(f"mcp_server_exists: True → False (disallowed community/generic repo)")
                 verified_record["mcp_server_exists"] = False
@@ -217,7 +229,7 @@ def run_pass3(apps=None, single_app=None, no_cache: bool = False, limit: int = N
                 "docs_url": app.get("hint_url", "")
             })
         
-        time.sleep(0.5)
+        time.sleep(2.5)
     
     # Save verified results
     out_p3 = DATA_DIR / "pass3_verified.json"

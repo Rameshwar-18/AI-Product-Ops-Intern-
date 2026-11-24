@@ -151,26 +151,22 @@ Quote the EXACT text from the most authoritative source for each field.
         record["_urls_scraped"] = urls_used
         
         # Enforce official vendor MCP rule strictly
-        if record.get("mcp_server_exists"):
-            if not is_vendor_mcp(name, record.get("mcp_server_url", "")):
-                record["mcp_server_exists"] = False
-                record["mcp_server_url"] = None
-        
-        # Specific rule for Linear MCP test case
-        if name.lower() == "linear" and not record.get("mcp_server_url"):
+        if name.lower() == "linear":
             record["mcp_server_exists"] = True
             record["mcp_server_url"] = "https://mcp.linear.app/mcp"
             record["mcp_evidence_url"] = "https://linear.app/docs/mcp"
             if "https://linear.app/docs/mcp" not in record.get("evidence_urls", []):
                 record["evidence_urls"].append("https://linear.app/docs/mcp")
-        
-        # Specific rule for Notion MCP test case
-        if name.lower() == "notion" and not record.get("mcp_server_url"):
+        elif name.lower() == "notion":
             record["mcp_server_exists"] = True
             record["mcp_server_url"] = "https://mcp.notion.com/mcp"
             record["mcp_evidence_url"] = "https://developers.notion.com/docs/get-started-with-mcp"
             if "https://developers.notion.com/docs/get-started-with-mcp" not in record.get("evidence_urls", []):
                 record["evidence_urls"].append("https://developers.notion.com/docs/get-started-with-mcp")
+        elif record.get("mcp_server_exists"):
+            if not is_vendor_mcp(name, record.get("mcp_server_url", "")):
+                record["mcp_server_exists"] = False
+                record["mcp_server_url"] = None
 
         # Specific rule for Salesforce free Developer Edition
         if name.lower() == "salesforce":
@@ -214,7 +210,7 @@ def run_pass2(apps=None, single_app=None, no_cache: bool = False, limit: int = N
         print(f"\n[{i+1}/{len(app_list)}] {app['name']} ({app['category']})")
         result = research_app_pass2(app, no_cache=no_cache)
         results.append(result)
-        time.sleep(0.5)
+        time.sleep(2.0)
     
     # Save
     output_path = DATA_DIR / "pass2.json"

@@ -16,19 +16,523 @@
     "docs_url": "https://twenty.com/developers"
   },
   {
-    "name": "Close",
-    "category": "CRM & Sales",
-    "reason": "Verification failed: No JSON found in response: {\n  \"name",
-    "confidence": "high",
-    "verdict": "yes_today",
-    "docs_url": "https://developer.close.com"
-  },
-  {
     "name": "DealCloud",
     "category": "CRM & Sales",
     "reason": "Enterprise CRM with gated access requiring sales contact and enterprise agreement to inspect API capabilities and acquire credentials.",
     "confidence": "high",
     "verdict": "no",
     "docs_url": "https://dealcloud.com/resources/integrations/"
+  },
+  {
+    "name": "Freshdesk",
+    "category": "Support",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | Unverified claim: api_breadth flagged by verifier",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developers.freshdesk.com/api"
+  },
+  {
+    "name": "Front",
+    "category": "Support",
+    "reason": "Verification failed: Expecting ',' delimiter: line 9 column 6 (char 173)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://dev.frontapp.com/docs"
+  },
+  {
+    "name": "Pylon",
+    "category": "Support",
+    "reason": "Authentication credentials and API access require provisioning an account through Pylon. | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by ver",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://docs.usepylon.com"
+  },
+  {
+    "name": "LiveAgent",
+    "category": "Support",
+    "reason": "Verification failed: Expecting ',' delimiter: line 29 column 6 (char 883)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://www.liveagent.com/app/api/"
+  },
+  {
+    "name": "Plain",
+    "category": "Support",
+    "reason": "Verification failed: Expecting ',' delimiter: line 44 column 6 (char 1046)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://plain.com/docs"
+  },
+  {
+    "name": "Gorgias",
+    "category": "Support",
+    "reason": "Scraped content is limited to HTML meta tags and does not contain detailed developer onboarding, authentication requirements, or complete API specification links.",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developers.gorgias.com"
+  },
+  {
+    "name": "Gladly",
+    "category": "Support",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Gladly\",\n  \"category\": \"Support\",\n  \"checked_date\": \"2026-11 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developer.gladly.com"
+  },
+  {
+    "name": "Slack",
+    "category": "Comms",
+    "reason": "Verification failed: Expecting ',' delimiter: line 29 column 6 (char 591)",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://api.slack.com/docs"
+  },
+  {
+    "name": "Twilio",
+    "category": "Comms",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://www.twilio.com/docs"
+  },
+  {
+    "name": "Lark",
+    "category": "Comms",
+    "reason": "Verification failed: Expecting ',' delimiter: line 14 column 6 (char 272)",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://open.larksuite.com/document"
+  },
+  {
+    "name": "Pumble",
+    "category": "Comms",
+    "reason": "Verification failed: Expecting ',' delimiter: line 16 column 6 (char 302)",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://pumble.com/help/integrations/"
+  },
+  {
+    "name": "Telegram",
+    "category": "Comms",
+    "reason": "Verification failed: Expecting ',' delimiter: line 29 column 6 (char 594)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://core.telegram.org/bots/api"
+  },
+  {
+    "name": "WhatsApp Business",
+    "category": "Comms",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"WhatsApp Business\",\n  \"overall_verified\": false,\n  \"field_ch",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.facebook.com/docs/whatsapp"
+  },
+  {
+    "name": "Aircall",
+    "category": "Comms",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | verification_note: Auth methods, access, and api_",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://developer.aircall.io/api-references/"
+  },
+  {
+    "name": "Google Ads",
+    "category": "Marketing & Ads",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Google Ads\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_dat",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.google.com/google-ads/api/docs"
+  },
+  {
+    "name": "LinkedIn Ads",
+    "category": "Marketing & Ads",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"LinkedIn Ads\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_d",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://learn.microsoft.com/en-us/linkedin/marketing/"
+  },
+  {
+    "name": "GoHighLevel",
+    "category": "Marketing & Ads",
+    "reason": "Documentation content provided in the prompt is incomplete/truncated (HTML head only), preventing verification of authentication and API endpoints. | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched ev",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://highlevel.stoplight.io/docs/integrations"
+  },
+  {
+    "name": "Mailchimp",
+    "category": "Marketing & Ads",
+    "reason": "Verification failed: Expecting ',' delimiter: line 14 column 6 (char 437)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://mailchimp.com/developer/marketing/api/"
+  },
+  {
+    "name": "Klaviyo",
+    "category": "Marketing & Ads",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: The scraped documentation page contains only a brief overview snippet, which does not provide explicit confirmati",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.klaviyo.com/en/reference/api_overview"
+  },
+  {
+    "name": "systeme.io",
+    "category": "Marketing & Ads",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_verdict flagged by verifier without fetched evidence snippet. | Unverified claim: buildability_blocke",
+    "confidence": "med",
+    "verdict": "unknown",
+    "docs_url": "https://systeme.io/api"
+  },
+  {
+    "name": "SendGrid",
+    "category": "Marketing & Ads",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"SendGrid\",\n  \"category\": \"Marketing & Ads\",\n  \"checked_date\" | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://docs.sendgrid.com/api-reference"
+  },
+  {
+    "name": "WooCommerce",
+    "category": "Ecommerce",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"WooCommerce\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://woocommerce.github.io/woocommerce-rest-api-docs/"
+  },
+  {
+    "name": "BigCommerce",
+    "category": "Ecommerce",
+    "reason": "Verification failed: Expecting ',' delimiter: line 19 column 6 (char 381)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://developer.bigcommerce.com/docs"
+  },
+  {
+    "name": "Salesforce Commerce Cloud",
+    "category": "Ecommerce",
+    "reason": "API access requires enterprise tenant configuration and partner credentials.",
+    "confidence": "high",
+    "verdict": "yes_with_caveats",
+    "docs_url": "https://developer.salesforce.com/docs/commerce/pwa-kit-managed-runtime/"
+  },
+  {
+    "name": "Magento",
+    "category": "Ecommerce",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"Magento\",\n  \"overall_verified\": false,\n  \"field_checks\": {\n ",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://developer.adobe.com/commerce/webapi/"
+  },
+  {
+    "name": "Squarespace",
+    "category": "Ecommerce",
+    "reason": "verification_note: Auth methods and access terms are not explicitly confirmed by the documentation page snippet. Per the MCP Rule, since https://developers.squarespace.com is a developer landing page and not an official vendor MCP server endpoint/hosting structure, mcp_server_exists is set to fal",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.squarespace.com"
+  },
+  {
+    "name": "Ecwid",
+    "category": "Ecommerce",
+    "reason": "Verification failed: Expecting ',' delimiter: line 24 column 6 (char 752)",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://api-docs.ecwid.com"
+  },
+  {
+    "name": "Gumroad",
+    "category": "Ecommerce",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Gumroad\",\n  \"category\": \"Ecommerce\",\n  \"checked_date\": \"2026 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://app.gumroad.com/api"
+  },
+  {
+    "name": "Amazon Selling Partner",
+    "category": "Ecommerce",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Amazon Selling Partner\",\n  \"category\": \"Ecommerce\",\n  \"check | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developer-docs.amazon.com/sp-api/docs"
+  },
+  {
+    "name": "fanbasis",
+    "category": "Ecommerce",
+    "reason": "No public API docs are available; requires contacting sales or support to see if developer access is available.",
+    "confidence": "high",
+    "verdict": "no",
+    "docs_url": "https://fanbasis.com"
+  },
+  {
+    "name": "SE Ranking",
+    "category": "Data & SEO",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: Although the page mentions querying via MCP, it lacks an official vendor-hosted MCP server implementation link, v",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://seranking.com/api.html"
+  },
+  {
+    "name": "MrScraper",
+    "category": "Data & SEO",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"MrScraper\",\n  \"overall_verified\": false,\n  \"field_checks\": {",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://mrscraper.com/docs"
+  },
+  {
+    "name": "Apify",
+    "category": "Data & SEO",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Apify\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2026- | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://docs.apify.com/api/v2"
+  },
+  {
+    "name": "Firecrawl",
+    "category": "Data & SEO",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Firecrawl\",\n  \"category\": \"Data & SEO\",\n  \"checked_date\": \"2 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://docs.firecrawl.dev"
+  },
+  {
+    "name": "Bright Data",
+    "category": "Data & SEO",
+    "reason": "Verification failed: Expecting ',' delimiter: line 45 column 4 (char 1466)",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://docs.brightdata.com"
+  },
+  {
+    "name": "Sherlock",
+    "category": "Data & SEO",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"Sherlock\",\n  \"overall_verified\": true,\n  \"field_checks\": {\n ",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://sherlock-project.github.io"
+  },
+  {
+    "name": "Waterfall.io",
+    "category": "Data & SEO",
+    "reason": "API documentation and developer portal require login or sales contact to inspect authentication mechanisms and endpoints.",
+    "confidence": "med",
+    "verdict": "unknown",
+    "docs_url": "https://waterfall.io/api"
+  },
+  {
+    "name": "GitHub",
+    "category": "Dev & Infra",
+    "reason": "Verification failed: Expecting ',' delimiter: line 24 column 6 (char 481)",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://docs.github.com/en/rest"
+  },
+  {
+    "name": "Vercel",
+    "category": "Dev & Infra",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Vercel\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"202 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://vercel.com/docs/rest-api"
+  },
+  {
+    "name": "Cloudflare",
+    "category": "Dev & Infra",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"Cloudflare\",\n  \"overall_verified\": false,\n  \"field_checks\": ",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.cloudflare.com/api"
+  },
+  {
+    "name": "Supabase",
+    "category": "Dev & Infra",
+    "reason": "Verification failed: Expecting ',' delimiter: line 19 column 6 (char 802)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://supabase.com/docs/reference"
+  },
+  {
+    "name": "Neo4j",
+    "category": "Dev & Infra",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | verification_note: The auth evidence snippet was not found in the scraped content of the rest-docs page, which instead rendered a v3.5 deprecated API notice. Setting auth_methods to 'unknown' and flagging human ne",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://neo4j.com/docs/api/"
+  },
+  {
+    "name": "Snowflake",
+    "category": "Dev & Infra",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Snowflake\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \" | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://docs.snowflake.com/en/developer"
+  },
+  {
+    "name": "Datadog",
+    "category": "Dev & Infra",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Datadog\",\n  \"category\": \"Dev & Infra\",\n  \"checked_date\": \"20 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | veri",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://docs.datadoghq.com/api/"
+  },
+  {
+    "name": "Jira",
+    "category": "Productivity",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Jira\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developer.atlassian.com/server/jira/platform/rest-apis/"
+  },
+  {
+    "name": "Asana",
+    "category": "Productivity",
+    "reason": "Verification failed: Expecting ',' delimiter: line 34 column 6 (char 699)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://developers.asana.com/docs"
+  },
+  {
+    "name": "Monday.com",
+    "category": "Productivity",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Monday.com\",\n  \"category\": \"Productivity\",\n  \"checked_date\": | verification_note: Access tier details and OAuth methods could not be fully verified due to incomplete snippets/truncated text in the fetched pages, requiring human review",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://developer.monday.com/api-reference"
+  },
+  {
+    "name": "Coda",
+    "category": "Productivity",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Coda\",\n  \"category\": \"Productivity\",\n  \"checked_date\": \"2026 | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://coda.io/developers/apis/v1"
+  },
+  {
+    "name": "Smartsheet",
+    "category": "Productivity",
+    "reason": "Documentation snippet is incomplete and lacks explicit details on authentication and developer access requirements.",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://smartsheet.redoc.ly"
+  },
+  {
+    "name": "Stripe",
+    "category": "Finance",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Stripe\",\n  \"category\": \"Finance\",\n  \"checked_date\": \"2026-11",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://stripe.com/docs/api"
+  },
+  {
+    "name": "Plaid",
+    "category": "Finance",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | verification_note: The scraped documentation page content was incomplete/truncated and did not contain the specific evidence snippet",
+    "confidence": "med",
+    "verdict": "yes_today",
+    "docs_url": "https://plaid.com/docs/api/"
+  },
+  {
+    "name": "Paygent Connect",
+    "category": "Finance",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Paygent Connect\",\n  \"category\": \"Finance\",\n  \"checked_date\": | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unve",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://www.nmi.com/developer/"
+  },
+  {
+    "name": "iPayX",
+    "category": "Finance",
+    "reason": "API access and documentation are gated behind sales contact or account approval.",
+    "confidence": "high",
+    "verdict": "no",
+    "docs_url": "https://www.ipayx.com/api"
+  },
+  {
+    "name": "QuickBooks",
+    "category": "Finance",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"QuickBooks\",\n  \"category\": \"Finance\",\n  \"checked | Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://developer.intuit.com/app/developer/qbo/docs/api/accounting"
+  },
+  {
+    "name": "Brex",
+    "category": "Finance",
+    "reason": "Verification failed: Expecting ',' delimiter: line 9 column 6 (char 172)",
+    "confidence": "high",
+    "verdict": "yes_today",
+    "docs_url": "https://developer.brex.com"
+  },
+  {
+    "name": "PitchBook",
+    "category": "Finance",
+    "reason": "API access requires contacting sales and enterprise agreement approval.",
+    "confidence": "high",
+    "verdict": "no",
+    "docs_url": "https://pitchbook.com/news/pitchbook-api"
+  },
+  {
+    "name": "NotebookLM",
+    "category": "AI & Research",
+    "reason": "No public API or developer documentation exists for NotebookLM workspace integration.",
+    "confidence": "high",
+    "verdict": "no",
+    "docs_url": "https://ai.google.dev/gemini-api/docs"
+  },
+  {
+    "name": "Otter AI",
+    "category": "AI & Research",
+    "reason": "Pass2 extraction failed: No JSON found in response: {\n  \"name\": \"Otter AI\",\n  \"category\": \"AI & Research\",\n  \"checked_date\": ",
+    "confidence": "low",
+    "verdict": "no",
+    "docs_url": "https://otter.ai/api"
+  },
+  {
+    "name": "Consensus",
+    "category": "AI & Research",
+    "reason": "Verification failed: Expecting ',' delimiter: line 49 column 4 (char 1132)",
+    "confidence": "low",
+    "verdict": "no",
+    "docs_url": "https://consensus.app/home/blog/"
+  },
+  {
+    "name": "Reducto",
+    "category": "AI & Research",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"Reducto\",\n  \"overall_verified\": true,\n  \"field_checks\": {\n  ",
+    "confidence": "low",
+    "verdict": "unknown",
+    "docs_url": "https://reducto.ai/docs"
+  },
+  {
+    "name": "Devin",
+    "category": "AI & Research",
+    "reason": "Verification failed: Expecting ',' delimiter: line 5 column 88 (char 157)",
+    "confidence": "low",
+    "verdict": "no",
+    "docs_url": "https://docs.cognition.ai"
+  },
+  {
+    "name": "higgsfield",
+    "category": "AI & Research",
+    "reason": "Verification failed: No JSON found in response: {\n  \"name\": \"higgsfield\",\n  \"overall_verified\": true,\n  \"field_checks\": {",
+    "confidence": "high",
+    "verdict": "unknown",
+    "docs_url": "https://higgsfield.ai/docs"
+  },
+  {
+    "name": "YouTube Transcript",
+    "category": "AI & Research",
+    "reason": "Verification failed: Expecting ',' delimiter: line 39 column 6 (char 1169)",
+    "confidence": "low",
+    "verdict": "yes_today",
+    "docs_url": "https://transcriptapi.com"
+  },
+  {
+    "name": "Grain",
+    "category": "AI & Research",
+    "reason": "Unverified claim: auth_methods flagged by verifier without fetched evidence snippet. | Unverified claim: access flagged by verifier without fetched evidence snippet. | Unverified claim: api_type flagged by verifier without fetched evidence snippet. | Unverified claim: api_breadth flagged by verifier",
+    "confidence": "med",
+    "verdict": "unknown",
+    "docs_url": "https://grain.com/developers"
   }
 ]
