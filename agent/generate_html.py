@@ -49,24 +49,66 @@ def build_html():
     # Count ground truth evaluated size from CSV (only rows where at least one HUMAN_* column is non-empty)
     sample_csv = DATA_DIR / "ground_truth_checklist.csv"
     ground_truth_count = 0
+    misses_list = []
     if sample_csv.exists():
         try:
             import csv
             with open(sample_csv, mode="r", encoding="utf-8") as f:
                 reader = csv.DictReader(f)
                 human_cols = [c for c in (reader.fieldnames or []) if c.startswith("HUMAN_")]
+                field_mapping = [
+                    ("auth_methods", "Auth Methods", "auth_methods_agent", "HUMAN_auth_methods_correct"),
+                    ("access", "Access Tier", "access_agent", "HUMAN_access_correct"),
+                    ("api_breadth", "API Breadth", "api_breadth_agent", "HUMAN_api_breadth_correct"),
+                    ("mcp_server_exists", "Official MCP Server", "mcp_server_exists_agent", "HUMAN_mcp_server_exists_correct"),
+                    ("buildability_verdict", "Buildability Verdict", "buildability_verdict_agent", "HUMAN_buildability_verdict_correct"),
+                ]
                 for row in reader:
                     if any(row.get(c, "").strip() for c in human_cols):
                         ground_truth_count += 1
+                        app_name = row.get("name", "")
+                        for f_key, f_label, agent_col, human_col in field_mapping:
+                            h_val = row.get(human_col, "").strip()
+                            if h_val:
+                                a_val = row.get(agent_col, "").strip()
+                                is_match = False
+                                if f_key == "mcp_server_exists":
+                                    is_match = (str(a_val).lower() == str(h_val).lower())
+                                elif f_key == "auth_methods":
+                                    a_tokens = set(t.strip().lower() for t in a_val.replace(";", ",").split(","))
+                                    h_tokens = set(t.strip().lower() for t in h_val.replace(";", ",").split(","))
+                                    is_match = bool(a_tokens and (a_tokens == h_tokens or a_tokens.issubset(h_tokens)))
+                                else:
+                                    is_match = (a_val.lower() == h_val.lower())
+                                
+                                if not is_match:
+                                    misses_list.append({
+                                        "app": app_name,
+                                        "field": f_label,
+                                        "agent_val": a_val or "unknown",
+                                        "human_val": h_val,
+                                        "notes": row.get("HUMAN_notes", "")
+                                    })
         except Exception:
             pass
 
-    if ground_truth_count > 0:
-        human_checked_text = f"human-checked on a sample of {ground_truth_count}"
-    else:
-        human_checked_text = "not yet human-checked"
-
     import html as html_lib
+
+    misses_rows = []
+    for m in misses_list:
+        app_name = html_lib.escape(m["app"])
+        field_name = html_lib.escape(m["field"])
+        agent_val = html_lib.escape(m["agent_val"])
+        human_val = html_lib.escape(m["human_val"])
+        misses_rows.append(f"""
+              <tr>
+                <td><strong>{app_name}</strong></td>
+                <td><span class="badge-access">{field_name}</span></td>
+                <td><code style="color:var(--red);">{agent_val}</code></td>
+                <td><code style="color:var(--green); font-weight:600;">{human_val}</code></td>
+              </tr>""")
+    misses_table_html = "\\n".join(misses_rows)
+    misses_count = len(misses_list)
     
     # Generate dynamic table for apps that defeated automated extraction
     defeated_apps = []
@@ -784,7 +826,7 @@ def build_html():
         <span class="section-tag">01 / Executive Summary</span>
         <h1 class="hero-title">100 Apps Researched for<br>AI Agent Toolkits</h1>
         <p class="hero-subtitle">
-          <strong>100 apps agent-checked; {human_checked_text}.</strong> Evaluated across 10 categories with multi-pass scraping, strict vendor MCP verification, and evidence cross-examination.
+          <strong>100 apps agent-checked; {ground_truth_count} apps human-checked ({ground_truth_count} from the CSV). The first 7 were chosen where errors were suspected, so accuracy is likely understated.</strong> Evaluated across 10 categories with multi-pass scraping, strict vendor MCP verification, and evidence cross-examination.
         </p>
       </div>
 
@@ -867,7 +909,7 @@ def build_html():
         </div>
 
         <select class="filter-select" id="filterCategory" onchange="applyFilters()">
-          <option value="">All Categories (10)</option>
+          <option value="" selected>All Categories (10)</option>
           <option value="CRM & Sales">CRM & Sales (10)</option>
           <option value="Support">Support (10)</option>
           <option value="Comms">Comms (10)</option>
@@ -881,14 +923,15 @@ def build_html():
         </select>
 
         <select class="filter-select" id="filterVerdict" onchange="applyFilters()">
-          <option value="">All Verdicts</option>
+          <option value="" selected>All Verdicts</option>
           <option value="yes_today">✅ Yes Today</option>
           <option value="yes_with_caveats">⚠️ Yes with Caveats</option>
           <option value="no">❌ Not Buildable</option>
+          <option value="unknown">❓ Unknown / Undetermined</option>
         </select>
 
         <select class="filter-select" id="filterAuth" onchange="applyFilters()">
-          <option value="">All Auth Methods</option>
+          <option value="" selected>All Auth Methods</option>
           <option value="Bearer token">Bearer token</option>
           <option value="OAuth2">OAuth2</option>
           <option value="API key">API key</option>
@@ -897,7 +940,7 @@ def build_html():
         </select>
 
         <select class="filter-select" id="filterAccess" onchange="applyFilters()">
-          <option value="">All Access Types</option>
+          <option value="" selected>All Access Types</option>
           <option value="self_serve_free">Self-serve Free</option>
           <option value="self_serve_trial">Self-serve Trial</option>
           <option value="paid_plan_required">Paid Plan Required</option>
@@ -993,7 +1036,7 @@ def build_html():
         <span class="section-tag">04 / Verification & Ground Truth</span>
         <h2 class="section-title">Verification & Accuracy Benchmark</h2>
         <p class="section-desc">
-          Evaluated against a stratified random sample of <strong>30 applications</strong> (3 apps per category, seed=42) in <code>data/ground_truth_checklist.csv</code> ({human_checked_text}).
+          <strong>{ground_truth_count} apps human-checked ({ground_truth_count} from the CSV). The first 7 were chosen where errors were suspected, so accuracy is likely understated.</strong>
         </p>
       </div>
 
@@ -1025,25 +1068,59 @@ def build_html():
         </div>
       </div>
 
-      <!-- Hits and Misses Analysis -->
-      <div class="limits-grid" style="margin-top: 2rem;">
-        <div class="limit-card" style="border-left: 3px solid var(--green);">
-          <h3>✅ What the Agent Got Right</h3>
-          <p>
-            Standard developer APIs (GitHub, Stripe, Supabase, Twilio) scored 100% on auth and access extraction. Pass 2 Firecrawl scrapes reliably extracted exact endpoint URLs, while Pass 3 verifiers reliably caught subtle MCP servers.
-          </p>
+      <!-- SECTION: Why the Agent Fails -->
+      <div style="margin-top: 2.5rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">🚨 Why the Research Agent Fails: Real Failure Modes</h3>
+        <p class="section-desc">Direct post-mortem of verified discrepancies between automated agent extraction and human ground truth.</p>
+        
+        <div class="limits-grid" style="margin-top: 1.25rem;">
+          <div class="limit-card" style="border-left: 3px solid var(--amber);">
+            <h3>1. Stale Documentation & Deprecated Rules (Amazon SP-API)</h3>
+            <p>
+              <strong>Evidenced:</strong> In Pass 1, the agent cited AWS Signature Version 4 (SigV4) as a blocker for Amazon SP-API. Human ground truth confirms Amazon officially deprecated mandatory SigV4 on October 2, 2023 in favor of LWA OAuth 2.0 tokens. In Pass 3, the verifier encountered a scraper block on the portal and wiped auth to <code>unknown</code>.<br>
+              <em style="color:var(--text-muted); font-size:0.8rem;">[Hypothesis] The agent's initial parametric retrieval drew from pre-October 2023 tutorials or outdated documentation mirrors.</em>
+            </p>
+          </div>
+          <div class="limit-card" style="border-left: 3px solid var(--red);">
+            <h3>2. Missing Official MCP Discovery (Otter AI, GitHub)</h3>
+            <p>
+              <strong>Evidenced:</strong> Across all three passes, the agent reported <code>mcp_server_exists: false</code> for both Otter AI and GitHub. Ground truth verification confirmed official vendor MCP endpoints exist for both (<code>mcp.otter.ai</code> via marketplace connectors and <code>api.githubcopilot.com/mcp/</code> via official Copilot MCP).<br>
+              <em style="color:var(--text-muted); font-size:0.8rem;">[Hypothesis] Automated MCP web search targeted root developer landing pages rather than vendor integration directories or Copilot subdomains.</em>
+            </p>
+          </div>
+          <div class="limit-card" style="border-left: 3px solid var(--amber);">
+            <h3>3. Scraping the Wrong Documentation Source (NotebookLM)</h3>
+            <p>
+              <strong>Evidenced:</strong> The agent logged <code>ai.google.dev/gemini-api/docs</code> as its source and concluded NotebookLM has no developer API (<code>verdict: unknown</code>). Ground truth confirms NotebookLM Enterprise is officially documented under Google Cloud Discovery Engine (<code>docs.cloud.google.com/.../api-notebooks</code>) using Cloud IAM Bearer tokens.<br>
+              <em style="color:var(--text-muted); font-size:0.8rem;">[Hypothesis] Broad search queries anchored on the consumer Google AI Studio portal rather than the Google Cloud enterprise docs.</em>
+            </p>
+          </div>
+          <div class="limit-card" style="border-left: 3px solid var(--blue);">
+            <h3>4. Verifier Pass 3 Over-Pruning (Twilio Accuracy Drop)</h3>
+            <p>
+              <strong>Evidenced:</strong> In Pass 1 and Pass 2, the agent correctly identified Twilio's authentication methods as <code>['API key', 'OAuth2', 'Basic']</code> (matching ground truth <code>Basic; OAuth2</code>). In Pass 3, the verifier strictly wiped this to <code>unknown</code> with the log: <em>"The fetched text does not explicitly mention the authentication methods"</em>. This single over-pruning action directly caused evaluated overall sample accuracy to drop from 41.7% to 33.3%.
+            </p>
+          </div>
         </div>
-        <div class="limit-card" style="border-left: 3px solid var(--red);">
-          <h3>❌ Common First-Pass Misses</h3>
-          <p>
-            Pass 1 failed on enterprise access tiers (assuming Plaid, Brex, or WhatsApp were self-serve free when production requires corporate vetting) and assumed tools like Sherlock or Mermaid were hosted REST APIs rather than local CLIs.
-          </p>
-        </div>
-        <div class="limit-card" style="border-left: 3px solid var(--blue);">
-          <h3>🔄 The Loop That Fixed Them</h3>
-          <p>
-            Pass 3 cross-checked the <em>actual quoted pricing text</em> against the `access` field. When "contact sales" or "business verification" was quoted in the snippet, the verifier automatically flipped the access tier and buildability verdict.
-          </p>
+
+        <div style="margin-top: 2rem;">
+          <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;">Discrepancies & Misses Table ({misses_count} Evaluated Field Misses)</h4>
+          <p class="section-desc" style="margin-bottom: 0.75rem;">Extracted directly from <code>data/ground_truth_checklist.csv</code> comparing agent outputs against human verification.</p>
+          <div class="table-responsive" style="max-height: 420px; overflow-y: auto;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Application</th>
+                  <th>Evaluated Field</th>
+                  <th>Agent Extracted Value</th>
+                  <th>Human Ground Truth Value</th>
+                </tr>
+              </thead>
+              <tbody>
+{misses_table_html}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -1187,26 +1264,37 @@ def build_html():
       const paginated = filteredApps.slice(start, start + PAGE_SIZE);
 
       tbody.innerHTML = paginated.map(a => {{
-        const verdictCls = a.buildability_verdict === 'yes_today' ? 'bv-yes' : (a.buildability_verdict === 'yes_with_caveats' ? 'bv-caveats' : 'bv-no');
-        const verdictText = a.buildability_verdict === 'yes_today' ? '✅ Yes Today' : (a.buildability_verdict === 'yes_with_caveats' ? '⚠️ Caveats' : '❌ No');
-        const authPills = a.auth_methods.map(m => `<span class="badge-auth">${{m}}</span>`).join('');
+        const v = a.buildability_verdict || 'unknown';
+        const verdictCls = v === 'yes_today' ? 'bv-yes' : (v === 'yes_with_caveats' ? 'bv-caveats' : 'bv-no');
+        const verdictText = v === 'yes_today' ? '✅ Yes Today' : (v === 'yes_with_caveats' ? '⚠️ Caveats' : (v === 'no' ? '❌ No' : '❓ Unknown'));
+        
+        const authArr = Array.isArray(a.auth_methods) ? a.auth_methods : (a.auth_methods ? [a.auth_methods] : ['unknown']);
+        const authPills = authArr.map(m => `<span class="badge-auth">${{m}}</span>`).join('');
+        
         const mcpDisplay = a.mcp_server_exists 
           ? `<a href="${{a.mcp_server_url || '#'}}" target="_blank" class="mcp-indicator-yes">✓ Yes</a>` 
           : `<span class="mcp-indicator-no">✗ None</span>`;
-        const primaryEv = a.evidence_urls && a.evidence_urls[0] 
-          ? `<a href="${{a.evidence_urls[0]}}" target="_blank" class="ev-link-btn" title="${{a.auth_evidence_snippet || ''}}">Docs ↗</a>` 
+          
+        const evUrls = Array.isArray(a.evidence_urls) ? a.evidence_urls : (a.evidence_urls ? [a.evidence_urls] : []);
+        const primaryEv = evUrls[0] 
+          ? `<a href="${{evUrls[0]}}" target="_blank" class="ev-link-btn" title="${{a.auth_evidence_snippet || ''}}">Docs ↗</a>` 
           : '-';
+
+        const accessStr = typeof a.access === 'string' ? a.access.replace(/_/g, ' ') : String(a.access || 'unknown');
+        const apiArr = Array.isArray(a.api_type) ? a.api_type : (a.api_type ? [a.api_type] : ['unknown']);
+        const breadthStr = a.api_breadth || 'unknown';
+        const blockerStr = a.buildability_blocker === 'none' ? '<span style="color:var(--green);">Ready</span>' : (a.buildability_blocker || 'none');
 
         return `
           <tr>
-            <td><strong>${{a.name}}</strong></td>
-            <td style="color:var(--text-muted); font-size:0.8rem;">${{a.category}}</td>
+            <td><strong>${{a.name || ''}}</strong></td>
+            <td style="color:var(--text-muted); font-size:0.8rem;">${{a.category || ''}}</td>
             <td><span class="badge-verdict ${{verdictCls}}">${{verdictText}}</span></td>
             <td>${{authPills}}</td>
-            <td><span class="badge-access">${{a.access.replace(/_/g, ' ')}}</span></td>
-            <td style="font-family:var(--font-mono); font-size:0.75rem;">${{a.api_type.join(', ')}} (${{a.api_breadth}})</td>
+            <td><span class="badge-access">${{accessStr}}</span></td>
+            <td style="font-family:var(--font-mono); font-size:0.75rem;">${{apiArr.join(', ')}} (${{breadthStr}})</td>
             <td>${{mcpDisplay}}</td>
-            <td style="color:var(--text-muted); font-size:0.8rem; max-width:240px;">${{a.buildability_blocker === 'none' ? '<span style=\"color:var(--green);\">Ready</span>' : a.buildability_blocker}}</td>
+            <td style="color:var(--text-muted); font-size:0.8rem; max-width:240px;">${{blockerStr}}</td>
             <td>${{primaryEv}}</td>
           </tr>
         `;
@@ -1232,17 +1320,25 @@ def build_html():
     }}
 
     function applyFilters() {{
-      const query = document.getElementById('filterSearch').value.toLowerCase();
+      const query = (document.getElementById('filterSearch').value || '').trim().toLowerCase();
       const cat = document.getElementById('filterCategory').value;
       const verdict = document.getElementById('filterVerdict').value;
       const auth = document.getElementById('filterAuth').value;
       const access = document.getElementById('filterAccess').value;
 
       filteredApps = RAW_APPS.filter(a => {{
-        if (query && !a.name.toLowerCase().includes(query) && !a.category.toLowerCase().includes(query) && !a.description.toLowerCase().includes(query) && !a.buildability_blocker.toLowerCase().includes(query)) return false;
+        const name = (a.name || '').toLowerCase();
+        const category = (a.category || '').toLowerCase();
+        const desc = (a.description || '').toLowerCase();
+        const blocker = (a.buildability_blocker || '').toLowerCase();
+        
+        if (query && !name.includes(query) && !category.includes(query) && !desc.includes(query) && !blocker.includes(query)) return false;
         if (cat && a.category !== cat) return false;
-        if (verdict && a.buildability_verdict !== verdict) return false;
-        if (auth && !a.auth_methods.includes(auth)) return false;
+        if (verdict && (a.buildability_verdict || 'unknown') !== verdict) return false;
+        
+        const authArr = Array.isArray(a.auth_methods) ? a.auth_methods : (a.auth_methods ? [a.auth_methods] : []);
+        if (auth && !authArr.includes(auth)) return false;
+        
         if (access && a.access !== access) return false;
         return true;
       }});
@@ -1259,8 +1355,10 @@ def build_html():
       }}
 
       filteredApps.sort((a, b) => {{
-        let va = a[col] || '';
-        let vb = b[col] || '';
+        let va = a[col] != null ? a[col] : '';
+        let vb = b[col] != null ? b[col] : '';
+        if (Array.isArray(va)) va = va.join(', ');
+        if (Array.isArray(vb)) vb = vb.join(', ');
         return currentSort.asc ? String(va).localeCompare(String(vb)) : String(vb).localeCompare(String(va));
       }});
       renderTable();
@@ -1278,17 +1376,20 @@ def build_html():
       const headers = ['name', 'category', 'buildability_verdict', 'auth_methods', 'access', 'api_type', 'api_breadth', 'mcp_server_exists', 'buildability_blocker', 'evidence_urls'];
       const rows = [headers.join(',')];
       filteredApps.forEach(a => {{
+        const authArr = Array.isArray(a.auth_methods) ? a.auth_methods : (a.auth_methods ? [a.auth_methods] : []);
+        const apiArr = Array.isArray(a.api_type) ? a.api_type : (a.api_type ? [a.api_type] : []);
+        const evUrls = Array.isArray(a.evidence_urls) ? a.evidence_urls : (a.evidence_urls ? [a.evidence_urls] : []);
         rows.push([
-          JSON.stringify(a.name),
-          JSON.stringify(a.category),
-          JSON.stringify(a.buildability_verdict),
-          JSON.stringify(a.auth_methods.join('; ')),
-          JSON.stringify(a.access),
-          JSON.stringify(a.api_type.join('; ')),
-          JSON.stringify(a.api_breadth),
-          JSON.stringify(a.mcp_server_exists),
-          JSON.stringify(a.buildability_blocker),
-          JSON.stringify(a.evidence_urls.join('; '))
+          JSON.stringify(a.name || ''),
+          JSON.stringify(a.category || ''),
+          JSON.stringify(a.buildability_verdict || ''),
+          JSON.stringify(authArr.join('; ')),
+          JSON.stringify(a.access || ''),
+          JSON.stringify(apiArr.join('; ')),
+          JSON.stringify(a.api_breadth || ''),
+          JSON.stringify(Boolean(a.mcp_server_exists)),
+          JSON.stringify(a.buildability_blocker || ''),
+          JSON.stringify(evUrls.join('; '))
         ].join(','));
       }});
       const blob = new Blob([rows.join('\\n')], {{ type: 'text/csv' }});
@@ -1357,6 +1458,7 @@ def build_html():
     }}
 
     function initCharts() {{
+      if (typeof Chart === 'undefined') return;
       Chart.defaults.color = '#9CA3AF';
       Chart.defaults.font.family = "'Inter', sans-serif";
 
@@ -1484,6 +1586,18 @@ def build_html():
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
+      // Explicitly ensure all filter inputs start at default "All"
+      const catEl = document.getElementById('filterCategory');
+      if (catEl) catEl.value = '';
+      const verEl = document.getElementById('filterVerdict');
+      if (verEl) verEl.value = '';
+      const authEl = document.getElementById('filterAuth');
+      if (authEl) authEl.value = '';
+      const accEl = document.getElementById('filterAccess');
+      if (accEl) accEl.value = '';
+      const searchEl = document.getElementById('filterSearch');
+      if (searchEl) searchEl.value = '';
+
       renderTable();
       renderHumanQueue();
       renderAccuracyTable();
