@@ -93,7 +93,7 @@ def research_app_pass1(app: dict) -> dict:
         return record
     except Exception as e:
         print(f"  [Pass1] ERROR for {name}: {e}")
-        # Return minimal error record
+        # Return minimal error record without poisoning cache
         error_record = {
             "name": name,
             "category": category,
@@ -115,7 +115,6 @@ def research_app_pass1(app: dict) -> dict:
             "_pass": 1,
             "_error": str(e)
         }
-        save_cached(name, 1, error_record)
         return error_record
 
 

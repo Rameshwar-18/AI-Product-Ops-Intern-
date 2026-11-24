@@ -340,13 +340,21 @@
     "high": 85,
     "med": 15
   },
+  "api_type_distribution": {
+    "REST": 91,
+    "GraphQL": 11,
+    "SOAP": 2,
+    "other": 7,
+    "unknown": 4,
+    "SDK": 2
+  },
   "insights": [
-    "1. Bearer tokens and API keys are the most prevalent authentication methods (present in 81 apps), while OAuth2 is mandated by 56 apps — particularly dominating CRM (8/10) and Marketing (7/10).",
-    "2. 71% of apps (71/100) are immediately buildable today with zero friction, representing low-hanging fruit for Composio's tool catalog.",
-    "3. Only 58% of apps (58/100) currently feature an existing Model Context Protocol (MCP) server, leaving a massive 58% unserved market gap Composio can monopolize.",
-    "4. Self-serve developer onboarding accounts for 72% (72/100) of services, while 28% require enterprise contracts, partner vetting, or paid tiers.",
-    "5. Developer & Infrastructure tools lead with 100% immediate buildability (10/10 'yes_today'), followed closely by Productivity (10/10), making them the fastest category to roll out.",
-    "6. Enterprise sales gating and partner friction are heavily concentrated in Finance (PitchBook, DealCloud, iPayX) and Social Advertising (Meta Ads, LinkedIn Ads, WhatsApp Business).",
-    "7. The multi-pass verification loop lifted overall dataset accuracy from 50.0% in Pass 1 to 100.0% in Pass 3 by eliminating hallucinations in access gating and authentication headers."
+    "OAuth2 is the dominant auth method (56/100 apps = 56%), with API key a close second (21 apps). CRM and Finance categories lean OAuth2; Dev tools lean API key.",
+    "71 apps (71%) are buildable today with no blockers. Another 23 are buildable with caveats (paid plan, rate limits, partial OAuth).",
+    "Only 58 apps (58%) have an existing MCP server \u2014 massive gap Composio can fill.",
+    "Self-serve access (free/trial) covers 72 apps (72%), while 28 apps require payment, approval, or partner status \u2014 these need outreach.",
+    "The most common blocker is 'No public developer API available', affecting 4 apps.",
+    "The 3 Finance apps most often require sales contact or partner gating \u2014 highest resistance to self-serve tooling.",
+    "Dev & Infra tools (71 of that category buildable today) and Productivity tools offer the clearest quick wins for Composio's agent toolkit roadmap."
   ]
 }

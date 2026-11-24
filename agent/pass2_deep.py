@@ -160,7 +160,6 @@ Quote the EXACT text from the most authoritative source for each field.
         fallback["confidence"] = "low"
         fallback["human_needed"] = True
         fallback["human_needed_reason"] = f"Pass2 extraction failed: {str(e)[:100]}"
-        save_cached_p2(name, fallback)
         return fallback
 
 

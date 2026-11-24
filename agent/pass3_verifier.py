@@ -148,7 +148,6 @@ def verify_record(record: dict) -> dict:
         fallback["_verification_error"] = str(e)
         fallback["human_needed"] = True
         fallback["human_needed_reason"] = f"Verification failed: {str(e)[:100]}"
-        save_cached_p3(name, fallback)
         return fallback
 
 
