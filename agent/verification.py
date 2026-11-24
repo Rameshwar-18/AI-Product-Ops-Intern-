@@ -46,24 +46,15 @@ def draw_sample(seed: int = 42, n_per_cat: int = 3) -> list:
     return sample
 
 
-def create_ground_truth_csv(sample: list, overwrite: bool = False) -> Path:
+def create_ground_truth_csv(sample: list, overwrite: bool = True) -> Path:
     """
     Create a CSV checklist for manual verification.
-    Pre-filled with agent answers and pre-verified ground truth answers,
-    with documentation URLs and correction columns ready for manual check.
+    Pre-filled with agent answers and documentation URLs.
+    All HUMAN_* correction columns are left strictly EMPTY for human evaluation.
     """
     out_path = DATA_DIR / "ground_truth_checklist.csv"
     if out_path.exists() and not overwrite:
-        # Check if already populated with human verification data
-        try:
-            with open(out_path, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                rows = list(reader)
-                if rows and any(r.get("HUMAN_auth_methods_correct") for r in rows):
-                    print(f"Ground truth checklist already exists with verified data ({len(rows)} apps): {out_path}")
-                    return out_path
-        except Exception:
-            pass
+        return out_path
 
     fields = [
         "name", "category",
@@ -73,7 +64,7 @@ def create_ground_truth_csv(sample: list, overwrite: bool = False) -> Path:
         "mcp_server_exists_agent", "mcp_server_url",
         "buildability_verdict_agent", "buildability_blocker_agent",
         "confidence_agent", "human_needed",
-        # Correction columns (pre-filled with verified ground truth, editable for corrections)
+        # Strictly empty human correction columns
         "HUMAN_auth_methods_correct",
         "HUMAN_access_correct",
         "HUMAN_api_breadth_correct",
@@ -116,56 +107,60 @@ def create_ground_truth_csv(sample: list, overwrite: bool = False) -> Path:
                 "buildability_blocker_agent": app.get("buildability_blocker", ""),
                 "confidence_agent": app.get("confidence", ""),
                 "human_needed": str(app.get("human_needed", "")),
-                # Pre-filled with verified ground truth
-                "HUMAN_auth_methods_correct": auth_str,
-                "HUMAN_access_correct": app.get("access", ""),
-                "HUMAN_api_breadth_correct": app.get("api_breadth", ""),
-                "HUMAN_mcp_server_exists_correct": str(app.get("mcp_server_exists", "")),
-                "HUMAN_buildability_verdict_correct": app.get("buildability_verdict", ""),
-                "HUMAN_notes": "Verified against live official developer documentation on 2026-11-24."
+                # Empty for human evaluation
+                "HUMAN_auth_methods_correct": "",
+                "HUMAN_access_correct": "",
+                "HUMAN_api_breadth_correct": "",
+                "HUMAN_mcp_server_exists_correct": "",
+                "HUMAN_buildability_verdict_correct": "",
+                "HUMAN_notes": ""
             }
             writer.writerow(row)
     
-    print(f"Ground truth checklist saved to: {out_path}")
+    print(f"Ground truth checklist saved to: {out_path} (HUMAN_* columns empty for evaluation)")
     return out_path
 
 
 def compute_accuracy(ground_truth_path: Path = None) -> dict:
     """
     Compute per-field accuracy for Pass1, Pass2, Pass3 vs ground truth.
-    Reads ground_truth_checklist.csv and evaluates candidates.
+    Strict rule: Only computed from rows filled by the human.
+    If no human rows exist, prints honest message and returns empty dict.
     """
     if ground_truth_path is None:
         ground_truth_path = DATA_DIR / "ground_truth_checklist.csv"
     
     if not ground_truth_path.exists():
-        # Return simulated accuracy from internal consistency check
-        return _simulate_accuracy()
+        print("No ground truth checklist found. Generate it first with draw_sample().")
+        return {}
     
-    # Load ground truth
+    # Load ground truth from human-filled rows only
     gt = {}
     with open(ground_truth_path, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for row in reader:
-            if any(row.get(f"HUMAN_{field}_correct") 
+            if any(row.get(f"HUMAN_{field}_correct", "").strip() 
                    for field in ["auth_methods", "access", "api_breadth", "mcp_server_exists", "buildability_verdict"]):
                 gt[row["name"]] = row
     
     if not gt:
-        print("No human corrections found in ground truth CSV yet. Using simulated accuracy.")
-        return _simulate_accuracy()
+        print("No human ground truth yet. Please open data/ground_truth_checklist.csv and fill the HUMAN_* columns for evaluated apps to benchmark accuracy.")
+        return {}
     
     # Load all passes
     passes = {}
     for pass_num, filename in [(1, "pass1.json"), (2, "pass2.json"), (3, "pass3_verified.json")]:
         p = DATA_DIR / filename
         if p.exists():
-            data = json.loads(p.read_text(encoding="utf-8"))
-            passes[pass_num] = {r["name"]: r for r in data}
+            try:
+                data = json.loads(p.read_text(encoding="utf-8"))
+                passes[pass_num] = {r["name"]: r for r in data}
+            except Exception:
+                pass
     
     fields = ["auth_methods", "access", "api_breadth", "mcp_server_exists", "buildability_verdict"]
     accuracy = {
-        "sample_size": len(gt),
+        "human_verified_sample_size": len(gt),
         "seed": 42,
         "stratification": "3 apps per category x 10 categories"
     }
@@ -182,45 +177,49 @@ def compute_accuracy(ground_truth_path: Path = None) -> dict:
             agent = pass_data[name]
             
             # 1. Auth check
-            human_auth_raw = human_row.get("HUMAN_auth_methods_correct", "")
-            human_auth_set = {x.strip().lower() for x in human_auth_raw.replace(";", ",").split(",") if x.strip()}
-            
-            agent_auth = agent.get("auth_methods", [])
-            if isinstance(agent_auth, str):
-                agent_auth = [x.strip() for x in agent_auth.replace(";", ",").split(",") if x.strip()]
-            agent_auth_set = {x.strip().lower() for x in agent_auth if x.strip()}
-            
-            total["auth_methods"] += 1
-            if human_auth_set == agent_auth_set or (pass_num != 1 and bool(agent_auth_set.intersection(human_auth_set))):
-                correct["auth_methods"] += 1
+            human_auth_raw = human_row.get("HUMAN_auth_methods_correct", "").strip()
+            if human_auth_raw:
+                human_auth_set = {x.strip().lower() for x in human_auth_raw.replace(";", ",").split(",") if x.strip()}
+                agent_auth = agent.get("auth_methods", [])
+                if isinstance(agent_auth, str):
+                    agent_auth = [x.strip() for x in agent_auth.replace(";", ",").split(",") if x.strip()]
+                agent_auth_set = {x.strip().lower() for x in agent_auth if x.strip()}
+                total["auth_methods"] += 1
+                if human_auth_set == agent_auth_set or bool(agent_auth_set.intersection(human_auth_set)):
+                    correct["auth_methods"] += 1
             
             # 2. Access check
             human_access = human_row.get("HUMAN_access_correct", "").strip().lower()
-            agent_access = str(agent.get("access", "")).strip().lower()
-            total["access"] += 1
-            if human_access and human_access == agent_access:
-                correct["access"] += 1
+            if human_access:
+                agent_access = str(agent.get("access", "")).strip().lower()
+                total["access"] += 1
+                if human_access == agent_access:
+                    correct["access"] += 1
                 
             # 3. Breadth check
             human_breadth = human_row.get("HUMAN_api_breadth_correct", "").strip().lower()
-            agent_breadth = str(agent.get("api_breadth", "")).strip().lower()
-            total["api_breadth"] += 1
-            if human_breadth and human_breadth == agent_breadth:
-                correct["api_breadth"] += 1
+            if human_breadth:
+                agent_breadth = str(agent.get("api_breadth", "")).strip().lower()
+                total["api_breadth"] += 1
+                if human_breadth == agent_breadth:
+                    correct["api_breadth"] += 1
                 
             # 4. MCP check
-            human_mcp = human_row.get("HUMAN_mcp_server_exists_correct", "").strip().lower() in ("true", "1", "yes")
-            agent_mcp = str(agent.get("mcp_server_exists", "")).strip().lower() in ("true", "1", "yes")
-            total["mcp_server_exists"] += 1
-            if human_mcp == agent_mcp:
-                correct["mcp_server_exists"] += 1
+            human_mcp_raw = human_row.get("HUMAN_mcp_server_exists_correct", "").strip().lower()
+            if human_mcp_raw:
+                human_mcp = human_mcp_raw in ("true", "1", "yes")
+                agent_mcp = str(agent.get("mcp_server_exists", "")).strip().lower() in ("true", "1", "yes")
+                total["mcp_server_exists"] += 1
+                if human_mcp == agent_mcp:
+                    correct["mcp_server_exists"] += 1
                 
             # 5. Verdict check
             human_verdict = human_row.get("HUMAN_buildability_verdict_correct", "").strip().lower()
-            agent_verdict = str(agent.get("buildability_verdict", "")).strip().lower()
-            total["buildability_verdict"] += 1
-            if human_verdict and human_verdict == agent_verdict:
-                correct["buildability_verdict"] += 1
+            if human_verdict:
+                agent_verdict = str(agent.get("buildability_verdict", "")).strip().lower()
+                total["buildability_verdict"] += 1
+                if human_verdict == agent_verdict:
+                    correct["buildability_verdict"] += 1
         
         accuracy[pass_key] = {
             field: {
@@ -237,44 +236,8 @@ def compute_accuracy(ground_truth_path: Path = None) -> dict:
             "pct": round(overall_c / overall_t * 100, 1) if overall_t > 0 else 0
         }
     
-    # Save accuracy report
     (DATA_DIR / "accuracy_report.json").write_text(json.dumps(accuracy, indent=2), encoding="utf-8")
     return accuracy
-
-
-def _simulate_accuracy() -> dict:
-    """
-    Simulated accuracy based on internal consistency and confidence scores.
-    Used when no human corrections are available yet.
-    Based on typical LLM research accuracy patterns.
-    """
-    return {
-        "pass1": {
-            "auth_methods": {"correct": 56, "total": 100, "pct": 56.0},
-            "access": {"correct": 48, "total": 100, "pct": 48.0},
-            "api_breadth": {"correct": 42, "total": 100, "pct": 42.0},
-            "mcp_server_exists": {"correct": 65, "total": 100, "pct": 65.0},
-            "buildability_verdict": {"correct": 55, "total": 100, "pct": 55.0},
-            "overall": {"correct": 266, "total": 500, "pct": 53.2}
-        },
-        "pass2": {
-            "auth_methods": {"correct": 74, "total": 100, "pct": 74.0},
-            "access": {"correct": 68, "total": 100, "pct": 68.0},
-            "api_breadth": {"correct": 61, "total": 100, "pct": 61.0},
-            "mcp_server_exists": {"correct": 79, "total": 100, "pct": 79.0},
-            "buildability_verdict": {"correct": 72, "total": 100, "pct": 72.0},
-            "overall": {"correct": 354, "total": 500, "pct": 70.8}
-        },
-        "pass3": {
-            "auth_methods": {"correct": 82, "total": 100, "pct": 82.0},
-            "access": {"correct": 76, "total": 100, "pct": 76.0},
-            "api_breadth": {"correct": 70, "total": 100, "pct": 70.0},
-            "mcp_server_exists": {"correct": 85, "total": 100, "pct": 85.0},
-            "buildability_verdict": {"correct": 80, "total": 100, "pct": 80.0},
-            "overall": {"correct": 393, "total": 500, "pct": 78.6}
-        },
-        "_note": "Simulated accuracy - run with human-corrected ground_truth_checklist.csv for real numbers"
-    }
 
 
 if __name__ == "__main__":
@@ -283,13 +246,16 @@ if __name__ == "__main__":
     for a in sample:
         print(f"  - {a['name']} ({a['category']})")
     
-    csv_path = create_ground_truth_csv(sample)
-    print(f"\nOpen this CSV and fill in HUMAN_* columns:")
+    csv_path = create_ground_truth_csv(sample, overwrite=True)
+    print(f"\nOpen this CSV and fill in HUMAN_* columns for your evaluation:")
     print(f"  {csv_path}")
     
     accuracy = compute_accuracy()
-    print("\nAccuracy (simulated):")
-    print(json.dumps(accuracy, indent=2))
+    if accuracy:
+        print("\nAccuracy Benchmark Report:")
+        print(json.dumps(accuracy, indent=2))
+    else:
+        print("\nNo human ground truth entered yet.")
     
     # Save accuracy
     (DATA_DIR / "accuracy_report.json").write_text(

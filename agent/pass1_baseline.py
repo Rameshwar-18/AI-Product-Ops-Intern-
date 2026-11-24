@@ -15,7 +15,7 @@ load_dotenv()
 sys.path.insert(0, str(Path(__file__).parent))
 
 from apps import APPS
-from schema import EXTRACTION_PROMPT_TEMPLATE
+from schema import EXTRACTION_PROMPT_TEMPLATE, is_vendor_mcp
 from llm_client import get_llm_response, extract_json_from_response
 from firecrawl_client import search_web
 
@@ -45,7 +45,7 @@ def save_cached(app_name: str, pass_num: int, data: dict):
     p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def research_app_pass1(app: dict) -> dict:
+def research_app_pass1(app: dict, no_cache: bool = False) -> dict:
     """
     Pass 1: Use LLM training knowledge + one quick web search.
     Fast and cheap - provides baseline for improvement measurement.
@@ -54,13 +54,14 @@ def research_app_pass1(app: dict) -> dict:
     category = app["category"]
     hint_url = app.get("hint_url", "")
     
-    # Check cache
-    cached = load_cached(name, 1)
-    if cached:
-        print(f"  [Pass1] {name} - cached")
-        return cached
+    # Check cache unless no_cache is requested
+    if not no_cache:
+        cached = load_cached(name, 1)
+        if cached:
+            print(f"  [Pass1] {name} - cached")
+            return cached
     
-    print(f"  [Pass1] Researching: {name}")
+    print(f"  [Pass1] {name} - live")
     
     # Do one search to get some context
     search_context = ""
@@ -89,6 +90,13 @@ def research_app_pass1(app: dict) -> dict:
         record = extract_json_from_response(response)
         record["_pass"] = 1
         record["_search_urls_used"] = [r.get("url","") for r in (results if 'results' in dir() else [])]
+        
+        # Enforce official vendor MCP rule strictly
+        if record.get("mcp_server_exists"):
+            if not is_vendor_mcp(name, record.get("mcp_server_url", "")):
+                record["mcp_server_exists"] = False
+                record["mcp_server_url"] = None
+        
         save_cached(name, 1, record)
         return record
     except Exception as e:
@@ -118,7 +126,7 @@ def research_app_pass1(app: dict) -> dict:
         return error_record
 
 
-def run_pass1(apps=None, single_app=None):
+def run_pass1(apps=None, single_app=None, no_cache: bool = False, limit: int = None):
     """Run pass 1 for all apps or a single app."""
     if single_app:
         app_list = [a for a in APPS if a["name"].lower() == single_app.lower()]
@@ -126,22 +134,20 @@ def run_pass1(apps=None, single_app=None):
             print(f"App '{single_app}' not found in list")
             return []
     else:
-        app_list = apps or APPS
+        app_list = list(apps or APPS)
+        if limit:
+            app_list = app_list[:limit]
     
     results = []
     for i, app in enumerate(app_list):
         print(f"\n[{i+1}/{len(app_list)}] {app['name']} ({app['category']})")
-        result = research_app_pass1(app)
+        result = research_app_pass1(app, no_cache=no_cache)
         results.append(result)
-        
-        # Rate limit
-        if not load_cached(app["name"], 1) or True:
-            time.sleep(1)
+        time.sleep(0.5)
     
     # Save results
     output_path = DATA_DIR / "pass1.json"
     
-    # Merge with existing if running single app
     existing = []
     if output_path.exists():
         try:
@@ -149,7 +155,6 @@ def run_pass1(apps=None, single_app=None):
         except:
             pass
     
-    # Update or append
     existing_names = {r["name"]: i for i, r in enumerate(existing)}
     for r in results:
         if r["name"] in existing_names:

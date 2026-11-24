@@ -128,93 +128,73 @@ def run_single_app(app_name: str, live: bool = False):
             print(f"Failed loading verified dataset: {e}")
 
 
-def run_all(pass_num: int = None, force: bool = False):
-    """Run all apps through the pipeline."""
-    has_llm_key = bool(os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY") or os.environ.get("OPENAI_API_KEY"))
+def run_all(pass_num: int = None, limit: int = None, no_cache: bool = False):
+    """Run apps through the live multi-pass research and verification pipeline."""
+    from pass1_baseline import run_pass1
+    from pass2_deep import run_pass2
+    from pass3_verifier import run_pass3
+    from verification import draw_sample, create_ground_truth_csv
+    from analysis import analyze
+    
     data_dir = Path(__file__).parent / "data"
+    app_target = APPS[:limit] if limit else APPS
+    count = len(app_target)
     
-    if has_llm_key and force:
-        from pass1_baseline import run_pass1
-        from pass2_deep import run_pass2
-        from pass3_verifier import run_pass3
-        from verification import draw_sample, create_ground_truth_csv, compute_accuracy
-        from analysis import load_verified, analyze
-        
-        if pass_num is None or pass_num == 1:
-            print("\n" + "="*60)
-            print("PASS 1: Baseline (LLM + web search)")
-            print("="*60)
-            run_pass1()
-        
-        if pass_num is None or pass_num == 2:
-            print("\n" + "="*60)
-            print("PASS 2: Deep research (Firecrawl scraping)")
-            print("="*60)
-            run_pass2()
-        
-        if pass_num is None or pass_num == 3:
-            print("\n" + "="*60)
-            print("PASS 3: Verification")
-            print("="*60)
-            run_pass3()
-        
-        # Verification sample
-        print("\n" + "="*60)
-        print("VERIFICATION: Stratified sample + accuracy")
-        print("="*60)
-        sample = draw_sample(seed=42, n_per_cat=3)
-        create_ground_truth_csv(sample, overwrite=False)
-        accuracy = compute_accuracy()
-        
-        print(f"Sample: {len(sample)} apps")
-        print(f"Pass 3 overall accuracy: {accuracy.get('pass3', {}).get('overall', {}).get('pct', 0)}%")
-        
-        # Analysis
-        print("\n" + "="*60)
-        print("ANALYSIS")
-        print("="*60)
-        apps = load_verified()
-        if apps:
-            result = analyze(apps)
-            (data_dir / "analysis.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
-            for ins in result.get("insights", []):
-                print(f"  • {ins}")
-        generate_html()
-        return
-
-    # Deterministic compilation mode for instant evaluation & verification
     print("\n" + "="*60)
-    print("COMPOSIO RESEARCH PIPELINE — 100 APPS MULTI-PASS COMPILATION")
+    print(f"COMPOSIO MULTI-PASS RESEARCH PIPELINE — {count} APPS")
+    print(f"Mode: Live Pipeline | Cache: {'BYPASS (--no-cache)' if no_cache else 'RESUMABLE'}")
     print("="*60)
-    if not has_llm_key:
-        print("💡 No LLM API key detected in environment. Running full deterministic pipeline compiler.")
+    
+    # Pass 1: Baseline LLM + Search
+    if pass_num is None or pass_num == 1:
+        print("\n" + "-"*60)
+        print(f"STAGE 1: Pass 1 Baseline Research ({count} apps)")
+        print("-"*60)
+        run_pass1(apps=app_target, no_cache=no_cache, limit=limit)
+    
+    # Pass 2: Deep Documentation Scrape & Vendor MCP Discovery
+    if pass_num is None or pass_num == 2:
+        print("\n" + "-"*60)
+        print(f"STAGE 2: Pass 2 Deep Documentation Scrape ({count} apps)")
+        print("-"*60)
+        run_pass2(apps=app_target, no_cache=no_cache, limit=limit)
+        
+    # Pass 3: Strict Verifier Cross-Examination
+    if pass_num is None or pass_num == 3:
+        print("\n" + "-"*60)
+        print(f"STAGE 3: Pass 3 Verifier Agent ({count} apps)")
+        print("-"*60)
+        verified_results = run_pass3(apps=app_target, no_cache=no_cache, limit=limit)
     else:
-        print("💡 LLM key detected. Compiling pre-verified multi-pass dataset and benchmark (use --force for live network crawl).")
-    
-    import subprocess
-    dataset_builder = Path(__file__).parent / "agent" / "build_complete_dataset.py"
-    if dataset_builder.exists():
-        proc = subprocess.run([sys.executable, str(dataset_builder)], capture_output=True, text=True)
-        print(proc.stdout)
-        if proc.returncode != 0:
-            print(f"Builder error: {proc.stderr}")
-    
-    # Generate HTML
-    generate_html()
+        verified_file = data_dir / "pass3_verified.json"
+        verified_results = json.loads(verified_file.read_text(encoding="utf-8")) if verified_file.exists() else []
 
-    # If specific pass requested, display summary
-    if pass_num == 1:
-        p1 = json.loads((data_dir / "pass1.json").read_text(encoding="utf-8"))
-        print(f"\n[PASS 1 COMPLETE] Loaded {len(p1)} baseline records. Baseline accuracy: 50.0%")
-    elif pass_num == 2:
-        p2 = json.loads((data_dir / "pass2.json").read_text(encoding="utf-8"))
-        print(f"\n[PASS 2 COMPLETE] Loaded {len(p2)} deep-scraped records. Deep pass accuracy: 91.3%")
-    elif pass_num == 3:
-        p3 = json.loads((data_dir / "pass3_verified.json").read_text(encoding="utf-8"))
-        hn = json.loads((data_dir / "human_needed.json").read_text(encoding="utf-8"))
-        print(f"\n[PASS 3 COMPLETE] Loaded {len(p3)} verified records. Human queue: {len(hn)} apps. Final accuracy: 100.0%")
-    else:
-        print("\nAll passes (Pass 1, Pass 2, Pass 3), verification benchmark, and HTML dashboard compiled successfully.")
+    # Verification Ground Truth Sample (strictly empty HUMAN_* columns)
+    print("\n" + "-"*60)
+    print("STAGE 4: Verification Checklist Preparation")
+    print("-"*60)
+    sample = draw_sample(seed=42, n_per_cat=3)
+    if limit and limit < 30:
+        sample = [a for a in sample if any(t["name"] == a["name"] for t in app_target)] or verified_results[:min(len(verified_results), 3)]
+    create_ground_truth_csv(sample, overwrite=True)
+
+    # Statistical Clustering & Analysis from real data
+    print("\n" + "-"*60)
+    print("STAGE 5: Cluster Analysis & Data-Backed Insights")
+    print("-"*60)
+    if verified_results:
+        analysis_data = analyze(verified_results)
+        (data_dir / "analysis.json").write_text(json.dumps(analysis_data, indent=2, ensure_ascii=False), encoding="utf-8")
+        print("Analysis generated from live verified records:")
+        for ins in analysis_data.get("insights", []):
+            print(f"  • {ins}")
+
+    # Re-render HTML from real data
+    print("\n" + "-"*60)
+    print("STAGE 6: Interactive Dashboard Compilation")
+    print("-"*60)
+    generate_html()
+    print("\nPipeline execution complete.")
 
 
 def generate_html():
@@ -240,44 +220,68 @@ if __name__ == "__main__":
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python run.py --app "Linear"      # Research one app end-to-end
-  python run.py --all               # Full pipeline for all 100 apps  
-  python run.py --pass 1            # Run/view Pass 1 (baseline)
-  python run.py --verify            # Run verification + accuracy benchmark
-  python run.py --analyze           # Run analysis and print 7 key insights
-  python run.py --html              # Regenerate index.html
+  python run.py --app "Linear"              # Research one app end-to-end
+  python run.py --app "Linear" --live       # Research one app live bypassing cache
+  python run.py --all --limit 10            # Run live pipeline for first 10 apps
+  python run.py --all                       # Full live pipeline for all 100 apps  
+  python run.py --all --no-cache            # Full pipeline bypassing cache
+  python run.py --pass 1                    # Run Pass 1 (baseline)
+  python run.py --verify                    # Evaluate accuracy against human ground truth
+  python run.py --check-consistency         # Run data integrity audit
+  python run.py --analyze                   # Run statistical analysis and print insights
+  python run.py --html                      # Regenerate index.html
         """
     )
     parser.add_argument("--app", help="Research a single app by name")
-    parser.add_argument("--all", action="store_true", help="Run full pipeline for all 100 apps")
+    parser.add_argument("--all", action="store_true", help="Run full pipeline across apps")
+    parser.add_argument("--limit", type=int, help="Limit number of apps to process (e.g. --limit 10)")
     parser.add_argument("--pass", dest="pass_num", type=int, choices=[1, 2, 3], help="Run specific pass only")
-    parser.add_argument("--verify", action="store_true", help="Run verification + accuracy")
+    parser.add_argument("--no-cache", action="store_true", help="Bypass cache and force live scrapes and calls")
+    parser.add_argument("--verify", action="store_true", help="Run verification against human ground truth")
     parser.add_argument("--analyze", action="store_true", help="Run analysis")
+    parser.add_argument("--check-consistency", action="store_true", help="Audit dataset consistency and rules")
     parser.add_argument("--html", action="store_true", help="Generate index.html")
-    parser.add_argument("--force", action="store_true", help="Force live network crawl even if pre-verified")
     parser.add_argument("--live", action="store_true", help="Run live web crawl and LLM extraction")
+    parser.add_argument("--force", action="store_true", help="Alias for --no-cache")
     
     args = parser.parse_args()
+    use_no_cache = args.no_cache or args.force
     
     if args.app:
-        run_single_app(args.app, live=(args.live or args.force))
+        run_single_app(args.app, live=(args.live or use_no_cache))
     elif args.all:
-        run_all(force=args.force)
+        run_all(limit=args.limit, no_cache=use_no_cache)
     elif args.pass_num:
-        run_all(pass_num=args.pass_num, force=args.force)
+        run_all(pass_num=args.pass_num, limit=args.limit, no_cache=use_no_cache)
+    elif args.check_consistency:
+        from analysis import check_consistency, load_verified
+        apps = load_verified()
+        if not apps:
+            print("No verified dataset found to audit.")
+        else:
+            report = check_consistency(apps)
+            print(f"\n{'='*60}")
+            print("DATASET INTEGRITY & CONSISTENCY AUDIT REPORT")
+            print(f"{'='*60}\n")
+            print(f"Overall Status: {'PASSED' if report['passed'] else 'FAILED'}")
+            print(f"Total Records Audited: {report['total_records']}\n")
+            for name, chk in report["checks"].items():
+                print(f"  • {name.replace('_', ' ').title()}: [{chk['status']}]")
+                if chk.get("failures"):
+                    print(f"    - Failures: {chk['failures']}")
+                    if chk.get("details"):
+                        print(f"    - Details: {chk['details']}")
     elif args.verify:
-        from verification import draw_sample, create_ground_truth_csv, compute_accuracy
-        sample = draw_sample(seed=42, n_per_cat=3)
-        csv_path = create_ground_truth_csv(sample, overwrite=False)
-        acc = compute_accuracy(csv_path)
-        print(f"\nVerification Sample: {len(sample)} apps (3 per category x 10 categories, seed=42)")
-        print(f"Ground Truth Checklist: {csv_path}")
-        print("\nAccuracy Progression Across Passes:")
-        for p in ["pass1", "pass2", "pass3"]:
-            if p in acc:
-                print(f"  {p.upper()}: {acc[p].get('overall', {}).get('pct', 0)}% overall accuracy")
-        print("\nFull Accuracy Benchmark Report (JSON):")
-        print(json.dumps(acc, indent=2))
+        from verification import compute_accuracy
+        acc = compute_accuracy()
+        if acc:
+            print(f"\nHuman-Verified Sample Size: {acc.get('human_verified_sample_size')} apps")
+            print("\nAccuracy Progression Across Passes (Evaluated vs Human Ground Truth):")
+            for p in ["pass1", "pass2", "pass3"]:
+                if p in acc:
+                    print(f"  {p.upper()}: {acc[p].get('overall', {}).get('pct', 0)}% overall accuracy")
+            print("\nFull Accuracy Benchmark Report (JSON):")
+            print(json.dumps(acc, indent=2))
     elif args.analyze:
         from analysis import load_verified, analyze
         apps = load_verified()
@@ -285,7 +289,7 @@ Examples:
         data_dir = Path(__file__).parent / "data"
         (data_dir / "analysis.json").write_text(json.dumps(result, indent=2), encoding="utf-8")
         print(f"\n{'='*60}")
-        print("COMPOSIO 100 APPS RESEARCH — ANALYSIS & INSIGHTS")
+        print("COMPOSIO APPS RESEARCH — ANALYSIS & INSIGHTS")
         print(f"{'='*60}\n")
         print(f"Total Apps Researched:    {result.get('total_apps')}")
         print(f"Dominant Auth Method:     {result.get('dominant_auth')}")
@@ -294,8 +298,8 @@ Examples:
         print(f"Buildable Today:          {result.get('buildability', {}).get('yes_today', 0)}")
         print(f"Buildable with Caveats:   {result.get('buildability', {}).get('yes_with_caveats', 0)}")
         print(f"Not Buildable:            {result.get('buildability', {}).get('no', 0)}")
-        print(f"Existing MCP Coverage:    {result.get('mcp_coverage_count')} ({result.get('mcp_coverage_pct')}%)")
-        print(f"\n7 Key Insights:")
+        print(f"Official MCP Coverage:    {result.get('mcp_coverage_count')} ({result.get('mcp_coverage_pct')}%)")
+        print(f"\nKey Insights:")
         for ins in result.get("insights", []):
             print(f"  • {ins}")
         print(f"\nSaved analysis to: {data_dir / 'analysis.json'}")

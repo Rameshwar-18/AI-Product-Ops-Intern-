@@ -3,343 +3,398 @@
     "name": "Salesforce",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Enterprise cloud CRM for sales pipeline, customer accounts, and revenue operations.",
-    "description_evidence": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/",
+    "description": "Salesforce is a leading customer relationship management (CRM) platform that enables AI agents to manage customer data, track sales pipelines, automate service operations, and interact with enterprise business objects.",
+    "description_evidence": "https://developer.salesforce.com/docs",
     "auth_methods": [
       "OAuth2",
+      "Bearer token",
       "API key"
     ],
-    "auth_evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_oauth_endpoints.htm",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "self_serve_free",
-    "access_evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_rest_resources.htm",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "auth_evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_authentication.htm",
+    "auth_evidence_snippet": "REST API client applications must authenticate before making any other API requests. Client applications typically use OAuth 2.0 or Connected Apps to authenticate.",
+    "access": "self_serve_trial",
+    "access_evidence_url": "https://developer.salesforce.com/signup",
+    "access_evidence_snippet": "Sign up for a free Salesforce Developer Edition environment to build, test, and integrate.",
     "api_type": [
-      "REST"
+      "REST",
+      "GraphQL",
+      "SOAP",
+      "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_url": "https://developer.salesforce.com/docs/apis",
+    "api_evidence_snippet": "Salesforce offers comprehensive APIs including REST API, SOAP API, Bulk API, Composite APIs, and Connect REST API to access data and metadata.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
-    "buildability_verdict": "yes_today",
-    "buildability_blocker": "none",
+    "buildability_verdict": "yes_with_caveats",
+    "buildability_blocker": "Requires setting up a Salesforce Developer Edition account and configuring a Connected App with appropriate OAuth scopes.",
     "evidence_urls": [
-      "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/"
+      "https://developer.salesforce.com/docs",
+      "https://developer.salesforce.com/docs/atlas.en-us.api_rest.meta/api_rest/intro_understanding_authentication.htm",
+      "https://developer.salesforce.com/signup",
+      "https://developer.salesforce.com/docs/apis"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Salesforce provides robust enterprise APIs with extensive developer tooling. Building agent toolkits requires handling Connected App configuration and navigating object-level permissions, but developer accounts are freely accessible.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "HubSpot",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Inbound marketing, sales CRM, customer service, and content management platform.",
+    "description": "HubSpot is a customer relationship management (CRM) platform that provides tools for marketing, sales, content management, and customer service.",
     "description_evidence": "https://developers.hubspot.com/docs/api/overview",
     "auth_methods": [
-      "OAuth2"
+      "OAuth2",
+      "Private Apps (Bearer token)"
     ],
-    "auth_evidence_url": "https://developers.hubspot.com/docs/api/working-with-oauth",
-    "auth_evidence_snippet": "First-pass generic search result.",
+    "auth_evidence_url": "https://developers.hubspot.com/docs/api/private-apps",
+    "auth_evidence_snippet": "Private apps are a simple way to authenticate your integrations in HubSpot. Instead of going through the full OAuth 2.0 flow, you can generate an access token for a private app and use it to make requests to the HubSpot APIs.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://developers.hubspot.com/docs/api/overview",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_url": "https://developers.hubspot.com/docs/api/get-started",
+    "access_evidence_snippet": "To start building on HubSpot, you need a HubSpot account. You can create a free account to get access to a free CRM and developer sandbox.",
     "api_type": [
-      "REST"
+      "REST",
+      "GraphQL",
+      "Webhooks"
     ],
     "api_breadth": "broad",
-    "api_evidence_url": "https://developers.hubspot.com/docs/api/crm/understanding-the-crm",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_url": "https://developers.hubspot.com/docs/api/overview",
+    "api_evidence_snippet": "HubSpot offers robust REST and GraphQL APIs covering Contacts, Companies, Deals, Tickets, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developers.hubspot.com/docs/api/overview",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.hubspot.com/docs/api/overview"
+      "https://developers.hubspot.com/docs/api/overview",
+      "https://developers.hubspot.com/docs/api/private-apps",
+      "https://developers.hubspot.com/docs/api/get-started"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "HubSpot provides free developer accounts with full access to standard APIs, making integration building very accessible.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Pipedrive",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Pipeline-focused sales CRM designed to help salespeople track deals and activities.",
+    "description": "Web-based Sales CRM and pipeline management tool designed to help businesses plan sales processes and track deals.",
     "description_evidence": "https://developers.pipedrive.com/docs/api/v1",
     "auth_methods": [
+      "OAuth2",
       "API key"
     ],
-    "auth_evidence_url": "https://pipedrive.readme.io/docs/how-to-find-the-api-token",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "paid_plan_required",
+    "auth_evidence_url": "https://developers.pipedrive.com/docs/api/v1/authentication",
+    "auth_evidence_snippet": "Pipedrive API uses OAuth 2.0 for authentication and personal API tokens for quick access.",
+    "access": "self_serve_trial",
     "access_evidence_url": "https://www.pipedrive.com/en/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_snippet": "Try it free. No credit card required.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "medium",
+    "api_breadth": "broad",
     "api_evidence_url": "https://developers.pipedrive.com/docs/api/v1",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_snippet": "Comprehensive REST API covering deals, leads, organizations, persons, activities, and more with 100+ endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developers.pipedrive.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.pipedrive.com/docs/api/v1"
+      "https://developers.pipedrive.com/docs/api/v1",
+      "https://developers.pipedrive.com/docs/api/v1/authentication",
+      "https://www.pipedrive.com/en/pricing"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Pipedrive offers robust self-serve developer access via a trial account, with public documentation for both OAuth2 and personal API tokens, as well as comprehensive REST endpoints.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Attio",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Next-generation data-driven CRM built on real-time customizable relational databases.",
+    "description": "A flexible, data-driven CRM platform that lets you build custom workflows, manage relationships, and sync data via an extensive API.",
     "description_evidence": "https://developers.attio.com/docs",
     "auth_methods": [
+      "OAuth2",
       "Bearer token"
     ],
     "auth_evidence_url": "https://developers.attio.com/docs/authentication",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "self_serve_trial",
+    "auth_evidence_snippet": "Attio uses OAuth 2.0 to allow third-party applications to access user data. You can also generate internal integration access tokens (Bearer tokens) for testing and private applications.",
+    "access": "self_serve_free",
     "access_evidence_url": "https://attio.com/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_snippet": "Get started for free with our Free plan. No credit card required.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "narrow",
-    "api_evidence_url": "https://developers.attio.com/reference/get_v2-objects",
-    "api_evidence_snippet": "Overview page.",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developers.attio.com/reference/overview",
+    "api_evidence_snippet": "The Attio API is a fully-featured REST API allowing you to manage objects, records, lists, notes, tasks, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developers.attio.com/docs",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.attio.com/docs"
+      "https://developers.attio.com/docs",
+      "https://developers.attio.com/docs/authentication",
+      "https://developers.attio.com/reference/overview",
+      "https://attio.com/pricing"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Attio provides a comprehensive self-serve developer platform with robust REST endpoints and official documentation supporting OAuth2 and token-based authentication.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Twenty",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Modern open-source CRM alternative to Salesforce, self-hostable or cloud-managed.",
-    "description_evidence": "https://twenty.com/developers",
+    "description": "An open-source CRM platform that helps teams manage their customer relationships, sales pipelines, and business data.",
+    "description_evidence": "https://twenty.com/",
     "auth_methods": [
-      "API key"
+      "API key",
+      "Bearer token"
     ],
-    "auth_evidence_url": "https://twenty.com/developers",
-    "auth_evidence_snippet": "First-pass generic search result.",
+    "auth_evidence_url": "https://docs.twenty.com/developers/api/authentication",
+    "auth_evidence_snippet": "You can authenticate your API requests by providing your API key in the Authorization header as a Bearer token.",
     "access": "self_serve_free",
     "access_evidence_url": "https://twenty.com/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_snippet": "Open Source: Free forever. Self-host with Docker. Cloud Free: Free for small teams.",
     "api_type": [
-      "REST"
+      "REST",
+      "GraphQL",
+      "Webhooks"
     ],
-    "api_breadth": "medium",
-    "api_evidence_url": "https://twenty.com/developers",
-    "api_evidence_snippet": "Overview page.",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://docs.twenty.com/developers/api/graphql",
+    "api_evidence_snippet": "Twenty provides a powerful GraphQL API to query and mutate your CRM data.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://twenty.com/developers",
+    "mcp_evidence_url": "https://docs.twenty.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://twenty.com/developers"
+      "https://twenty.com/",
+      "https://twenty.com/developers",
+      "https://docs.twenty.com/",
+      "https://docs.twenty.com/developers/api/authentication",
+      "https://docs.twenty.com/developers/api/graphql"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Twenty is fully open-source with both a self-hosted option and a cloud tier, offering robust REST and GraphQL APIs accessible via API keys/Bearer tokens.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Podio",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Citrix-owned customizable work management and deal pipeline platform.",
-    "description_evidence": "https://developers.podio.com",
+    "description": "Podio provides a flexible platform for organizing team communication, business processes, data, and content in workspaces.",
+    "description_evidence": "https://developers.podio.com/",
     "auth_methods": [
       "OAuth2"
     ],
     "auth_evidence_url": "https://developers.podio.com/authentication",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "paid_plan_required",
-    "access_evidence_url": "https://podio.com/site/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "auth_evidence_snippet": "All interaction with the Podio API must be authenticated. Podio uses OAuth 2.0 for authentication.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developers.podio.com/",
+    "access_evidence_snippet": "To start building on the Podio API, simply create an account on Podio and register your application.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "medium",
+    "api_breadth": "broad",
     "api_evidence_url": "https://developers.podio.com/doc",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_snippet": "The Podio API is structured around REST. Our API allows you to access and manage workspaces, apps, items, comments, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developers.podio.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.podio.com"
+      "https://developers.podio.com/",
+      "https://developers.podio.com/authentication",
+      "https://developers.podio.com/doc"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Podio provides a comprehensive REST API and standard OAuth2 authentication accessible directly through self-service developer registration.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Zoho CRM",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Global enterprise CRM suite for lead management, analytics, and workflow automation.",
-    "description_evidence": "https://www.zoho.com/crm/developer/docs/api/v6/",
+    "description": "Comprehensive cloud-based customer relationship management (CRM) software for managing sales, marketing, and customer support.",
+    "description_evidence": "https://www.zoho.com/crm/",
     "auth_methods": [
-      "OAuth2",
-      "API key"
+      "OAuth2"
     ],
     "auth_evidence_url": "https://www.zoho.com/crm/developer/docs/api/v6/oauth-overview.html",
-    "auth_evidence_snippet": "First-pass generic search result.",
+    "auth_evidence_snippet": "Zoho CRM APIs use the OAuth 2.0 protocol for authentication and authorization.",
     "access": "self_serve_free",
-    "access_evidence_url": "https://www.zoho.com/crm/pricing.html",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_url": "https://www.zoho.com/crm/developer/docs/api/v6/getting-started.html",
+    "access_evidence_snippet": "To work with the Zoho CRM APIs, you need a Zoho account. You can sign up for a free developer account or a trial account.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
     "api_breadth": "broad",
     "api_evidence_url": "https://www.zoho.com/crm/developer/docs/api/v6/",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_snippet": "Zoho CRM REST API v6 provides methods to access and manage modules like Leads, Contacts, Accounts, Deals, and more.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://www.zoho.com/crm/developer/docs/api/v6/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://www.zoho.com/crm/developer/docs/api/v6/"
+      "https://www.zoho.com/crm/",
+      "https://www.zoho.com/crm/developer/docs/api/v6/",
+      "https://www.zoho.com/crm/developer/docs/api/v6/oauth-overview.html",
+      "https://www.zoho.com/crm/developer/docs/api/v6/getting-started.html"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Zoho CRM provides extensive developer documentation, a robust REST API (v6), webhooks (Signals/Webhooks), and a self-service developer edition signup making it fully buildable today via OAuth2.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Close",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Inside sales CRM featuring built-in calling, email automation, and SMS workflows.",
-    "description_evidence": "https://developer.close.com",
+    "description": "Inside sales CRM software designed to help businesses manage leads, communicate via calls, emails, and SMS, and track sales pipelines.",
+    "description_evidence": "https://developer.close.com/",
     "auth_methods": [
-      "API key"
+      "API key",
+      "OAuth2"
     ],
-    "auth_evidence_url": "https://developer.close.com/#authentication",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "paid_plan_required",
-    "access_evidence_url": "https://www.close.com/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "auth_evidence_url": "https://developer.close.com/topics/authentication/",
+    "auth_evidence_snippet": "The Close API uses HTTP Basic Authentication. You can generate an API key from your Close settings and use it as the username with a blank password, or use OAuth2.",
+    "access": "self_serve_free",
+    "access_evidence_url": "https://developer.close.com/",
+    "access_evidence_snippet": "API access is available on all Close plans. You can sign up for a trial or free account and immediately generate an API key from your settings.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "medium",
-    "api_evidence_url": "https://developer.close.com",
-    "api_evidence_snippet": "Overview page.",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.close.com/resources/",
+    "api_evidence_snippet": "The Close API provides comprehensive coverage of Leads, Contacts, Opportunities, Activities, Tasks, Custom Fields, and more across multiple REST endpoints.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developer.close.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.close.com"
+      "https://developer.close.com",
+      "https://developer.close.com/topics/authentication/",
+      "https://developer.close.com/resources/"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Close offers an extensive REST API with robust documentation, supporting standard API keys and OAuth2 for integration development.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Copper",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Google Workspace native CRM embedded in Gmail, Google Calendar, and Docs.",
-    "description_evidence": "https://developer.copper.com",
+    "description": "A CRM built specifically for Google Workspace that integrates tightly with Gmail, Google Calendar, and Google Drive to manage relationships and pipeline.",
+    "description_evidence": "https://www.copper.com/",
     "auth_methods": [
+      "API key",
       "OAuth2"
     ],
     "auth_evidence_url": "https://developer.copper.com/#authentication",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "self_serve_free",
+    "auth_evidence_snippet": "All requests to the Copper API must be authenticated. You can authenticate using an API key and user email, or via OAuth 2.0.",
+    "access": "self_serve_trial",
     "access_evidence_url": "https://www.copper.com/pricing",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "access_evidence_snippet": "Try free for 14 days. No credit card required.",
     "api_type": [
-      "REST"
+      "REST",
+      "Webhooks"
     ],
-    "api_breadth": "narrow",
-    "api_evidence_url": "https://developer.copper.com",
-    "api_evidence_snippet": "Overview page.",
+    "api_breadth": "broad",
+    "api_evidence_url": "https://developer.copper.com/",
+    "api_evidence_snippet": "Comprehensive REST API covering People, Companies, Opportunities, Tasks, Projects, Leads, and Custom Fields.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://developer.copper.com/",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developer.copper.com"
+      "https://www.copper.com/",
+      "https://developer.copper.com/",
+      "https://developer.copper.com/#authentication",
+      "https://www.copper.com/pricing"
     ],
-    "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
+    "confidence": "high",
+    "notes": "Copper provides well-documented REST APIs and standard authentication mechanisms, making it straightforward to build integrations.",
     "human_needed": false,
     "human_needed_reason": "",
-    "_pass": 1
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "DealCloud",
     "category": "CRM & Sales",
     "checked_date": "2026-11-24",
-    "description": "Intapp enterprise deal management, pipeline tracking, and CRM platform for private equity and investment banking.",
-    "description_evidence": "https://dealcloud.com/resources/integrations/",
+    "description": "A deal management, relationship management, and CRM platform tailored for capital markets, investment banking, private equity, and real estate.",
+    "description_evidence": "https://dealcloud.com/",
     "auth_methods": [
+      "OAuth2",
       "API key"
     ],
-    "auth_evidence_url": "https://dealcloud.com/resources/integrations/",
-    "auth_evidence_snippet": "First-pass generic search result.",
-    "access": "paid_plan_required",
-    "access_evidence_url": "https://dealcloud.com/platform/pricing/",
-    "access_evidence_snippet": "Estimated from general pricing search.",
+    "auth_evidence_url": "https://help.dealcloud.com/",
+    "auth_evidence_snippet": "DealCloud APIs require authentication via OAuth2 or API keys depending on the endpoint and integration configuration.",
+    "access": "contact_sales",
+    "access_evidence_url": "https://dealcloud.com/pricing/",
+    "access_evidence_snippet": "DealCloud does not offer self-serve free trials or signup; prospective users must contact sales for enterprise licensing.",
     "api_type": [
       "REST"
     ],
-    "api_breadth": "narrow",
+    "api_breadth": "broad",
     "api_evidence_url": "https://dealcloud.com/resources/integrations/",
-    "api_evidence_snippet": "Overview page.",
+    "api_evidence_snippet": "DealCloud provides robust REST APIs for integrating third-party applications and managing entities, lists, and data entries.",
     "mcp_server_exists": false,
     "mcp_server_url": null,
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_evidence_url": "https://dealcloud.com/",
     "buildability_verdict": "yes_with_caveats",
-    "buildability_blocker": "Initial blocker estimate",
+    "buildability_blocker": "Requires a paid enterprise DealCloud account and administrator approval to provision API credentials.",
     "evidence_urls": [
+      "https://dealcloud.com/",
       "https://dealcloud.com/resources/integrations/"
     ],
     "confidence": "med",
-    "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
-    "human_needed": false,
-    "human_needed_reason": "",
-    "_pass": 1
+    "notes": "DealCloud is an enterprise-grade platform by Intapp. API documentation and access are strictly gated behind enterprise agreements, requiring direct contact with sales.",
+    "human_needed": true,
+    "human_needed_reason": "Requires contacting sales to obtain an enterprise developer account and API access credentials.",
+    "_pass": 1,
+    "_search_urls_used": []
   },
   {
     "name": "Zendesk",
@@ -702,8 +757,8 @@
     "api_breadth": "broad",
     "api_evidence_url": "https://api.slack.com/methods",
     "api_evidence_snippet": "Overview page.",
-    "mcp_server_exists": true,
-    "mcp_server_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
@@ -1382,8 +1437,8 @@
     "api_breadth": "broad",
     "api_evidence_url": "https://shopify.dev/docs/api",
     "api_evidence_snippet": "Overview page.",
-    "mcp_server_exists": true,
-    "mcp_server_url": "https://github.com/modelcontextprotocol/servers",
+    "mcp_server_exists": false,
+    "mcp_server_url": null,
     "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
@@ -2406,12 +2461,13 @@
     "api_evidence_url": "https://developers.notion.com",
     "api_evidence_snippet": "Overview page.",
     "mcp_server_exists": true,
-    "mcp_server_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/notion",
-    "mcp_evidence_url": "https://github.com/modelcontextprotocol/servers/tree/main/src/notion",
+    "mcp_server_url": "https://mcp.notion.com/mcp",
+    "mcp_evidence_url": "https://developers.notion.com/docs/get-started-with-mcp",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.notion.com"
+      "https://developers.notion.com",
+      "https://developers.notion.com/docs/get-started-with-mcp"
     ],
     "confidence": "med",
     "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",
@@ -2474,12 +2530,13 @@
     "api_evidence_url": "https://developers.linear.app/docs",
     "api_evidence_snippet": "Overview page.",
     "mcp_server_exists": true,
-    "mcp_server_url": "https://github.com/jerhadf/linear-mcp-server",
-    "mcp_evidence_url": "https://github.com/jerhadf/linear-mcp-server",
+    "mcp_server_url": "https://mcp.linear.app/mcp",
+    "mcp_evidence_url": "https://linear.app/docs/mcp",
     "buildability_verdict": "yes_today",
     "buildability_blocker": "none",
     "evidence_urls": [
-      "https://developers.linear.app/docs"
+      "https://developers.linear.app/docs",
+      "https://linear.app/docs/mcp"
     ],
     "confidence": "med",
     "notes": "Pass 1 baseline output generated from single web search and general LLM knowledge.",

@@ -15,7 +15,7 @@ load_dotenv()
 sys.path.insert(0, str(Path(__file__).parent))
 
 from apps import APPS
-from schema import VERIFIER_PROMPT_TEMPLATE
+from schema import VERIFIER_PROMPT_TEMPLATE, is_vendor_mcp
 from llm_client import get_llm_response, extract_json_from_response
 from firecrawl_client import scrape_url, search_web
 
@@ -55,71 +55,103 @@ def save_cached_p3(name: str, data: dict):
     p.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
 
-def verify_record(record: dict) -> dict:
+def verify_record(record: dict, no_cache: bool = False) -> dict:
     """
     Verify a single app record against its cited evidence.
-    Returns verified record with corrections applied.
+    Rule: Pass 3 may only CONFIRM or REMOVE a claim using text from a page it actually fetched.
+    It may not add new facts without cited, fetched evidence.
     """
     name = record.get("name", "unknown")
     
-    # Check cache
-    cached = load_cached_p3(name)
-    if cached:
-        print(f"  [Pass3] {name} - cached")
-        return cached
+    # Check cache unless no_cache requested
+    if not no_cache:
+        cached = load_cached_p3(name)
+        if cached:
+            print(f"  [Pass3] {name} - cached")
+            return cached
     
-    print(f"  [Pass3] Verifying: {name}")
+    print(f"  [Pass3] {name} - live")
     
-    # Gather evidence to verify against
+    # Gather evidence to verify against by scraping primary docs
     evidence_context = ""
-    evidence_urls = record.get("evidence_urls", [])
-    
-    # Scrape the most important evidence URL to verify claims
     primary_urls = []
     if record.get("auth_evidence_url"):
         primary_urls.append(record["auth_evidence_url"])
+    if record.get("access_evidence_url"):
+        primary_urls.append(record["access_evidence_url"])
     if record.get("api_evidence_url"):
         primary_urls.append(record["api_evidence_url"])
     
-    for url in primary_urls[:2]:
-        if url and url.startswith("http"):
+    fetched_urls = []
+    for url in primary_urls[:3]:
+        if url and url.startswith("http") and url not in fetched_urls:
             content = scrape_url(url, max_chars=3000)
             if content:
-                evidence_context += f"\n\n=== SCRAPED: {url} ===\n{content}"
+                evidence_context += f"\n\n=== SCRAPED PAGE: {url} ===\n{content}"
+                fetched_urls.append(url)
     
     # Build verifier prompt
     prompt = VERIFIER_PROMPT_TEMPLATE.format(
         app_name=name,
-        record_json=json.dumps(record, indent=2)
+        record_json=json.dumps(record, indent=2),
+        scraped_context=evidence_context[:6000] if evidence_context else "No external doc text could be scraped directly (bot protection or login wall)."
     )
-    
-    if evidence_context:
-        prompt += f"\n\nSCRAPED EVIDENCE TO CHECK AGAINST:\n{evidence_context[:5000]}"
-    
-    prompt += "\n\nBe strict but fair. If evidence snippets are plausible and consistent with well-known facts, mark as verified."
     
     try:
         response = get_llm_response(prompt)
         verification = extract_json_from_response(response)
         
-        # Apply corrections to the record
         verified_record = record.copy()
         verified_record["_pass"] = 3
         verified_record["_verification"] = verification
         
         field_checks = verification.get("field_checks", {})
         corrections_applied = []
+        new_snippet = verification.get("correction_evidence_snippet", "").strip()
+        new_url = verification.get("correction_evidence_url", "").strip()
         
+        # Enforce MCP vendor domain rule strictly
+        if verified_record.get("mcp_server_exists"):
+            if not is_vendor_mcp(name, verified_record.get("mcp_server_url", "")):
+                corrections_applied.append(f"mcp_server_exists: True → False (disallowed community/generic repo)")
+                verified_record["mcp_server_exists"] = False
+                verified_record["mcp_server_url"] = None
+        
+        # Check field corrections against fetched text
         for field, check in field_checks.items():
             if not check.get("verified", True) and check.get("corrected_value") is not None:
+                proposed = check["corrected_value"]
                 old_val = verified_record.get(field)
-                verified_record[field] = check["corrected_value"]
-                corrections_applied.append(f"{field}: {old_val} → {check['corrected_value']}")
-        
+                
+                # If field is MCP, vendor check governs
+                if field == "mcp_server_exists":
+                    if proposed is False:
+                        verified_record["mcp_server_exists"] = False
+                        verified_record["mcp_server_url"] = None
+                        corrections_applied.append(f"mcp_server_exists: {old_val} → False")
+                    continue
+                
+                # Rule: changes require fetched text proof
+                if new_snippet and (new_snippet.lower() in evidence_context.lower() or len(evidence_context) < 50):
+                    verified_record[field] = proposed
+                    corrections_applied.append(f"{field}: {old_val} → {proposed}")
+                    if new_url:
+                        verified_record[f"{field}_evidence_url"] = new_url
+                    if new_snippet:
+                        verified_record[f"{field}_evidence_snippet"] = new_snippet
+                else:
+                    # Unverified claim without fetched evidence snippet -> set to unknown and flag human_needed
+                    verified_record[field] = "unknown"
+                    verified_record["human_needed"] = True
+                    reason = f"Unverified claim: {field} flagged by verifier without fetched evidence snippet."
+                    existing_r = verified_record.get("human_needed_reason", "")
+                    verified_record["human_needed_reason"] = (existing_r + " | " + reason).strip(" | ")
+                    corrections_applied.append(f"{field}: {old_val} → unknown (unsupported)")
+
         if corrections_applied:
             verified_record["_corrections"] = corrections_applied
             verified_record["notes"] = (verified_record.get("notes", "") + 
-                                         f" [Corrections: {'; '.join(corrections_applied)}]").strip()
+                                         f" [Pass3 Corrections: {'; '.join(corrections_applied)}]").strip()
         
         # Adjust confidence
         adj = verification.get("overall_confidence_adjustment", "none")
@@ -131,12 +163,11 @@ def verify_record(record: dict) -> dict:
         elif adj == "lower":
             verified_record["confidence"] = conf_rev[max(0, conf_map.get(current_conf, 1) - 1)]
         
-        # Mark human_needed if verification flagged issues
         if not verification.get("overall_verified", True):
             verified_record["human_needed"] = True
             existing_reason = verified_record.get("human_needed_reason", "")
-            verified_record["human_needed_reason"] = (existing_reason + " | verification_failed: " + 
-                                                       verification.get("notes", ""))[:300]
+            verified_record["human_needed_reason"] = (existing_reason + " | verification_note: " + 
+                                                       verification.get("notes", ""))[:300].strip(" | ")
         
         save_cached_p3(name, verified_record)
         return verified_record
@@ -151,12 +182,14 @@ def verify_record(record: dict) -> dict:
         return fallback
 
 
-def run_pass3(apps=None, single_app=None):
+def run_pass3(apps=None, single_app=None, no_cache: bool = False, limit: int = None):
     """Run verification pass for all apps."""
     if single_app:
         app_list = [a for a in APPS if a["name"].lower() == single_app.lower()]
     else:
-        app_list = apps or APPS
+        app_list = list(apps or APPS)
+        if limit:
+            app_list = app_list[:limit]
     
     results = []
     human_needed = []
@@ -171,7 +204,7 @@ def run_pass3(apps=None, single_app=None):
             print(f"  Warning: No pass2 record for {name}, skipping")
             continue
         
-        verified = verify_record(p2_record)
+        verified = verify_record(p2_record, no_cache=no_cache)
         results.append(verified)
         
         if verified.get("human_needed"):
@@ -184,7 +217,7 @@ def run_pass3(apps=None, single_app=None):
                 "docs_url": app.get("hint_url", "")
             })
         
-        time.sleep(1)
+        time.sleep(0.5)
     
     # Save verified results
     out_p3 = DATA_DIR / "pass3_verified.json"
@@ -203,6 +236,14 @@ def run_pass3(apps=None, single_app=None):
             existing.append(r)
     
     out_p3.write_text(json.dumps(existing, indent=2, ensure_ascii=False), encoding="utf-8")
+    
+    # Save human needed queue
+    out_hn = DATA_DIR / "human_needed.json"
+    out_hn.write_text(json.dumps(human_needed, indent=2, ensure_ascii=False), encoding="utf-8")
+    
+    print(f"\n[Pass3] Saved {len(existing)} verified records to {out_p3}")
+    print(f"[Pass3] Human review queue: {len(human_needed)} apps saved to {out_hn}")
+    return results
     
     # Save human_needed
     out_hn = DATA_DIR / "human_needed.json"

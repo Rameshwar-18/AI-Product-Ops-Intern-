@@ -105,14 +105,21 @@ def analyze(apps: list) -> dict:
             all_api_types.append(at)
     api_type_counts = Counter(all_api_types)
     
+    dev_infra_yes = buildability_by_cat.get('Dev & Infra', Counter()).get('yes_today', 0)
+    dev_infra_total = sum(buildability_by_cat.get('Dev & Infra', Counter()).values()) or 10
+    prod_yes = buildability_by_cat.get('Productivity', Counter()).get('yes_today', 0)
+    prod_total = sum(buildability_by_cat.get('Productivity', Counter()).values()) or 10
+    finance_gated = access_by_cat.get('Finance', Counter()).get('contact_sales', 0) + access_by_cat.get('Finance', Counter()).get('partner_gated', 0)
+    finance_total = sum(access_by_cat.get('Finance', Counter()).values()) or 10
+    
     insights = [
-        f"OAuth2 is the dominant auth method ({auth_counts.get('OAuth2', 0)}/{total} apps = {auth_counts.get('OAuth2',0)*100//total}%), with API key a close second ({auth_counts.get('API key', 0)} apps). CRM and Finance categories lean OAuth2; Dev tools lean API key.",
-        f"{verdict_counts.get('yes_today', 0)} apps ({verdict_counts.get('yes_today',0)*100//total}%) are buildable today with no blockers. Another {verdict_counts.get('yes_with_caveats', 0)} are buildable with caveats (paid plan, rate limits, partial OAuth).",
-        f"Only {mcp_exists} apps ({mcp_exists*100//total}%) have an existing MCP server — massive gap Composio can fill.",
-        f"Self-serve access (free/trial) covers {self_serve} apps ({self_serve*100//total}%), while {gated} apps require payment, approval, or partner status — these need outreach.",
-        f"The most common blocker is '{blocker_counts.most_common(1)[0][0] if blocker_counts else 'none'}', affecting {blocker_counts.most_common(1)[0][1] if blocker_counts else 0} apps.",
-        f"The {access_by_cat.get('Finance', Counter()).get('contact_sales', 0) + access_by_cat.get('Finance', Counter()).get('partner_gated', 0)} Finance apps most often require sales contact or partner gating — highest resistance to self-serve tooling.",
-        f"Dev & Infra tools ({verdict_counts.get('yes_today', 0)} of that category buildable today) and Productivity tools offer the clearest quick wins for Composio's agent toolkit roadmap."
+        f"1. Authentication: {dominant_auth[0]} is the leading auth mechanism ({dominant_auth[1]}/{total} apps = {round(dominant_auth[1]/total*100, 1)}%), with OAuth2 closely following in CRM and Social/Marketing platforms.",
+        f"2. Buildability: {verdict_counts.get('yes_today', 0)}/{total} apps ({round(verdict_counts.get('yes_today', 0)/total*100, 1)}%) are immediately buildable today with zero blockers; {verdict_counts.get('yes_with_caveats', 0)} require handling rate limits or paid developer tiers.",
+        f"3. Official MCP Gap: Only {mcp_exists}/{total} apps ({round(mcp_exists/total*100, 1)}%) currently provide official vendor-hosted or vendor-documented MCP servers — leaving a massive open market gap for Composio.",
+        f"4. Access Tiers: Self-serve access (free tiers or automated trials) covers {self_serve}/{total} apps ({round(self_serve/total*100, 1)}%), while {gated}/{total} apps require enterprise contracts or manual approval.",
+        f"5. Main Blocker: '{blocker_counts.most_common(1)[0][0] if blocker_counts else 'none'}' is the most common blocker, affecting {blocker_counts.most_common(1)[0][1] if blocker_counts else 0} apps.",
+        f"6. Enterprise Gating: Finance tools exhibit the highest gating resistance, with {finance_gated}/{finance_total} apps requiring sales outreach or partner underwriting.",
+        f"7. Quick Rollouts: Dev & Infra ({dev_infra_yes}/{dev_infra_total} buildable today) and Productivity ({prod_yes}/{prod_total} buildable today) provide the clearest immediate wins for Composio's tool catalog."
     ]
     
     return {
@@ -137,6 +144,78 @@ def analyze(apps: list) -> dict:
         "api_type_distribution": dict(api_type_counts),
         "insights": insights
     }
+
+
+def check_consistency(apps: list) -> dict:
+    """
+    Validate data integrity across all research records.
+    Ensures every claim has evidence, MCPs are vendor-owned, and categories sum to total.
+    """
+    from schema import is_vendor_mcp
+    report = {
+        "total_records": len(apps),
+        "passed": True,
+        "checks": {}
+    }
+    
+    # Check 1: Required fields
+    required = ["name", "category", "auth_methods", "access", "api_breadth", "buildability_verdict", "confidence"]
+    missing_fields = []
+    for a in apps:
+        for f in required:
+            if f not in a or a[f] is None:
+                missing_fields.append((a.get("name", "unknown"), f))
+    report["checks"]["required_fields"] = {
+        "status": "PASS" if not missing_fields else "FAIL",
+        "failures": len(missing_fields),
+        "details": missing_fields[:5]
+    }
+    
+    # Check 2: MCP Vendor Ownership Integrity
+    mcp_violations = []
+    for a in apps:
+        if a.get("mcp_server_exists"):
+            url = a.get("mcp_server_url", "")
+            if not is_vendor_mcp(a.get("name", ""), url):
+                mcp_violations.append((a.get("name"), url))
+    report["checks"]["mcp_vendor_ownership"] = {
+        "status": "PASS" if not mcp_violations else "FAIL",
+        "failures": len(mcp_violations),
+        "details": mcp_violations
+    }
+    
+    # Check 3: Evidence URLs & Snippets
+    missing_evidence = []
+    for a in apps:
+        if not a.get("evidence_urls"):
+            missing_evidence.append(a.get("name"))
+    report["checks"]["evidence_urls_present"] = {
+        "status": "PASS" if not missing_evidence else "FAIL",
+        "failures": len(missing_evidence),
+        "details": missing_evidence[:5]
+    }
+    
+    # Check 4: Human Needed consistency
+    human_inconsistencies = []
+    for a in apps:
+        if a.get("human_needed") and not a.get("human_needed_reason"):
+            human_inconsistencies.append(a.get("name"))
+    report["checks"]["human_needed_reasons"] = {
+        "status": "PASS" if not human_inconsistencies else "FAIL",
+        "failures": len(human_inconsistencies)
+    }
+    
+    # Check 5: Category Counts
+    cat_counts = Counter(a.get("category") for a in apps)
+    report["checks"]["category_distribution"] = {
+        "status": "PASS" if all(cnt <= 10 for cnt in cat_counts.values()) else "WARN",
+        "counts": dict(cat_counts)
+    }
+    
+    if any(c["status"] == "FAIL" for c in report["checks"].values()):
+        report["passed"] = False
+        
+    return report
 
 
 if __name__ == "__main__":

@@ -1,23 +1,23 @@
 {
   "total_apps": 100,
   "auth_methods": {
-    "OAuth2": 56,
-    "Bearer token": 60,
-    "API key": 21,
-    "other": 9,
+    "OAuth2": 55,
+    "Bearer token": 58,
+    "API key": 22,
+    "unknown": 7,
     "Basic": 13,
-    "unknown": 4
+    "other": 8
   },
   "dominant_auth": [
     "Bearer token",
-    60
+    58
   ],
   "auth_by_category": {
     "CRM & Sales": {
-      "OAuth2": 8,
-      "Bearer token": 3,
-      "API key": 3,
-      "other": 1
+      "OAuth2": 7,
+      "Bearer token": 1,
+      "API key": 4,
+      "unknown": 3
     },
     "Support": {
       "OAuth2": 6,
@@ -82,20 +82,21 @@
     }
   },
   "access_distribution": {
-    "paid_plan_required": 10,
-    "self_serve_free": 53,
     "self_serve_trial": 19,
+    "unknown": 2,
+    "self_serve_free": 52,
     "contact_sales": 11,
+    "paid_plan_required": 9,
     "admin_approval": 5,
     "partner_gated": 2
   },
-  "self_serve_count": 72,
-  "gated_count": 28,
+  "self_serve_count": 71,
+  "gated_count": 27,
   "access_by_category": {
     "CRM & Sales": {
-      "paid_plan_required": 1,
-      "self_serve_free": 5,
       "self_serve_trial": 3,
+      "unknown": 2,
+      "self_serve_free": 4,
       "contact_sales": 1
     },
     "Support": {
@@ -149,14 +150,16 @@
     }
   },
   "buildability": {
-    "yes_today": 71,
     "yes_with_caveats": 23,
+    "unknown": 1,
+    "yes_today": 70,
     "no": 6
   },
   "buildability_by_category": {
     "CRM & Sales": {
-      "yes_today": 8,
       "yes_with_caveats": 1,
+      "unknown": 1,
+      "yes_today": 7,
       "no": 1
     },
     "Support": {
@@ -197,27 +200,25 @@
       "yes_today": 5
     }
   },
-  "mcp_coverage_count": 58,
-  "mcp_coverage_pct": 58.0,
+  "mcp_coverage_count": 10,
+  "mcp_coverage_pct": 10.0,
   "top_blockers": {
     "No public developer API available": 4,
-    "Multi-datacenter domain routing (.com, .eu, .in, .com.au, .com.cn) and 1-hour access token lifecycle": 1,
-    "Enterprise-only access, contract gating, no self-serve sandbox, closed vendor partnership needed": 1,
+    "Connected App configuration, profile permissions, and IP restrictions required by Salesforce admin.": 1,
+    "unknown": 1,
+    "Insufficient public API documentation or developer portal access available via the provided page to determine endpoints, authentication flows, or self-serve developer access.": 1,
     "No self-serve developer access; testing requires customer-provisioned enterprise instance": 1,
     "Narrow public API surface compared to Slack; mostly webhook-based with limited channel admin endpoints": 1,
     "Meta Business Manager verification required; template pre-approval mandated for outbound notifications; per-conversation pricing": 1,
     "Developer token review required for production": 1,
     "Meta App Review and Business Verification required": 1,
-    "Marketing Developer Platform partner application approval required": 1,
-    "Production app review required for publishing": 1
+    "Marketing Developer Platform partner application approval required": 1
   },
   "easy_wins": [
-    "Salesforce",
-    "HubSpot",
     "Pipedrive",
     "Attio",
-    "Twenty",
     "Podio",
+    "Zoho CRM",
     "Close",
     "Copper",
     "Zendesk",
@@ -285,7 +286,7 @@
     "Grain"
   ],
   "yes_with_caveats": [
-    "Zoho CRM",
+    "Salesforce",
     "Gladly",
     "Pumble",
     "WhatsApp Business",
@@ -318,6 +319,9 @@
     "higgsfield"
   ],
   "human_needed": [
+    "HubSpot",
+    "Twenty",
+    "Close",
     "DealCloud",
     "Gladly",
     "LinkedIn Ads",
@@ -337,24 +341,25 @@
     "higgsfield"
   ],
   "confidence_distribution": {
-    "high": 85,
-    "med": 15
+    "high": 83,
+    "med": 16,
+    "low": 1
   },
   "api_type_distribution": {
-    "REST": 91,
-    "GraphQL": 11,
-    "SOAP": 2,
-    "other": 7,
-    "unknown": 4,
-    "SDK": 2
+    "REST": 89,
+    "GraphQL": 9,
+    "SDK": 3,
+    "Webhooks": 5,
+    "unknown": 6,
+    "other": 7
   },
   "insights": [
-    "OAuth2 is the dominant auth method (56/100 apps = 56%), with API key a close second (21 apps). CRM and Finance categories lean OAuth2; Dev tools lean API key.",
-    "71 apps (71%) are buildable today with no blockers. Another 23 are buildable with caveats (paid plan, rate limits, partial OAuth).",
-    "Only 58 apps (58%) have an existing MCP server \u2014 massive gap Composio can fill.",
-    "Self-serve access (free/trial) covers 72 apps (72%), while 28 apps require payment, approval, or partner status \u2014 these need outreach.",
-    "The most common blocker is 'No public developer API available', affecting 4 apps.",
-    "The 3 Finance apps most often require sales contact or partner gating \u2014 highest resistance to self-serve tooling.",
-    "Dev & Infra tools (71 of that category buildable today) and Productivity tools offer the clearest quick wins for Composio's agent toolkit roadmap."
+    "1. Authentication: Bearer token is the leading auth mechanism (58/100 apps = 58.0%), with OAuth2 closely following in CRM and Social/Marketing platforms.",
+    "2. Buildability: 70/100 apps (70.0%) are immediately buildable today with zero blockers; 23 require handling rate limits or paid developer tiers.",
+    "3. Official MCP Gap: Only 10/100 apps (10.0%) currently provide official vendor-hosted or vendor-documented MCP servers \u2014 leaving a massive open market gap for Composio.",
+    "4. Access Tiers: Self-serve access (free tiers or automated trials) covers 71/100 apps (71.0%), while 27/100 apps require enterprise contracts or manual approval.",
+    "5. Main Blocker: 'No public developer API available' is the most common blocker, affecting 4 apps.",
+    "6. Enterprise Gating: Finance tools exhibit the highest gating resistance, with 3/10 apps requiring sales outreach or partner underwriting.",
+    "7. Quick Rollouts: Dev & Infra (10/10 buildable today) and Productivity (10/10 buildable today) provide the clearest immediate wins for Composio's tool catalog."
   ]
 }

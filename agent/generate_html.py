@@ -23,7 +23,13 @@ WEB_DIR.mkdir(parents=True, exist_ok=True)
 def build_html():
     apps = json.loads((DATA_DIR / "pass3_verified.json").read_text(encoding="utf-8"))
     analysis = json.loads((DATA_DIR / "analysis.json").read_text(encoding="utf-8"))
-    accuracy = json.loads((DATA_DIR / "accuracy_report.json").read_text(encoding="utf-8"))
+    acc_path = DATA_DIR / "accuracy_report.json"
+    accuracy = {}
+    if acc_path.exists():
+        try:
+            accuracy = json.loads(acc_path.read_text(encoding="utf-8"))
+        except Exception:
+            pass
     human_needed = json.loads((DATA_DIR / "human_needed.json").read_text(encoding="utf-8"))
 
     # Compute key stats
@@ -839,21 +845,21 @@ def build_html():
             <span class="node-step-tag">STAGE 01</span>
             <div class="node-title">Pass 1: Baseline</div>
             <div class="node-desc">
-              Initial high-velocity pass using LLM parametric knowledge combined with single targeted search queries. Generates early baseline estimates (50.0% accuracy).
+              Initial high-velocity pass using LLM parametric knowledge combined with single targeted search queries. Generates early baseline estimates and initial schema mapping.
             </div>
           </div>
           <div class="flow-node">
             <span class="node-step-tag">STAGE 02</span>
             <div class="node-title">Pass 2: Deep Scrape</div>
             <div class="node-desc">
-              Firecrawl crawls official developer documentation portals, API references, authentication specs, and pricing matrices. Quoted text snippets required for every field (91.3% accuracy).
+              Firecrawl crawls official developer documentation portals, API references, authentication specs, and pricing matrices. Quoted text snippets and direct documentation URLs required for every field.
             </div>
           </div>
           <div class="flow-node">
             <span class="node-step-tag">STAGE 03</span>
             <div class="node-title">Pass 3: Verifier Loop</div>
             <div class="node-desc">
-              Independent verifier agent audits claims against cited snippets. Detects plan gating, missing OAuth scopes, or CLI limitations. Overwrites hallucinations (100.0% verified sample accuracy).
+              Independent verifier agent audits claims strictly against fetched page text. Overwrites hallucinations, enforces official vendor-owned MCP rules, and routes unverified claims to human review.
             </div>
           </div>
           <div class="flow-node">
@@ -979,6 +985,18 @@ def build_html():
           <h3>🖥️ Sherlock & Mermaid CLI</h3>
           <p>
             Open-source command-line utilities rather than hosted HTTP microservices. Composio must execute these via local container sandboxes or Node/Python subprocesses.
+          </p>
+        </div>
+        <div class="limit-card">
+          <h3>🛡️ Bot Blocking & Login Walls</h3>
+          <p>
+            Certain portals (Attio, SE Ranking, Canva) employ Cloudflare/Akamai bot-management or require workspace login before exposing full API specs, triggering fallback to human review.
+          </p>
+        </div>
+        <div class="limit-card">
+          <h3>🌐 Vendor vs Community MCP Gaps</h3>
+          <p>
+            While community repos exist under <code>modelcontextprotocol/servers</code>, only 10 platforms maintain official vendor-owned endpoints or repos (Linear, Notion, GitHub, Cloudflare, Supabase, etc.), leaving 90 open tool opportunities.
           </p>
         </div>
       </div>
@@ -1170,11 +1188,23 @@ def build_html():
 
     function renderAccuracyTable() {{
       const tbody = document.getElementById('accuracyTableBody');
+      if (!RAW_ACCURACY || !RAW_ACCURACY.pass1 || !RAW_ACCURACY.pass1.overall) {{
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="5" style="text-align:center; padding:2rem; color:var(--text-muted); font-size:0.95rem;">
+              📋 <strong>Ground Truth Evaluation Pending:</strong> Stratified random sample generated in <code>data/ground_truth_checklist.csv</code> (30 apps, seed=42) with empty <code>HUMAN_*</code> columns.<br>
+              Fill your verified evaluations in the CSV and run <code>python run.py --verify</code> to calculate real per-field accuracy without simulated estimates.
+            </td>
+          </tr>
+        `;
+        return;
+      }}
+
       const rows = [
         {{ key: 'auth_methods', label: 'Auth Methods (OAuth2, Key, Bearer)' }},
         {{ key: 'access', label: 'Access Tier (Self-serve vs Gated)' }},
         {{ key: 'api_breadth', label: 'API Breadth (<20, 20-100, 100+)' }},
-        {{ key: 'mcp_server_exists', label: 'MCP Server Existence' }},
+        {{ key: 'mcp_server_exists', label: 'Official Vendor MCP Server' }},
         {{ key: 'buildability_verdict', label: 'Buildability Verdict' }},
         {{ key: 'overall', label: '📊 Overall Accuracy Benchmark' }}
       ];
@@ -1192,7 +1222,7 @@ def build_html():
             <td class="acc-score score-low">${{p1}}%</td>
             <td class="acc-score score-mid">${{p2}}%</td>
             <td class="acc-score score-high">${{p3}}%</td>
-            <td class="acc-score score-high">+${{delta}}%</td>
+            <td class="acc-score score-high">${{delta >= 0 ? '+' : ''}}${{delta}}%</td>
           </tr>
         `;
       }}).join('');
@@ -1209,9 +1239,9 @@ def build_html():
           labels: ['✅ Yes Today', '⚠️ Yes with Caveats', '❌ Not Buildable'],
           datasets: [{{
             data: [
-              RAW_ANALYSIS.buildability.yes_today || 68,
-              RAW_ANALYSIS.buildability.yes_with_caveats || 24,
-              RAW_ANALYSIS.buildability.no || 8
+              RAW_ANALYSIS.buildability.yes_today || 0,
+              RAW_ANALYSIS.buildability.yes_with_caveats || 0,
+              RAW_ANALYSIS.buildability.no || 0
             ],
             backgroundColor: ['#10B981', '#F59E0B', '#EF4444'],
             borderWidth: 0
@@ -1261,58 +1291,68 @@ def build_html():
         }}
       }});
 
-      // 4. Accuracy Progression Line
-      new Chart(document.getElementById('accuracyProgressionChart'), {{
-        type: 'line',
-        data: {{
-          labels: ['Pass 1: Baseline', 'Pass 2: Deep Scraped', 'Pass 3: Verifier Loop'],
-          datasets: [{{
-            label: 'Overall Sample Accuracy %',
-            data: [
-              RAW_ACCURACY.pass1.overall.pct,
-              RAW_ACCURACY.pass2.overall.pct,
-              RAW_ACCURACY.pass3.overall.pct
-            ],
-            borderColor: '#6366F1',
-            backgroundColor: 'rgba(99, 102, 241, 0.15)',
-            fill: true,
-            tension: 0.35,
-            pointRadius: 6,
-            pointBackgroundColor: '#6366F1'
-          }}]
-        }},
-        options: {{
-          scales: {{ y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }} }} }},
-          plugins: {{ legend: {{ display: false }} }}
-        }}
-      }});
+      // 4. Accuracy Progression Line (only if human ground truth benchmark exists)
+      const accCanvas = document.getElementById('accuracyProgressionChart');
+      if (RAW_ACCURACY && RAW_ACCURACY.pass1 && RAW_ACCURACY.pass1.overall) {{
+        new Chart(accCanvas, {{
+          type: 'line',
+          data: {{
+            labels: ['Pass 1: Baseline', 'Pass 2: Deep Scraped', 'Pass 3: Verifier Loop'],
+            datasets: [{{
+              label: 'Overall Sample Accuracy %',
+              data: [
+                RAW_ACCURACY.pass1.overall.pct,
+                RAW_ACCURACY.pass2.overall.pct,
+                RAW_ACCURACY.pass3.overall.pct
+              ],
+              borderColor: '#6366F1',
+              backgroundColor: 'rgba(99, 102, 241, 0.15)',
+              fill: true,
+              tension: 0.35,
+              pointRadius: 6,
+              pointBackgroundColor: '#6366F1'
+            }}]
+          }},
+          options: {{
+            scales: {{ y: {{ min: 0, max: 100, ticks: {{ callback: v => v + '%' }} }} }},
+            plugins: {{ legend: {{ display: false }} }}
+          }}
+        }});
+      }} else if (accCanvas) {{
+        accCanvas.parentElement.innerHTML = '<div style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--text-muted); font-size:0.85rem; text-align:center; padding:1rem;">Awaiting human evaluations in <code>data/ground_truth_checklist.csv</code> to render accuracy curve.</div>';
+      }}
 
-      // 5. Radar Chart
-      const radarFields = ['auth_methods', 'access', 'api_breadth', 'mcp_server_exists', 'buildability_verdict'];
-      const radarLabels = ['Auth Methods', 'Access Tier', 'API Breadth', 'MCP Existence', 'Buildability'];
-      new Chart(document.getElementById('fieldRadarChart'), {{
-        type: 'radar',
-        data: {{
-          labels: radarLabels,
-          datasets: [
-            {{
-              label: 'Pass 1 (Baseline)',
-              data: radarFields.map(f => RAW_ACCURACY.pass1[f].pct),
-              borderColor: '#EF4444',
-              backgroundColor: 'rgba(239, 68, 68, 0.1)'
-            }},
-            {{
-              label: 'Pass 3 (Verified)',
-              data: radarFields.map(f => RAW_ACCURACY.pass3[f].pct),
-              borderColor: '#10B981',
-              backgroundColor: 'rgba(16, 185, 129, 0.15)'
-            }}
-          ]
-        }},
-        options: {{
-          scales: {{ r: {{ min: 0, max: 100, ticks: {{ stepSize: 20 }} }} }}
-        }}
-      }});
+      // 5. Radar Chart (only if human ground truth benchmark exists)
+      const radarCanvas = document.getElementById('fieldRadarChart');
+      if (RAW_ACCURACY && RAW_ACCURACY.pass1 && RAW_ACCURACY.pass1.overall) {{
+        const radarFields = ['auth_methods', 'access', 'api_breadth', 'mcp_server_exists', 'buildability_verdict'];
+        const radarLabels = ['Auth Methods', 'Access Tier', 'API Breadth', 'Official MCP', 'Buildability'];
+        new Chart(radarCanvas, {{
+          type: 'radar',
+          data: {{
+            labels: radarLabels,
+            datasets: [
+              {{
+                label: 'Pass 1 (Baseline)',
+                data: radarFields.map(f => RAW_ACCURACY.pass1[f]?.pct || 0),
+                borderColor: '#EF4444',
+                backgroundColor: 'rgba(239, 68, 68, 0.1)'
+              }},
+              {{
+                label: 'Pass 3 (Verified)',
+                data: radarFields.map(f => RAW_ACCURACY.pass3[f]?.pct || 0),
+                borderColor: '#10B981',
+                backgroundColor: 'rgba(16, 185, 129, 0.15)'
+              }}
+            ]
+          }},
+          options: {{
+            scales: {{ r: {{ min: 0, max: 100, ticks: {{ stepSize: 20 }} }} }}
+          }}
+        }});
+      }} else if (radarCanvas) {{
+        radarCanvas.parentElement.innerHTML = '<div style="display:flex; align-items:center; justify-content:center; height:240px; color:var(--text-muted); font-size:0.85rem; text-align:center; padding:1rem;">Radar comparison activates once human ground truth is entered.</div>';
+      }}
     }}
 
     document.addEventListener('DOMContentLoaded', () => {{
